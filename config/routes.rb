@@ -1,10 +1,10 @@
 Linkr::Application.routes.draw do
-  match '/signup' => 'users#new'
-  match '/login'  => 'sessions#new'
-  match '/logout' => 'sessions#destroy'
+  get '/signup' => 'users#new'
+  get '/login'  => 'sessions#new'
+  get '/logout' => 'sessions#destroy'
 
-  match '/help'      => 'pages#help'
-  match '/dashboard' => 'dashboard#show'
+  get '/help'      => 'pages#help'
+  get '/dashboard' => 'dashboard#show'
 
   resources :users,    :only => [:new, :create, :show, :update]
   resources :sessions, :only => [:new, :create, :destroy]

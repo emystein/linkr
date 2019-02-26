@@ -1,8 +1,8 @@
 class BookmarksController < ApplicationController
-  before_filter :require_user
+  before_action :require_user
 
   def index
-    @bookmarks = Bookmark.public.paginate(:page => params[:page])
+    @bookmarks = Bookmark.public_bookmarks.paginate(:page => params[:page])
   end
 
   def show
@@ -30,6 +30,7 @@ class BookmarksController < ApplicationController
   end
 
   def create
+    params.permit!
     @bookmark = current_user.bookmarks.new(params[:bookmark])
 
     if @bookmark.save
@@ -40,6 +41,7 @@ class BookmarksController < ApplicationController
   end
 
   def update
+    params.permit!
     @bookmark = current_user.bookmarks.find(params[:id])
 
     if @bookmark.update_attributes(params[:bookmark])

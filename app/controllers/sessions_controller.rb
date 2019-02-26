@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id  
       redirect_to :bookmarks, :flash => {:success => "Logged in successfully."}
     else  
-      flash.now.error = "Invalid login or password"  
+      flash[:error] = "Invalid login or password"  
       render "new"  
     end  
   end  

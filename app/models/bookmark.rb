@@ -3,8 +3,8 @@ class Bookmark < ActiveRecord::Base
 
   acts_as_taggable_on :tags
 
-  default_scope :order => 'created_at DESC'
-  scope :public, where(:private => false)
+  default_scope { order(created_at: :desc) }
+  scope :public_bookmarks, -> { where(:private => false) }
 
   belongs_to  :location
   belongs_to  :user
@@ -15,6 +15,6 @@ class Bookmark < ActiveRecord::Base
   validates_presence_of :title
 
   def find_or_generate_location
-    self.location = Location.find_or_create_by_url(@url)
+    self.location = Location.find_or_create_by(:url => @url)
   end
 end

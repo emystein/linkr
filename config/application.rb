@@ -51,5 +51,7 @@ module Linkr
       g.test_framework :rspec, :fixtures => true, :views => false
       g.fixture_replacement :factory_girl, :dir => 'spec/factories'
     end
+
+    config.eager_load = false
   end
 end
