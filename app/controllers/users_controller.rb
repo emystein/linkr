@@ -1,7 +1,4 @@
 class UsersController < ApplicationController
-  BETA_KEY = "welcome"
-  before_action :check_beta_key, :only => [:create]
-
   def new
     @user = User.new
   end
@@ -18,11 +15,6 @@ class UsersController < ApplicationController
     else  
       render "new"  
     end  
-  end
-
-  def check_beta_key
-    return if params[:beta_key] == BETA_KEY
-    redirect_to signup_path, :flash => {:success => "Invalid beta key. Sorry. Maybe next time?"}
   end
 
   def user_params

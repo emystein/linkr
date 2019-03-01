@@ -1,5 +1,5 @@
 class BookmarksController < ApplicationController
-  before_action :require_user, :except => [:show, :index]
+  before_action :authenticate_user!, :except => [:show, :index]
 
   def index
     @bookmarks = Bookmark.public_bookmarks.paginate(:page => params[:page])
@@ -44,7 +44,9 @@ class BookmarksController < ApplicationController
     params.permit!
     @bookmark = current_user.bookmarks.find(params[:id])
 
-    if @bookmark.update_attributes(params[:bookmark])
+    updated = @bookmark.update(params[:bookmark])
+    
+    if updated
       redirect_to dashboard_url, :flash => {:success => 'Bookmark was successfully updated.'}
     else
       render action: "edit"

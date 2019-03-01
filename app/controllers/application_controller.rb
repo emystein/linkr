@@ -1,18 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :user_signed_in?
 
-  def current_user  
-    @current_user ||= User.find(session[:user_id])
-  rescue ActiveRecord::RecordNotFound
-    return
-  end  
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def logged_in?
-    !!current_user
-  end
+  protected
 
-  def require_user
-    redirect_to '/login' unless logged_in?
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
   end
 end

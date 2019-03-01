@@ -11,7 +11,7 @@ describe TagsController, :type => :controller do
 
   describe "GET 'show'" do
     it "should be successful" do
-      get 'show'
+      get 'show', :params => {:id => "music"}
       response.should be_success
     end
   end

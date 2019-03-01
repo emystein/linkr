@@ -3,6 +3,17 @@ require 'spork'
 require 'factory_bot'
 require 'shoulda-matchers'
 
+module ControllerMacros    
+  def sign_me_in
+    before :each do
+      @request.env['devise.mapping'] = Devise.mappings[:user]
+      @current_user = create(:user)
+      # sign_in :user, @current_user
+      sign_in @current_user, scope: :user
+    end 
+  end 
+end
+
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However, 
   # if you change any configuration or code from libraries loaded here, you'll
@@ -41,8 +52,12 @@ Spork.prefork do
 
     config.include FactoryBot::Syntax::Methods
 
+    config.extend ControllerMacros, type: :controller
+
     # config.include(Shoulda::Matchers::ActiveModel, type: :model)
     # config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+    config.include Devise::Test::ControllerHelpers, type: :controller
+    config.include Devise::Test::ControllerHelpers, type: :view
   end
   
 end

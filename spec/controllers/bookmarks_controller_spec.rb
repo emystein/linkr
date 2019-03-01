@@ -19,18 +19,13 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe BookmarksController, :type => :controller do
-  before :all do
-    user = create(:user)
-    user.authenticate(user.password) 
-    session[:user_id] = user.id 
-    # assign(:user, user)
-  end
+  sign_me_in
 
   # This should return the minimal set of attributes required to create a valid
   # Bookmark. As you add validations to Bookmark, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {"title" => "El título"}
+    {"user_id" => subject.current_user.id, "title" => "El título", "url" => "La URL"}
   end
 
   describe "GET index" do
@@ -44,7 +39,7 @@ describe BookmarksController, :type => :controller do
   describe "GET show" do
     it "assigns the requested bookmark as @bookmark" do
       bookmark = Bookmark.create! valid_attributes
-      get :show, params: {id: bookmark.id.to_s}
+      get :show, :params => {id: bookmark.id.to_s}
       assigns(:bookmark).should eq(bookmark)
     end
   end
@@ -59,7 +54,7 @@ describe BookmarksController, :type => :controller do
   describe "GET edit" do
     it "assigns the requested bookmark as @bookmark" do
       bookmark = Bookmark.create! valid_attributes
-      get :edit, params: {id: bookmark.id.to_s}
+      get :edit, :params => {id: bookmark.id.to_s}
       assigns(:bookmark).should eq(bookmark)
     end
   end
@@ -68,19 +63,19 @@ describe BookmarksController, :type => :controller do
     describe "with valid params" do
       it "creates a new Bookmark" do
         expect {
-          post :create, params: {bookmark: valid_attributes}
+          post :create, :params => {bookmark: valid_attributes}
         }.to change(Bookmark, :count).by(1)
       end
 
       it "assigns a newly created bookmark as @bookmark" do
-        post :create, params: {bookmark: valid_attributes}
+        post :create, :params => {bookmark: valid_attributes}
         assigns(:bookmark).should be_a(Bookmark)
         assigns(:bookmark).should be_persisted
       end
 
-      it "redirects to the created bookmark" do
-        post :create, params: {bookmark: valid_attributes}
-        response.should redirect_to(Bookmark.last)
+      it "redirects to the dashboard" do
+        post :create, :params => {bookmark: valid_attributes}
+        response.should redirect_to(dashboard_url)
       end
     end
 
@@ -88,14 +83,14 @@ describe BookmarksController, :type => :controller do
       it "assigns a newly created but unsaved bookmark as @bookmark" do
         # Trigger the behavior that occurs when invalid params are submitted
         Bookmark.any_instance.stub(:save).and_return(false)
-        post :create, params: {bookmark: {}}
+        post :create, :params => {bookmark: {}}
         assigns(:bookmark).should be_a_new(Bookmark)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Bookmark.any_instance.stub(:save).and_return(false)
-        post :create, params: {bookmark: {}}
+        post :create, :params => {bookmark: {}}
         response.should render_template("new")
       end
     end
@@ -107,40 +102,22 @@ describe BookmarksController, :type => :controller do
         bookmark = Bookmark.create! valid_attributes
         # Assuming there are no other bookmarks in the database, this
         # specifies that the Bookmark created on the previous line
-        # receives the :update_attributes message with whatever params are
+        # receives the :update message with whatever params are
         # submitted in the request.
-        Bookmark.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, params: {id: bookmark.id, bookmark: {'these' => 'params'}}
+        Bookmark.any_instance.should_receive(:update).with({'these' => 'params'})
+        put :update, :params => {id: bookmark.id, bookmark: {'these' => 'params'}}
       end
 
       it "assigns the requested bookmark as @bookmark" do
         bookmark = Bookmark.create! valid_attributes
-        put :update, params: {id: bookmark.id, bookmark: valid_attributes}
+        put :update, :params => {id: bookmark.id, bookmark: valid_attributes}
         assigns(:bookmark).should eq(bookmark)
       end
 
-      it "redirects to the bookmark" do
+      it "redirects to the dashboard" do
         bookmark = Bookmark.create! valid_attributes
-        put :update, params: {id: bookmark.id, bookmark: valid_attributes}
-        response.should redirect_to(bookmark)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the bookmark as @bookmark" do
-        bookmark = Bookmark.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Bookmark.any_instance.stub(:save).and_return(false)
-        put :update, params: {id: bookmark.id, bookmark: {}}
-        assigns(:bookmark).should eq(bookmark)
-      end
-
-      it "re-renders the 'edit' template" do
-        bookmark = Bookmark.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Bookmark.any_instance.stub(:save).and_return(false)
-        put :update, params: {id: bookmark.id.to_s, bookmark: {}}
-        response.should render_template("edit")
+        put :update, :params => {id: bookmark.id, bookmark: valid_attributes}
+        response.should redirect_to(dashboard_url)
       end
     end
   end
@@ -149,13 +126,13 @@ describe BookmarksController, :type => :controller do
     it "destroys the requested bookmark" do
       bookmark = Bookmark.create! valid_attributes
       expect {
-        delete :destroy, params: {id: bookmark.id.to_s}
+        delete :destroy, :params => {id: bookmark.id.to_s}
       }.to change(Bookmark, :count).by(-1)
     end
 
     it "redirects to the bookmarks list" do
       bookmark = Bookmark.create! valid_attributes
-      delete :destroy, params: {id: bookmark.id.to_s}
+      delete :destroy, :params => {id: bookmark.id.to_s}
       response.should redirect_to(bookmarks_url)
     end
   end

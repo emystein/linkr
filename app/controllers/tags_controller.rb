@@ -1,6 +1,4 @@
 class TagsController < ApplicationController
-  # before_action :require_user
-
   def index
     @tags = Bookmark.public_bookmarks.tag_counts
     if current_user

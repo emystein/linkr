@@ -11,21 +11,21 @@
   <header>
     <div class="container">
       <nav id="profile">
-        <% if logged_in? %>
+        <% if user_signed_in? %>
           <%= link_to "new bookmark", new_bookmark_path %> |
           <%= link_to current_user.nickname, user_path(current_user) %> | 
-          <%= link_to "logout", logout_path %> | 
+          <%= link_to('Logout', destroy_user_session_path, method: :delete) %>  | 
           <%= link_to "help", help_path %>
         <% else %>
-          <%= link_to "signup", signup_path %> | 
-          <%= link_to "login", login_path %>
+          <%= link_to "signup", new_user_registration_path %> | 
+          <%= link_to 'login', new_user_session_path  %> 
         <% end %>
       </nav>
 
-      <h1><%= link_to "Linkr", logged_in? ? bookmarks_path : root_path %></h1>
+      <h1><%= link_to "Linkr", user_signed_in? ? bookmarks_path : root_path %></h1>
 
       <nav id="site">
-        <% if logged_in? -%>
+        <% if user_signed_in? -%>
           <%= link_to "Everyone", bookmarks_path %>
           <%= link_to "Bookmarks", dashboard_path %>
           <%= link_to "Tags", tags_path %>

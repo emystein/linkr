@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :require_user
+  before_action :authenticate_user!
 
   def show
     @bookmarks = current_user.bookmarks.paginate(:page => params[:page])
