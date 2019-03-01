@@ -1,5 +1,5 @@
 class BookmarksController < ApplicationController
-  before_action :require_user
+  before_action :require_user, :except => [:show, :index]
 
   def index
     @bookmarks = Bookmark.public_bookmarks.paginate(:page => params[:page])

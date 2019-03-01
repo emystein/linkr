@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SessionsController do
+describe SessionsController, :type => :controller do
 
   describe "GET 'new'" do
     it "should be successful" do
@@ -11,24 +11,24 @@ describe SessionsController do
 
   describe "Create" do
     before do
-      @user = Factory(:user)
+      @user = create(:user)
     end
 
     it "allows a user to login via nickname" do
-      post :create, :login => @user.nickname, :password => 'password'
+      post :create, params: {login: @user.nickname, password: 'password'}
       response.should redirect_to(dashboard_path)
     end
 
     it "allows a user to login via email" do
-      post :create, :login => @user.email, :password => 'password'
+      post :create, params: {login: @user.email, password: 'password'}
       response.should redirect_to(dashboard_path)
     end
   end
 
   describe "Destroy" do
     before do
-      @user = Factory(:user)
-      post :create, :login => @user.nickname, :password => 'password'
+      @user = create(:user)
+      post :create, params: {login: @user.nickname, password: 'password'}
     end
 
     it "allows a user to logout" do

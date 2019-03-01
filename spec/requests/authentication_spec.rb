@@ -31,7 +31,7 @@ end
 
 feature "Logging In:" do
   background do
-    @user = Factory(:user)
+    @user = create(:user)
   end
 
   scenario "The homepage should have a login link" do
@@ -72,7 +72,7 @@ end
 
 feature "Logging Out:" do
   background do
-    @user = Factory(:user)
+    @user = create(:user)
     visit login_path
     fill_in "Nickname or email address", :with => @user.nickname
     fill_in "Password", :with => "password"

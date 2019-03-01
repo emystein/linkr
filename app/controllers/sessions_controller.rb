@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    redirect_to :bookmarks if current_user
+    redirect_to :dashboard if current_user
   end
 
   def create  
@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])  
       session[:user_id] = user.id  
-      redirect_to :bookmarks, :flash => {:success => "Logged in successfully."}
+      redirect_to :dashboard, :flash => {:success => "Logged in successfully."}
     else  
       flash[:error] = "Invalid login or password"  
       render "new"  

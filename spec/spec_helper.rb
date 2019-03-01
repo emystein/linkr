@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'spork'
-require 'factory_girl'
+require 'factory_bot'
+require 'shoulda-matchers'
 
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However, 
@@ -34,6 +35,13 @@ Spork.prefork do
     # examples within a transaction, remove the following line or assign false
     # instead of true.
     config.use_transactional_fixtures = true
+
+    # config.include Rails.application.routes.url_helpers
+
+    config.include FactoryBot::Syntax::Methods
+
+    # config.include(Shoulda::Matchers::ActiveModel, type: :model)
+    # config.include(Shoulda::Matchers::ActiveRecord, type: :model)
   end
   
 end
@@ -54,6 +62,9 @@ end
 #   feel free to delete them.
 #
 
-
-
-
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end

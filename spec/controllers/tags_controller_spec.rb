@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe TagsController do
+describe TagsController, :type => :controller do
 
   describe "GET 'index'" do
     it "should be successful" do

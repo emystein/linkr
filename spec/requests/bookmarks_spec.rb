@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature "Bookmarks:" do
   background do
-    @user = Factory(:user)
+    @user = create(:user)
     visit login_path
     fill_in "Nickname or email address", :with => @user.nickname
     fill_in "Password", :with => "password"

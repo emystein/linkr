@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   sequence :nickname do |n|
     "person#{n}"
   end
@@ -8,8 +8,8 @@ FactoryGirl.define do
   end
 
   factory :user do |f|
-    f.nickname {Factory.next :nickname}
-    f.email    {Factory.next :email}
-    f.password 'password'
+    f.nickname {generate(:nickname)}
+    f.email    {generate(:email)}
+    f.password {'password'}
   end
 end

@@ -42,8 +42,8 @@ end
 
 group :development, :test do
   gem "rspec-rails"
-#  gem "shoulda-matchers"
-  gem "factory_girl_rails"
+  gem "shoulda-matchers", require: false
+  gem "factory_bot_rails"
   gem "launchy"
   gem 'spork', '~> 0.9.0.rc'
   # gem "rb-fsevent" if RUBY_PLATFORM =~ /darwin/
@@ -51,6 +51,7 @@ group :development, :test do
   gem "guard-rspec"
   gem "guard-spork"
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "rails-controller-testing"
 end
 
 group :test do

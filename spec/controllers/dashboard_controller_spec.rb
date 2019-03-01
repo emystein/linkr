@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DashboardController do
+describe DashboardController, :type => :controller do
 
   describe "GET 'show'" do
     it "should be successful" do

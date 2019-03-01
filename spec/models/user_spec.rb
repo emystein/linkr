@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe User do
+describe User, type: :model do 
   before do
-    @user = Factory(:user)
+    @user = create(:user)
   end
 
   it { should validate_presence_of(:nickname) }
