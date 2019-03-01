@@ -44,6 +44,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "shoulda-matchers", require: false
   gem "factory_bot_rails"
+  gem 'database_cleaner'
   gem "launchy"
   gem 'spork', '~> 0.9.0.rc'
   # gem "rb-fsevent" if RUBY_PLATFORM =~ /darwin/

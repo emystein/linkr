@@ -19,6 +19,12 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe BookmarksController, :type => :controller do
+  before :all do
+    user = create(:user)
+    user.authenticate(user.password) 
+    session[:user_id] = user.id 
+    # assign(:user, user)
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Bookmark. As you add validations to Bookmark, be sure to
