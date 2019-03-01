@@ -6,8 +6,9 @@ feature "Signing Up:" do
     page.should have_content("signup")
   end
 
-  scenario "Allows the creatation of new accounts" do
+  scenario "Allows the creation of new accounts" do
     visit signup_path
+    fill_in 'Beta key', :with => "welcome"
     fill_in 'Nickname', :with => "jack"
     fill_in 'Email', :with => "jack@example.com"
     fill_in 'Password', :with => "password"
@@ -19,7 +20,7 @@ feature "Signing Up:" do
   scenario "Does not allow account creation without required information" do
     visit signup_path
     click_button "Sign-up with Linkr"
-    page.should have_content("Form is invalid")
+    page.should have_content("Invalid beta key")
   end
 
   scenario "Has a login link for people who already have accounts" do

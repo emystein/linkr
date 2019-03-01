@@ -24,7 +24,7 @@
 
       <h1><%= link_to "Linkr", logged_in? ? bookmarks_path : root_path %></h1>
 
-      <nav id="main">
+      <nav id="site">
         <% if logged_in? -%>
           <%= link_to "Everyone", bookmarks_path %>
           <%= link_to "Bookmarks", dashboard_path %>

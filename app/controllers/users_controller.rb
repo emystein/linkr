@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def create  
     @user = User.new(user_params)
     if @user.save  
-      redirect_to login_path, :success => "Signed up successfully!"  
+      redirect_to login_path, :flash => {:success => "Signed up successfully!"}
     else  
       render "new"  
     end  
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def check_beta_key
     return if params[:beta_key] == BETA_KEY
-    redirect_to signup_path, :success => "Invalid beta key. Sorry. Maybe next time?"
+    redirect_to signup_path, :flash => {:success => "Invalid beta key. Sorry. Maybe next time?"}
   end
 
   def user_params

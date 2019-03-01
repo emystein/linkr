@@ -33,7 +33,7 @@ feature "Navigation Auth'd:" do
 
   scenario "header link" do
     within('header') { click_link('Linkr') }
-    find('#main').should have_content('Your Bookmarks')
+    find('#main').should have_content("Everyone's Bookmarks")
   end
 end
 
