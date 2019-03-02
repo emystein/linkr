@@ -1,4 +1,4 @@
-Linkr::Application.routes.draw do
+Rails.application.routes.draw do
   devise_for :user, path_names: { sign_up: "signup", sign_in: "login", sign_out: "logout"}
 
   devise_scope :user do
