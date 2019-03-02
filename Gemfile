@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem "rails"
 gem 'puma', '~> 3.11'
 gem 'jquery-rails'
-gem 'sqlite3', '~> 1.3.6'
+gem 'sqlite3'
 # gem 'pg'
 gem 'redis'
 gem 'redis-objects'
