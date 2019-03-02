@@ -7,7 +7,7 @@ gem 'sqlite3', '~> 1.3.6' # see: https://github.com/rails/rails/issues/35153
 # gem 'pg'
 gem 'redis'
 gem 'redis-objects'
-gem 'will_paginate', '~> 3.0.0'
+gem 'will_paginate'
 gem 'acts-as-taggable-on'
 gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
