@@ -3,10 +3,10 @@ require 'spec_helper'
 feature "Navigation Auth'd:" do
   background do
     @user = create(:user)
-    visit login_path
-    fill_in "Nickname or email address", :with => @user.nickname
+    visit new_user_session_path
+    fill_in "Email", :with => @user.email
     fill_in "Password", :with => "password"
-    click_button "Login to Linkr"
+    click_button "Log in"
     visit dashboard_path
   end
 
@@ -16,7 +16,6 @@ feature "Navigation Auth'd:" do
   end
 
   scenario "everyone's bookmarks" do
-    pending
     within('nav#site') { click_link('Everyone') }
     find('#main').should have_content("Everyone's Bookmarks")
   end
@@ -39,7 +38,12 @@ end
 
 feature "Navigation UnAuth'd:" do
   background do
-    visit logout_path
+    @user = create(:user)
+    visit new_user_session_path
+    fill_in "Email", :with => @user.email
+    fill_in "Password", :with => "password"
+    click_button "Log in"
+    click_link "Logout" 
   end
 
   scenario "only has login/logout" do

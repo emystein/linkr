@@ -7,25 +7,19 @@ feature "Signing Up:" do
   end
 
   scenario "Allows the creation of new accounts" do
-    visit signup_path
+    visit new_user_registration_path
     fill_in 'Nickname', :with => "jack"
     fill_in 'Email', :with => "jack@example.com"
-    fill_in 'Password (6 characters minimum)', :with => "password"
+    fill_in 'Password', :with => "password"
     fill_in 'Password confirmation', :with => "password"
-    click_button "Sign-up with Linkr"
+    click_button "Sign up"
     page.should have_content("successfully")
   end
 
   scenario "Does not allow account creation without required information" do
-    visit signup_path
-    click_button "Sign-up with Linkr"
-    page.should have_content("Invalid beta key")
-  end
-
-  scenario "Has a login link for people who already have accounts" do
-    visit signup_path
-    page.should have_content("Already a member?")
-    page.should have_content("Login now!")
+    visit new_user_registration_path
+    click_button "Sign up"
+    page.should have_content("errors prohibited this user from being saved")
   end
 end
 
@@ -40,52 +34,42 @@ feature "Logging In:" do
   end
 
   scenario "Allows a user to login using their email and password" do
-    visit login_path
-    fill_in "Nickname or email address", :with => @user.email
+    visit new_user_session_path
+    fill_in "Email", :with => @user.email
     fill_in "Password", :with => "password"
-    click_button "Login to Linkr"
-    page.should have_content("successfully")
-  end
-
-  scenario "Allows a user to login using their nickname and password" do
-    visit login_path
-    fill_in "Nickname or email address", :with => @user.nickname
-    fill_in "Password", :with => "password"
-    click_button "Login to Linkr"
+    click_button "Log in"
     page.should have_content("successfully")
   end
 
   scenario "Does not authenticate a user with invalid credentials" do
-    visit login_path
-    fill_in "Nickname or email address", :with => @user.nickname
+    visit new_user_session_path
+    fill_in "Email", :with => @user.nickname
     fill_in "Password", :with => "wrong-password"
-    click_button "Login to Linkr"
-    page.should have_content("Invalid login or password")
+    click_button "Log in"
+    page.should have_content("Invalid Email or password")
   end
 
   scenario "Has a signup link for people who do not have accounts" do
-    visit login_path
-    page.should have_content("Not a member?")
-    page.should have_content("Sign-up now!")
+    visit new_user_session_path
+    page.should have_content("Sign up")
   end
 end
 
 feature "Logging Out:" do
   background do
     @user = create(:user)
-    visit login_path
-    fill_in "Nickname or email address", :with => @user.nickname
-    fill_in "Password", :with => "password"
-    click_button "Login to Linkr"
+    visit new_user_session_path
+    fill_in "Email", :with => @user.email
+    fill_in "Password", :with => @user.password
+    click_button "Log in"
   end
 
   scenario "Authenticated users should see a logout link" do
-    page.should have_content("logout")
+    page.should have_content("Logout")
   end
 
   scenario "Authenticated users should be able to log out" do
-    click_link("logout")
-    page.should have_content("Logged out sucessfully")
-    page.should have_content("login")
+    click_link("Logout")
+    page.should have_content("Log in")
   end
 end

@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   
   validates_presence_of   :nickname, :email
   validates_presence_of   :password, :on => :create
-  validates_uniqueness_of :nickname, :email
+  validates_uniqueness_of :nickname
+  validates_uniqueness_of :email, case_sensitive: false
 
   has_many :bookmarks
 
