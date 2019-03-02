@@ -21,11 +21,15 @@ require 'spec_helper'
 describe BookmarksController, :type => :controller do
   sign_me_in
 
+  before :each do
+    @location = Location.create!(url: "La URL")
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Bookmark. As you add validations to Bookmark, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {"user_id" => subject.current_user.id, "title" => "El título", "url" => "La URL"}
+    {"user_id" => subject.current_user.id, "title" => "El título", "url" => "La URL", "location_id" => @location.id}
   end
 
   describe "GET index" do
