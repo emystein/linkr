@@ -13,7 +13,6 @@ describe User, type: :model do
   it { should validate_uniqueness_of(:nickname) }
 
   context "Login finder:" do
-
     it "can find by nickname (login)" do
       User.by_login(@user.nickname).first.should == @user
     end

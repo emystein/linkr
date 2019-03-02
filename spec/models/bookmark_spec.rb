@@ -1,5 +1,10 @@
 require 'spec_helper'
 
-describe Bookmark do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Bookmark, type: :model do
+  before do
+    @bookmark = create(:bookmark)
+  end
+
+  it { should validate_presence_of(:title) }
+
 end

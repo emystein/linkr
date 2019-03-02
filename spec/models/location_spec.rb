@@ -1,5 +1,9 @@
 require 'spec_helper'
 
-describe Location do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Location, type: :model do
+  before do
+    @location = create(:location)
+  end
+
+  it { should validate_presence_of(:url) }
 end
