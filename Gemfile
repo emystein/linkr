@@ -46,11 +46,9 @@ group :development, :test do
   gem "factory_bot_rails"
   gem 'database_cleaner'
   gem "launchy"
-  gem 'spork', '~> 0.9.0.rc'
   # gem "rb-fsevent" if RUBY_PLATFORM =~ /darwin/
   gem "guard"
   gem "guard-rspec"
-  gem "guard-spork"
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "rails-controller-testing"
 end
