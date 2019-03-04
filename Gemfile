@@ -29,9 +29,6 @@ gem 'devise'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development do
-  gem 'pry'
-  gem 'pry-doc'
-
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -45,7 +42,6 @@ group :development, :test do
   gem "shoulda-matchers", require: false
   gem "factory_bot_rails"
   gem 'database_cleaner'
-  gem "launchy"
   # gem "rb-fsevent" if RUBY_PLATFORM =~ /darwin/
   gem "guard"
   gem "guard-rspec"
