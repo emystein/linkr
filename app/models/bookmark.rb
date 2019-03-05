@@ -10,16 +10,14 @@ class Bookmark < ActiveRecord::Base
   belongs_to  :user
 
   delegate :url, :to => :location, :allow_nil => true
+  
+  validates_presence_of :title
 
   before_validation(on: :create) do
     find_or_generate_location 
   end
 
-  validates_presence_of :title
-
   def find_or_generate_location
-    logger.info "Finding location with URL #{@url}"
     self.location = Location.find_or_create_by(:url => @url)
-    logger.info "Set location #{self.location}"
   end
 end
