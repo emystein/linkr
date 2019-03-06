@@ -13,28 +13,23 @@ describe Bookmark, type: :model do
   context "Search" do
     it "Find kitchen table" do
       @bookmarks = Bookmark.search("kitchen table")
-      @bookmarks.length.should == 1
-      @bookmarks.first.should == @kitchen_table_bookmark 
+      @bookmarks.should == [@kitchen_table_bookmark]
     end 
     it "Find kitchen table case insensitive" do
       @bookmarks = Bookmark.search("Kitchen Table")
-      @bookmarks.length.should == 1
-      @bookmarks.first.should == @kitchen_table_bookmark 
+      @bookmarks.should == [@kitchen_table_bookmark]
     end 
     it "Find kitchen table truncated first term" do
       @bookmarks = Bookmark.search("tchen table")
-      @bookmarks.length.should == 1
-      @bookmarks.first.should == @kitchen_table_bookmark 
+      @bookmarks.should == [@kitchen_table_bookmark]
     end 
     it "Find kitchen table truncated last term" do
       @bookmarks = Bookmark.search("Kitchen tab")
-      @bookmarks.length.should == 1
-      @bookmarks.first.should == @kitchen_table_bookmark 
+      @bookmarks.should == [@kitchen_table_bookmark]
     end 
     it "Find dinner table" do
       @bookmarks = Bookmark.search("dinner table")
-      @bookmarks.length.should == 1
-      @bookmarks.first.should == @dinner_table_bookmark 
+      @bookmarks.should == [@dinner_table_bookmark]
     end 
   end
 end
