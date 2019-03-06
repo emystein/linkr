@@ -1,4 +1,16 @@
+require 'active_support/concern'
+
+module BookmarkExtension extend ActiveSupport::Concern
+  class_methods do
+    def search(query)
+      Bookmark.where('lower(title) like lower(?)', "%#{query}%") 
+    end
+  end
+end
+
 class Bookmark < ActiveRecord::Base
+  include BookmarkExtension
+
   attr_accessor :url
 
   acts_as_taggable_on :tags

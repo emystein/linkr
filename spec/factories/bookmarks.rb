@@ -4,5 +4,5 @@ FactoryBot.define do
       notes {"MyText"} 
       user_id {1}
       location_id {1}
-    end
+  end
 end
