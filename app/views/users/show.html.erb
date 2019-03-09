@@ -1,7 +1,7 @@
 <div id="bookmarks-header">
   <h2><%= @user.nickname %>'s Bookmarks</h2>
 
-  <%= render 'components/user_search' %>
+  <%= render 'components/search', search_path: user_path %>
 
   <hr>
 </div>
