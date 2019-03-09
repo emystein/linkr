@@ -1,12 +1,12 @@
-<div id="bookmark-header-wrapper">
-  <h2 class="bookmark-header">Everyone's Bookmarks</h2>
+<div id="bookmarks-header">
+  <h2>Everyone's Bookmarks</h2>
 
-  <%= form_tag(bookmarks_path,  method: :get, style: 'style="float: left;"' ) do %>
+  <%= form_tag(bookmarks_path,  method: :get) do %>
     <%= text_field_tag :search_query, params[:search_query] %>
     <%= submit_tag 'Search' %>
   <% end %>
 
-  <hr class="bookmark-header">
+  <hr>
 </div>
 
 <section>

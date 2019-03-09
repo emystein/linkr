@@ -128,13 +128,17 @@ section#bookmark {
   }
 }
 
-h2.bookmark-header {
-  float: left;
-  border-bottom: 0
-}
-
-hr.bookmark-header {
-  clear: both;
-  border: 0;
-  border-top: 4px solid #222;
+div#bookmarks-header {
+  h2 {
+    float: left;
+    border-bottom: 0
+  }
+  form {
+    float: right;
+  }
+  hr {
+    clear: both;
+    border: 0;
+    border-top: 4px solid #222;
+  }
 }
