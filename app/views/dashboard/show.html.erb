@@ -1,4 +1,10 @@
-<h2>Your Bookmarks</h2>
+<div id="bookmarks-header">
+  <h2>Your Bookmarks</h2>
+
+  <%= render 'components/search' %>
+
+  <hr>
+</div>
 
 <section>
   <% unless @bookmarks.empty? %>
