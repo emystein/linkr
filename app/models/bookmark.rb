@@ -23,6 +23,7 @@ class Bookmark < ActiveRecord::Base
     self.location = Location.find_or_create_by(:url => @url)
   end
 
+  # see also: https://www.justinweiss.com/articles/search-and-filter-rails-models-without-bloating-your-controller/
   def self.search(query)
     self.where('lower(title) like lower(?)', "%#{query}%") 
   end

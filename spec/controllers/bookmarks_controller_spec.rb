@@ -39,8 +39,17 @@ describe BookmarksController, :type => :controller do
   describe "GET show" do
     it "assigns the requested bookmark as @bookmark" do
       bookmark = Bookmark.create! valid_attributes
-      get :show, :params => {id: bookmark.id.to_s}
+      post :show, :params => {id: bookmark.id.to_s}
       assigns(:bookmark).should eq(bookmark)
+    end
+  end
+
+  describe "Search" do
+    it "assigns the filtered bookmark as @bookmark" do
+      kitchen_table_bookmark = Bookmark.create!(user_id: subject.current_user.id, title: "Kitchen table")
+      dinner_table_bookmark = Bookmark.create!(user_id: subject.current_user.id, title: "Dinner table")
+      get :index, :params => {search_query: "kitchen"}
+      assigns(:bookmarks).should contain_exactly(kitchen_table_bookmark)
     end
   end
 

@@ -2,7 +2,11 @@ class BookmarksController < ApplicationController
   before_action :authenticate_user!, :except => [:show, :index]
 
   def index
-    @bookmarks = Bookmark.public_bookmarks.paginate(:page => params[:page])
+    if params[:search_query]
+      @bookmarks = Bookmark.public_bookmarks.search(params[:search_query]).paginate(:page => params[:page])
+    else
+      @bookmarks = Bookmark.public_bookmarks.paginate(:page => params[:page])
+    end
   end
 
   def show
@@ -58,6 +62,10 @@ class BookmarksController < ApplicationController
     @bookmark.destroy
 
     redirect_to bookmarks_url
+  end
+
+  def bookmarks_params
+    params.permit(:search_query)
   end
 end
 
