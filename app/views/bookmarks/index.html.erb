@@ -1,10 +1,7 @@
 <div id="bookmarks-header">
   <h2>Everyone's Bookmarks</h2>
 
-  <%= form_tag(bookmarks_path,  method: :get) do %>
-    <%= text_field_tag :search_query, params[:search_query] %>
-    <%= submit_tag 'Search' %>
-  <% end %>
+  <%= render "components/search", search_path: bookmarks_path %>
 
   <hr>
 </div>
