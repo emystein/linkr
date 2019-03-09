@@ -45,13 +45,14 @@ describe BookmarksController, :type => :controller do
   end
 
   describe "Search" do
-    it "assigns the filtered bookmark as @bookmark" do
+    it "assigns the filtered bookmark as @bookmarks" do
       kitchen_table_bookmark = Bookmark.create!(user_id: subject.current_user.id, title: "Kitchen table")
       dinner_table_bookmark = Bookmark.create!(user_id: subject.current_user.id, title: "Dinner table")
       get :index, :params => {search_query: "kitchen"}
       assigns(:bookmarks).should contain_exactly(kitchen_table_bookmark)
     end
   end
+
 
   describe "GET new" do
     it "assigns a new bookmark as @bookmark" do
