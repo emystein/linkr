@@ -1,11 +1,15 @@
-<h2>Everyone's Bookmarks</h2>
+<div id="bookmark-header-wrapper">
+  <h2 class="bookmark-header">Everyone's Bookmarks</h2>
 
-<section>
-  <%= form_tag(bookmarks_path,  method: :get) do %>
-    Search by title: <%= text_field_tag :search_query, params[:search_query] %>
+  <%= form_tag(bookmarks_path,  method: :get, style: 'style="float: left;"' ) do %>
+    <%= text_field_tag :search_query, params[:search_query] %>
     <%= submit_tag 'Search' %>
   <% end %>
 
+  <hr class="bookmark-header">
+</div>
+
+<section>
   <% unless @bookmarks.empty? %>
     <%= render :partial => 'bookmarks/bookmark', :collection => @bookmarks %>
     <%= will_paginate @bookmarks %>

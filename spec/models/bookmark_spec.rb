@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Bookmark, type: :model do
   before do
     @user = create(:user)
-    @kitchen_table_bookmark = @user.bookmarks.create!(url: "URL of kitchen table", title: "Kitchen table")
-    @dinner_table_bookmark = @user.bookmarks.create!(url: "URL of dinner table", title: "Dinner table")
+    @kitchen_table_bookmark = @user.bookmarks.create!(title: "Kitchen table")
+    @dinner_table_bookmark = @user.bookmarks.create!(title: "Dinner table")
     @bookmark = create(:bookmark)
   end
 
