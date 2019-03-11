@@ -9,6 +9,7 @@ gem 'redis'
 gem 'redis-objects'
 gem 'will_paginate'
 gem 'acts-as-taggable-on'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
@@ -62,3 +63,5 @@ end
 
 
 gem "activeresource", "~> 5.1"
+
+gem "bootstrap", "~> 4.3"
