@@ -27,12 +27,17 @@ article {
 }
 
 p.url {
+  margin-bottom: 0px;
   a {
     color: #666;
     &:hover {
       color: #fff;
     }
   }
+}
+
+p.meta {
+  margin-bottom: 0px;
 }
 
 .pagination {

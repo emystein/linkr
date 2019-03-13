@@ -8,9 +8,10 @@ header {
   color: #000;
   display: block;
   background: #fff;
-  line-height: 45px;
+  // line-height: 45px;
   border-bottom: 2px solid #aaa;
   h1 {
+    margin-bottom: 4px;
     padding-right: 35px;
     float: left;
     font-family: Georgia;
@@ -23,12 +24,12 @@ header {
       padding-right: 8px;
       padding-left: 8px;
     }
-
+    
   }
   nav#profile {
     float: right; }
-  nav#site {
-    a {
+    nav#site {
+      a {
       margin-right: 10px;
     }
   }

@@ -5,6 +5,7 @@ gem 'puma', '~> 3.11'
 gem 'jquery-rails'
 gem 'sqlite3', '~> 1.3.6' # see: https://github.com/rails/rails/issues/35153
 # gem 'pg'
+# Use Redis adapter to run Action Cable in production
 gem 'redis'
 gem 'redis-objects'
 gem 'will_paginate'
@@ -16,9 +17,6 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use ActiveModel has_secure_password
 gem 'devise'
 
 # Use ActiveStorage variant
