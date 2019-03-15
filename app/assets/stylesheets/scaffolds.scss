@@ -9,13 +9,16 @@ pre {
   font-size: 11px; }
 
 a {
-  color: red;
-  text-decoration: none;
+  color: red !important;
+  text-decoration: none !important;
   &:visited {
     color: red; }
   &:hover {
     color: #fff;
-    background-color: #000; } }
+    // background-color: $link-hover-color;
+    background-color: #000;
+  }
+}
 
 div {
   &.field, &.actions {
