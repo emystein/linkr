@@ -1,4 +1,5 @@
 // http://speakerdeck.com/u/chriseppstein/p/sass-the-future-of-stylesheets-in-rails-31
+@import "bootstrap";
 
 @import "_colors";
 @import "_utilities";
@@ -7,5 +8,3 @@
 @import "layout";
 @import "bookmarks";
 @import "fonts";
-
-@import "bootstrap";
