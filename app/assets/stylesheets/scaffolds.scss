@@ -14,9 +14,9 @@ a {
   &:visited {
     color: red; }
   &:hover {
-    color: #fff;
+    color: #fff !important;
     // background-color: $link-hover-color;
-    background-color: #000;
+    background-color: #000 !important;
   }
 }
 
