@@ -10,14 +10,14 @@ gem 'redis'
 gem 'redis-objects'
 gem 'will_paginate'
 gem 'acts-as-taggable-on'
-gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'sprockets-rails', :require => 'sprockets/railtie' # assets packaging
 gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.5' # generate JSON objects with a Builder-style DSL
 
-gem 'devise'
+gem 'devise' # authentication
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
