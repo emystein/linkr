@@ -11,7 +11,10 @@ class UsersController < ApplicationController
     else
       @bookmarks = @user.bookmarks.public_bookmarks.paginate(:page => params[:page])
     end
+  end
 
+  def tags
+    @user = User.find_by_id(params[:id])
     @tags = @user.bookmarks.tag_counts
   end
 end
