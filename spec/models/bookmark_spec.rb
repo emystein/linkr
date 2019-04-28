@@ -5,15 +5,13 @@ describe Bookmark, type: :model do
     @user = create(:user)
     @kitchen_table_bookmark = @user.bookmarks.create!(title: "Kitchen table")
     @dinner_table_bookmark = @user.bookmarks.create!(title: "Dinner table")
-    # @bookmark = create(:bookmark)
   end
 
   it { should validate_presence_of(:title) }
 
   context "Tags" do
     it "Assign tags" do
-      @kitchen_table_bookmark.tag_list.add("tag1")
-      @kitchen_table_bookmark.tag_list.add("tag2")
+      @kitchen_table_bookmark.tag_list.add("tag1", "tag2")
       @kitchen_table_bookmark.save
 
       @retrieved = Bookmark.find(@kitchen_table_bookmark.id)

@@ -11,5 +11,7 @@ class UsersController < ApplicationController
     else
       @bookmarks = @user.bookmarks.public_bookmarks.paginate(:page => params[:page])
     end
+
+    @tags = @user.bookmarks.tag_counts
   end
 end
