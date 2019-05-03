@@ -8,8 +8,11 @@ Rails.application.routes.draw do
   get "/help" => "pages#help"
   get "/dashboard" => "dashboard#show"
 
-  resources :users, :only => [:new, :create, :show, :update]
-  get "/users/:id/tags" => "users#tags"
+  resources :users, :only => [:new, :create, :show, :update] do
+    member do
+      get :tags
+    end
+  end
 
   resources :sessions, :only => [:new, :create, :destroy]
   resources :tags, :only => [:index, :show]
