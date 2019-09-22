@@ -25,4 +25,16 @@ class Bookmark < ActiveRecord::Base
   def self.search(query)
     self.where("lower(title) like lower(?)", "%#{query}%")
   end
+
+  require 'csv'
+  require 'activerecord-import/base'
+
+  def self.yabs_csv_import(file, user)
+    bookmarks = []
+    CSV.foreach(file.path, headers: true) do |row|
+      bookmark = Bookmark.new(user: user, title: row[4], url: row[5])
+      bookmarks << bookmark
+    end
+    Bookmark.import bookmarks, recursive: true
+  end
 end
