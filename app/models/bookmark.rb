@@ -30,13 +30,16 @@ class Bookmark < ActiveRecord::Base
 
   def self.yabs_csv_import(user, file)
     bookmarks = []
-    data = SmarterCSV.process(file.path)
 
-    data.each do | row |
-      bookmark = Bookmark.new(user: user, title: row[:title], url: row[:link], private: row[:state] != 'public')
-      bookmark.tag_list.add(row[:tags], parse: true)
-      bookmark.save
-      bookmarks << bookmark
+    rows = SmarterCSV.process(file.path)
+
+    ActiveRecord::Base.transaction do
+      rows.each do | row |
+        bookmark = Bookmark.new(user: user, title: row[:title], url: row[:link], private: row[:state] != 'public')
+        bookmark.tag_list.add(row[:tags], parse: true)
+        bookmark.save
+        bookmarks << bookmark
+      end
     end
 
     # TODO: add pagination
