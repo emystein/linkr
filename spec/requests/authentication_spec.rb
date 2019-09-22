@@ -3,7 +3,7 @@ require 'spec_helper'
 feature "Signing Up:" do
   scenario "The homepage should have a signup link" do
     visit root_path
-    page.should have_content("signup")
+    expect(page).to have_content("signup")
   end
 
   scenario "Allows the creation of new accounts" do
@@ -13,13 +13,13 @@ feature "Signing Up:" do
     fill_in 'Password', :with => "password"
     fill_in 'Password confirmation', :with => "password"
     click_button "Sign up"
-    page.should have_content("successfully")
+    expect(page).to have_content("successfully")
   end
 
   scenario "Does not allow account creation without required information" do
     visit new_user_registration_path
     click_button "Sign up"
-    page.should have_content("errors prohibited this user from being saved")
+    expect(page).to have_content("errors prohibited this user from being saved")
   end
 end
 
@@ -30,7 +30,7 @@ feature "Logging In:" do
 
   scenario "The homepage should have a login link" do
     visit root_path
-    page.should have_content("login")
+    expect(page).to have_content("login")
   end
 
   scenario "Allows a user to login using their email and password" do
@@ -38,7 +38,7 @@ feature "Logging In:" do
     fill_in "Email", :with => @user.email
     fill_in "Password", :with => "password"
     click_button "Log in"
-    page.should have_content("successfully")
+    expect(page).to have_content("successfully")
   end
 
   scenario "Does not authenticate a user with invalid credentials" do
@@ -46,12 +46,12 @@ feature "Logging In:" do
     fill_in "Email", :with => @user.nickname
     fill_in "Password", :with => "wrong-password"
     click_button "Log in"
-    page.should have_content("Invalid Email or password")
+    expect(page).to have_content("Invalid Email or password")
   end
 
   scenario "Has a signup link for people who do not have accounts" do
     visit new_user_session_path
-    page.should have_content("Sign up")
+    expect(page).to have_content("Sign up")
   end
 end
 
@@ -65,11 +65,11 @@ feature "Logging Out:" do
   end
 
   scenario "Authenticated users should see a logout link" do
-    page.should have_content("Logout")
+    expect(page).to have_content("Logout")
   end
 
   scenario "Authenticated users should be able to log out" do
     click_link("Logout")
-    page.should have_content("Log in")
+    expect(page).to have_content("Log in")
   end
 end

@@ -13,7 +13,7 @@ describe UsersController, :type => :controller do
       not_own_kitchen_table_bookmark = Bookmark.create!(user_id: other_user.id, title: "Kitchen table")
 
       get :show, :params => { id: subject.current_user.id, search_query: "kitchen" }
-      assigns(:bookmarks).should contain_exactly(kitchen_table_bookmark)
+      expect(assigns(:bookmarks)).to contain_exactly(kitchen_table_bookmark)
     end
   end
 end

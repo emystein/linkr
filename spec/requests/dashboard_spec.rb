@@ -11,6 +11,6 @@ feature "Dashboard:" do
 
   scenario "Users should be have a dashboard" do
     visit dashboard_path
-    page.should have_content("Your Bookmarks")
+    expect(page).to have_content("Your Bookmarks")
   end
 end

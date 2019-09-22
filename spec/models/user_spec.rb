@@ -14,11 +14,11 @@ describe User, type: :model do
 
   context "Login finder:" do
     it "can find by nickname (login)" do
-      User.by_login(@user.nickname).first.should == @user
+      expect(User.by_login(@user.nickname).first).to eq(@user)
     end
 
     it "can find by email (login)" do
-      User.by_login(@user.email).first.should == @user
+      expect(User.by_login(@user.email).first).to eq(@user)
     end
   end
 
@@ -30,7 +30,7 @@ describe User, type: :model do
       @user.save
 
       @retrieved = User.find(@user.id)
-      @retrieved.bookmarks.should == @user.bookmarks
+      expect(@retrieved.bookmarks).to eq(@user.bookmarks)
     end
   end
 
@@ -47,7 +47,7 @@ describe User, type: :model do
 
       tags = @user.bookmarks.tag_counts.map { |tag| { tag.name => tag.count } }
 
-      tags.should == [{ "tag1" => 2 }, { "tag2" => 1 }]
+      expect(tags).to eq([{ "tag1" => 2 }, { "tag2" => 1 }])
     end
   end
 end
