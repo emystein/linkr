@@ -6,13 +6,8 @@
 <section>
   <%= form_tag '/bookmarks/import', multipart: true do %>
     <%= file_field_tag :file %>
+    <br/>
     <%= submit_tag "Import from file" %>
-  <% end %>
-  <% unless @bookmarks.empty? %>
-    <%= render :partial => 'bookmarks/bookmark', :collection => @bookmarks %>
-    <p class="bookmark_count"><%= pluralize(@bookmarks.count, 'Bookmark') %></p>
-  <% else %>
-    <h4>There are no bookmarks to display.</h4>
   <% end %>
 </section>
 
