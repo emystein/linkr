@@ -37,8 +37,6 @@ GEM
       activemodel (= 5.2.3)
       activesupport (= 5.2.3)
       arel (>= 9.0)
-    activerecord-import (1.0.2)
-      activerecord (>= 3.2)
     activeresource (5.1.0)
       activemodel (>= 5.0, < 7)
       activemodel-serializers-xml (~> 1.0)
@@ -262,6 +260,7 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (4.0.1)
       activesupport (>= 4.2.0)
+    smarter_csv (1.2.6)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -303,7 +302,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-import (~> 1.0)
   activeresource (~> 5.1)
   acts-as-taggable-on
   bootsnap (>= 1.1.0)
@@ -330,6 +328,7 @@ DEPENDENCIES
   sass-rails
   selenium-webdriver
   shoulda-matchers
+  smarter_csv (~> 1.2)
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets-rails

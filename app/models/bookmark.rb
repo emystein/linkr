@@ -26,18 +26,23 @@ class Bookmark < ActiveRecord::Base
     self.where("lower(title) like lower(?)", "%#{query}%")
   end
 
-  require 'csv'
+  require 'smarter_csv'
 
   def self.yabs_csv_import(user, file)
     bookmarks = []
-    CSV.foreach(file.path, headers: true) do |row|
-      bookmark = Bookmark.new(user: user, title: row[4], url: row[5], private: row[6] != 'public')
-      bookmark.tag_list.add(row[9], parse: true)
+    data = SmarterCSV.process(file.path)
+
+    data.each do | row |
+      bookmark = Bookmark.new(user: user, title: row[:title], url: row[:link], private: row[:state] != 'public')
+      bookmark.tag_list.add(row[:tags], parse: true)
       bookmark.save
       bookmarks << bookmark
     end
+
+    # TODO: add pagination
     # bookmark_ids = bookmarks.map { |bookmark| bookmark.id }
     # bookmarks = Bookmark.where(:id => bookmark_ids).paginate(:page => params[:page])
+
     bookmarks
   end
 end
