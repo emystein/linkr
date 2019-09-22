@@ -33,7 +33,7 @@ class Bookmark < ActiveRecord::Base
 
     rows = SmarterCSV.process(file.path)
 
-    ActiveRecord::Base.transaction do
+    transaction do
       rows.each do | row |
         bookmark = Bookmark.new(user: user, title: row[:title], url: row[:link], private: row[:state] != 'public')
         bookmark.tag_list.add(row[:tags], parse: true)

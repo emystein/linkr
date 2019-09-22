@@ -75,6 +75,7 @@ class BookmarksController < ApplicationController
 
   def import
     @bookmarks = Bookmark.yabs_csv_import(current_user, params[:file])
+    render 'import_results'
   end
 end
 
