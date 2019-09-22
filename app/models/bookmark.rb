@@ -27,22 +27,17 @@ class Bookmark < ActiveRecord::Base
   end
 
   require 'csv'
-  require 'activerecord-import/base'
 
   def self.yabs_csv_import(user, file)
     bookmarks = []
     CSV.foreach(file.path, headers: true) do |row|
-      bookmark = Bookmark.new(
-        user: user,
-        title: row[4],
-        url: row[5],
-        private: row[6] != 'public'
-      )
+      bookmark = Bookmark.new(user: user, title: row[4], url: row[5], private: row[6] != 'public')
       bookmark.tag_list.add(row[9], parse: true)
       bookmark.save
       bookmarks << bookmark
     end
-    # Bookmark.import bookmarks, recursive: true
-    return bookmarks
+    # bookmark_ids = bookmarks.map { |bookmark| bookmark.id }
+    # bookmarks = Bookmark.where(:id => bookmark_ids).paginate(:page => params[:page])
+    bookmarks
   end
 end

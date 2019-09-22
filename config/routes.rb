@@ -5,8 +5,10 @@ Rails.application.routes.draw do
     post "/sessions/user", to: "devise/sessions#create" # devise post to this url on login
   end
 
-  get "/help" => "pages#help"
-  get "/dashboard" => "dashboard#show"
+  get  "/help"             => "pages#help"
+  get  "/dashboard"        => "dashboard#show"
+  get  "/bookmarks/import" => "bookmarks#show_import_form"
+  post "/bookmarks/import" => "bookmarks#import"
 
   resources :users, :only => [:new, :create, :show, :update] do
     member do

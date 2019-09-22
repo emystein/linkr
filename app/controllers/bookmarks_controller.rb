@@ -67,5 +67,14 @@ class BookmarksController < ApplicationController
   def bookmarks_params
     params.permit(:search_query)
   end
+
+  def show_import_form
+    @bookmarks = []
+    render 'import'
+  end
+
+  def import
+    @bookmarks = Bookmark.yabs_csv_import(current_user, params[:file])
+  end
 end
 

@@ -65,5 +65,3 @@ gem "activeresource", "~> 5.1"
 gem "bootstrap", "~> 4.3"
 
 gem "csv", "~> 3.1"
-
-gem "activerecord-import", "~> 1.0"
