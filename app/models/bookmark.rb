@@ -35,10 +35,13 @@ class Bookmark < ActiveRecord::Base
 
     transaction do
       rows.each do | row |
-        bookmark = Bookmark.new(user: user, title: row[:title], url: row[:link], private: row[:state] != 'public')
-        bookmark.tag_list.add(row[:tags], parse: true)
-        bookmark.save
-        bookmarks << bookmark
+        if !Location.where(:url => row[:link]).exists? then
+          bookmark = Bookmark.new(user: user, title: row[:title], url: row[:link], private: row[:state] != 'public')
+          # bookmark = Bookmark.where(location.url: row[:link]).first_or_create(user: user, title: row[:title], url: row[:link], private: row[:state] != 'public')
+          bookmark.tag_list.add(row[:tags], parse: true)
+          bookmark.save
+          bookmarks << bookmark
+        end
       end
     end
 

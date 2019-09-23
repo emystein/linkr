@@ -1,28 +1,41 @@
 require 'rails_helper'
-require 'spec_helper'
 
 describe CSV, type: :model do
   before do
     @user = create(:user)
+    @yabs_bookmarks_csv = File.open('spec/models/yabs_bookmarks.csv')
   end
 
   it 'Import YABS Bookmars CSV' do
-    result = Bookmark.yabs_csv_import(@user, File.open('spec/models/yabs_bookmarks.csv'))
+    Bookmark.yabs_csv_import(@user, @yabs_bookmarks_csv)
 
-    # expect(result.failed_instances.length).to eq(0)
+    expect(Bookmark.all.map(&:title)).to match_array(
+      ['Simple Planning for Startups • William Pietri',
+       'Discovering Docker and Cassandra']
+    )
 
-    titles = Bookmark.all.map { | bookmark | bookmark.title }
-    expect(titles).to match_array(['Simple Planning for Startups • William Pietri',
-                          'Discovering Docker and Cassandra'])
+    expect(Bookmark.all.map(&:url)).to match_array(
+      ['http://williampietri.com/writing/2014/simple-planning-for-startups/',
+       'http://blog.ditullio.fr/2016/06/10/docker-docker-basics-cassandra/']
+    )
 
-    urls = Bookmark.all.map { | bookmark | bookmark.url }
-    expect(urls).to match_array(['http://williampietri.com/writing/2014/simple-planning-for-startups/',
-                        'http://blog.ditullio.fr/2016/06/10/docker-docker-basics-cassandra/'])
+    expect(Bookmark.all.filter(&:private)).to be_empty
 
-    private_bookmarks = Bookmark.all.map { | bookmark | bookmark.private } 
-    expect(private_bookmarks).to eq([false, false])
+    expect(Bookmark.all.map(&:tag_list)).to match_array(
+      [%w[agile], %w[cassandra docker]]
+    )
+  end
 
-    tags = Bookmark.all.map { | bookmark | bookmark.tag_list }
-    expect(tags).to match_array([['agile'], ['cassandra', 'docker']])
+  it 'Skip already imported URLs' do
+    imported = Bookmark.yabs_csv_import(@user, @yabs_bookmarks_csv)
+
+    expect(imported.length).to eq(2)
+    expect(Bookmark.all.count).to eq(2)
+
+    # Re-execute and verify no duplicates are imported
+    imported = Bookmark.yabs_csv_import(@user, @yabs_bookmarks_csv)
+
+    expect(imported.length).to eq(0)
+    expect(Bookmark.all.count).to eq(2)
   end
 end
