@@ -21,9 +21,7 @@ describe CSV, type: :model do
 
     expect(Bookmark.all.filter(&:private)).to be_empty
 
-    expect(Bookmark.all.map(&:tag_list)).to match_array(
-      [%w[agile], %w[cassandra docker]]
-    )
+    expect(Bookmark.all.map(&:tag_list)).to match_array([%w[agile], %w[cassandra docker]])
   end
 
   it 'Skip already imported URLs' do

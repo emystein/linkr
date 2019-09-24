@@ -33,8 +33,11 @@ class Bookmark < ActiveRecord::Base
 
     rows = SmarterCSV.process(file.path)
 
+    # Skip row with summary 'Generated on:...'
+    rows = rows.filter { |row| row[:id].is_a? Integer }
+
     transaction do
-      rows.each do | row |
+      rows.each do |row|
         if !Location.where(:url => row[:link]).exists? then
           bookmark = Bookmark.new(user: user, title: row[:title], url: row[:link], private: row[:state] != 'public')
           # bookmark = Bookmark.where(location.url: row[:link]).first_or_create(user: user, title: row[:title], url: row[:link], private: row[:state] != 'public')
