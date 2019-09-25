@@ -37,7 +37,7 @@ class Bookmark < ActiveRecord::Base
 
     transaction do
       rows.each do |row|
-        next if exist_location_with_url(row[:link])
+        next if Location.where(url: row[:link]).exists?
 
         bookmarks << save_bookmark_from_csv_row(row, user)
       end
@@ -48,10 +48,6 @@ class Bookmark < ActiveRecord::Base
     # bookmarks = Bookmark.where(:id => bookmark_ids).paginate(:page => params[:page])
 
     bookmarks
-  end
-
-  def self.exist_location_with_url(url)
-    Location.where(url: url).exists?
   end
 
   def self.save_bookmark_from_csv_row(row, user)
