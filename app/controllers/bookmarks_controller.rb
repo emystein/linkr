@@ -75,6 +75,11 @@ class BookmarksController < ApplicationController
 
   def import
     @bookmarks = Bookmark.yabs_csv_import(current_user, params[:file])
+
+    # TODO: add pagination
+    # bookmark_ids = bookmarks.map { |bookmark| bookmark.id }
+    # bookmarks = Bookmark.where(:id => bookmark_ids).paginate(:page => params[:page])
+
     render 'import_results'
   end
 end

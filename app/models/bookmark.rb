@@ -28,12 +28,12 @@ class Bookmark < ActiveRecord::Base
 
   require 'smarter_csv'
 
-  def self.yabs_csv_import(user, file)
+  def self.yabs_csv_import(user, csv_file)
     bookmarks = []
 
-    rows = SmarterCSV.process(file.path)
+    rows = SmarterCSV.process(csv_file.path)
 
-    rows = rows.filter { |row| row[:id].is_a? Integer }
+    rows = rows.filter { |row| row[:id].is_a? Numeric }
 
     transaction do
       rows.each do |row|
@@ -42,10 +42,6 @@ class Bookmark < ActiveRecord::Base
         bookmarks << save_bookmark_from_csv_row(row, user)
       end
     end
-
-    # TODO: add pagination
-    # bookmark_ids = bookmarks.map { |bookmark| bookmark.id }
-    # bookmarks = Bookmark.where(:id => bookmark_ids).paginate(:page => params[:page])
 
     bookmarks
   end
