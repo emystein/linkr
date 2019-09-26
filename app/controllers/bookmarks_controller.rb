@@ -74,7 +74,7 @@ class BookmarksController < ApplicationController
   end
 
   def import
-    @bookmarks = Bookmark.yabs_csv_import(current_user, params[:file])
+    @bookmarks = CsvBookmarkImport.import(current_user, params[:file], YabsCsvBookmarkImportStrategy.new)
 
     # TODO: add pagination
     # bookmark_ids = bookmarks.map { |bookmark| bookmark.id }
