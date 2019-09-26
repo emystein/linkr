@@ -5,10 +5,8 @@
 
 <section>
   <%= form_tag '/bookmarks/import', multipart: true do %>
-    <%= file_field_tag :file %>
-    <br/>
+    <%= radio_button_tag :import_format, 'yabs', :checked => 'true' %>YABS Comma Separate Values (CSV)<br />
+    <%= file_field_tag :file %><br />
     <%= submit_tag "Import from file" %>
   <% end %>
 </section>
-
-

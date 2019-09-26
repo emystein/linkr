@@ -74,7 +74,13 @@ class BookmarksController < ApplicationController
   end
 
   def import
-    @bookmarks = CsvBookmarkImport.import(current_user, params[:file], YabsBookmark.new)
+    import_format = params[:import_format]
+
+    if import_format == 'yabs' then
+      @bookmarks = CsvBookmarkImport.import(current_user, params[:file], YabsCsvMetadata.new, YabsBookmark.new)
+    else
+      @error_message = 'Import format not recognized: #{import_format}'
+    end
 
     # TODO: add pagination
     # bookmark_ids = bookmarks.map { |bookmark| bookmark.id }

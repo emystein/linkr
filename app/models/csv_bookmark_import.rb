@@ -1,27 +1,23 @@
 require 'smarter_csv'
 
 class CsvBookmarkImport
-  def self.import(user, csv_file, import_strategy)
+  def self.import(user, csv_file, csv_metadata, bookmark_factory)
     bookmarks = []
 
     rows = SmarterCSV.process(csv_file.path)
 
-    rows = rows.filter { |row| row[:id].is_a? Numeric }
+    rows = rows.filter { |row| csv_metadata.id(row).is_a? Numeric }
 
     ActiveRecord::Base.transaction do
       rows.each do |row|
-        next if Location.where(url: row[:link]).exists?
+        next if Location.where(url: csv_metadata.url(row)).exists?
 
-        bookmarks << save_bookmark_from_csv_row(row, user, import_strategy)
+        bookmark = bookmark_factory.create_from_csv_row(row, user)
+        bookmark.save
+        bookmarks << bookmark
       end
     end
 
     bookmarks
-  end
-
-  def self.save_bookmark_from_csv_row(row, user, import_strategy)
-    bookmark = import_strategy.create_bookmark_from_yabs_csv_row(row, user)
-    bookmark.save
-    bookmark
   end
 end
