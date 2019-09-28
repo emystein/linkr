@@ -5,10 +5,9 @@ Rails.application.routes.draw do
     post "/sessions/user", to: "devise/sessions#create" # devise post to this url on login
   end
 
-  get  "/help"             => "pages#help"
-  get  "/dashboard"        => "dashboard#show"
-  get  "/bookmarks/import" => "bookmarks#show_import_form"
-  post "/bookmarks/import" => "bookmarks#import"
+  get "/help"             => "pages#help"
+  get "/dashboard"        => "dashboard#show"
+  get "/bookmarks/import" => "bookmarks#show_import_form"
 
   resources :users, :only => [:new, :create, :show, :update] do
     member do
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
   resources :bookmarks do
     get :save, :on => :member
     get :bookmarklet, :on => :collection
+    post :import, :on => :collection
   end
 
   root :to => "dashboard#show"

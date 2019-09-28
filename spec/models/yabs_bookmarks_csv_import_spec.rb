@@ -3,7 +3,7 @@ require 'rails_helper'
 describe CSV, type: :model do
   before do
     @user = create(:user)
-    @yabs_bookmarks_csv = File.open('spec/models/yabs_bookmarks.csv')
+    @yabs_bookmarks_csv = File.open(file_fixture('/yabs_bookmarks.csv'))
   end
 
   it 'Import YABS Bookmars CSV' do

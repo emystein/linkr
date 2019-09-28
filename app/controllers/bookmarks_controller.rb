@@ -72,7 +72,6 @@ class BookmarksController < ApplicationController
   end
 
   def show_import_form
-    @bookmarks = []
     render 'import'
   end
 
@@ -85,7 +84,7 @@ class BookmarksController < ApplicationController
                                       @@bookmark_factory_by_format[import_format])
     else
       @bookmarks = []
-      @error_message = 'Import format not recognized: #{import_format}'
+      @error_message = "Import format not recognized: #{import_format}"
     end
 
     # TODO: add pagination
