@@ -146,4 +146,24 @@ describe BookmarksController, :type => :controller do
       expect(response).to redirect_to(bookmarks_url)
     end
   end
+
+  describe "Import bookmarks" do
+    it "import bookmarks from a file upload" do
+      bookmarks_file = fixture_file_upload('/files/yabs_bookmarks.csv', 'text/csv')
+      post :import, params: {import_format: 'yabs', file: bookmarks_file}
+
+      expect(response).to render_template('import_results')
+      expect(assigns(:bookmarks)).not_to be_empty
+      expect(assigns(:error_message)).to be_nil
+    end
+
+    it "rejects unknown file format" do
+      bookmarks_file = fixture_file_upload('/files/yabs_bookmarks.csv', 'text/csv')
+      post :import, params: {import_format: 'unknown', file: bookmarks_file}
+
+      expect(response).to render_template('import_results')
+      expect(assigns(:bookmarks)).to be_empty
+      expect(assigns(:error_message)).not_to be_nil
+    end
+  end
 end

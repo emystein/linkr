@@ -1,6 +1,9 @@
 class BookmarksController < ApplicationController
   before_action :authenticate_user!, :except => [:show, :index]
 
+  @@csv_metadata_by_format = {'yabs' => YabsCsvMetadata.new}
+  @@bookmark_factory_by_format = {'yabs' => YabsBookmark.new}
+
   def index
     if params[:search_query]
       @bookmarks = Bookmark.public_bookmarks.search(params[:search_query]).paginate(:page => params[:page])
@@ -76,9 +79,12 @@ class BookmarksController < ApplicationController
   def import
     import_format = params[:import_format]
 
-    if import_format == 'yabs' then
-      @bookmarks = CsvBookmarkImport.import(current_user, params[:file], YabsCsvMetadata.new, YabsBookmark.new)
+    if @@csv_metadata_by_format.has_key?(import_format)
+      @bookmarks = CsvBookmarkImport.import(current_user, params[:file], 
+                                      @@csv_metadata_by_format[import_format], 
+                                      @@bookmark_factory_by_format[import_format])
     else
+      @bookmarks = []
       @error_message = 'Import format not recognized: #{import_format}'
     end
 
@@ -89,4 +95,3 @@ class BookmarksController < ApplicationController
     render 'import_results'
   end
 end
-
