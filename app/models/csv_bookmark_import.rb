@@ -10,11 +10,8 @@ class CsvBookmarkImport
 
     ActiveRecord::Base.transaction do
       rows.each do |row|
-        next if Location.where(url: csv_metadata.url(row)).exists?
-
         bookmark = bookmark_factory.create_from_csv_row(row, user)
-        bookmark.save
-        bookmarks << bookmark
+        bookmarks << bookmark if bookmark.save
       end
     end
 
