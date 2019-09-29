@@ -24,8 +24,8 @@ describe User, type: :model do
 
   context "Bookmarks" do
     it "persist and retrieve bookmarks" do
-      @kitchen_table_bookmark = @user.bookmarks.create!(title: "Kitchen table")
-      @dinner_table_bookmark = @user.bookmarks.create!(title: "Dinner table")
+      @kitchen_table_bookmark = @user.bookmarks.create!(title: "Kitchen table", url: "Kitchen table URL")
+      @dinner_table_bookmark = @user.bookmarks.create!(title: "Dinner table", url: "Dinner table URL")
 
       @user.save
 
@@ -36,10 +36,10 @@ describe User, type: :model do
 
   context "Tags" do
     it "tag counts" do
-      @kitchen_table_bookmark = @user.bookmarks.create!(title: "Kitchen table")
+      @kitchen_table_bookmark = @user.bookmarks.create!(title: "Kitchen table", url: "Kitchen table URL")
       @kitchen_table_bookmark.tag_list.add("tag1", "tag2")
       @kitchen_table_bookmark.save
-      @dinner_table_bookmark = @user.bookmarks.create!(title: "Dinner table")
+      @dinner_table_bookmark = @user.bookmarks.create!(title: "Dinner table", url: "Dinner table URL")
       @dinner_table_bookmark.tag_list.add("tag1")
       @dinner_table_bookmark.save
 

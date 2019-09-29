@@ -3,8 +3,8 @@ require "spec_helper"
 describe Bookmark, type: :model do
   before do
     @user = create(:user)
-    @kitchen_table_bookmark = @user.bookmarks.create!(title: "Kitchen table")
-    @dinner_table_bookmark = @user.bookmarks.create!(title: "Dinner table")
+    @kitchen_table_bookmark = @user.bookmarks.create!(title: "Kitchen table", url: "Kitchen table URL")
+    @dinner_table_bookmark = @user.bookmarks.create!(title: "Dinner table", url: "Dinner table URL")
   end
 
   it { should validate_presence_of(:title) }

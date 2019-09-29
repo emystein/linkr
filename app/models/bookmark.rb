@@ -12,6 +12,7 @@ class Bookmark < ActiveRecord::Base
   delegate :url, to: :location, allow_nil: true
 
   validates_presence_of :title
+  validates_uniqueness_of :location, scope: :user
 
   before_validation(on: :create) do
     find_or_generate_location

@@ -46,8 +46,8 @@ describe BookmarksController, :type => :controller do
 
   describe "Search" do
     it "assigns the filtered bookmark as @bookmarks" do
-      kitchen_table_bookmark = Bookmark.create!(user_id: subject.current_user.id, title: "Kitchen table")
-      dinner_table_bookmark = Bookmark.create!(user_id: subject.current_user.id, title: "Dinner table")
+      kitchen_table_bookmark = Bookmark.create!(user_id: subject.current_user.id, title: "Kitchen table", url: "Kitchen table URL")
+      dinner_table_bookmark = Bookmark.create!(user_id: subject.current_user.id, title: "Dinner table", url: "Dinner table URL")
       get :index, :params => { search_query: "kitchen" }
       expect(assigns(:bookmarks)).to contain_exactly(kitchen_table_bookmark)
     end
