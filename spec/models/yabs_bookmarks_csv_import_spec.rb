@@ -33,7 +33,7 @@ describe CSV, type: :model do
     # Re-execute and verify no duplicates are imported
     imported = CsvBookmarkImport.import(@user, @yabs_bookmarks_csv, YabsCsvMetadata.new, YabsBookmark.new)
 
-    # expect(imported.length).to eq(0)
+    expect(imported.length).to eq(0)
     expect(Bookmark.all.count).to eq(2)
   end
 end
