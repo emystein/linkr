@@ -78,18 +78,17 @@ class BookmarksController < ApplicationController
   def import
     import_format = params[:import_format]
 
+    import_start_timestamp = Time.now
+
     if @@csv_metadata_by_format.has_key?(import_format)
-      @bookmarks = CsvBookmarkImport.import(current_user, params[:file], 
+      CsvBookmarkImport.import(current_user, params[:file], 
                                       @@csv_metadata_by_format[import_format], 
                                       @@bookmark_factory_by_format[import_format])
     else
-      @bookmarks = []
       @error_message = "Import format not recognized: #{import_format}"
     end
 
-    # TODO: add pagination
-    # bookmark_ids = bookmarks.map { |bookmark| bookmark.id }
-    # bookmarks = Bookmark.where(:id => bookmark_ids).paginate(:page => params[:page])
+    @bookmarks = Bookmark.where(:created_at => import_start_timestamp..Time.now)
 
     render 'import_results'
   end
