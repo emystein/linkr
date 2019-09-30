@@ -26,10 +26,12 @@ describe CSV, type: :model do
 
   it 'Skip already imported URLs' do
     imported = BookmarksCsv.import(@user, @yabs_bookmarks_csv, YabsCsvMetadata.new, YabsBookmark.new)
+    expect(imported.count).to eq(2)
     expect(Bookmark.all.count).to eq(2)
 
     # Re-execute and verify no duplicates are imported
     imported = BookmarksCsv.import(@user, @yabs_bookmarks_csv, YabsCsvMetadata.new, YabsBookmark.new)
+    expect(imported.count).to eq(0)
     expect(Bookmark.all.count).to eq(2)
   end
 end
