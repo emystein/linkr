@@ -2,7 +2,7 @@ class BookmarksController < ApplicationController
   before_action :authenticate_user!, :except => [:show, :index]
 
   @@csv_metadata_by_format = {'yabs' => YabsCsvMetadata.new}
-  @@bookmark_factory_by_format = {'yabs' => YabsBookmark.new}
+  @@bookmark_factory_by_format = {'yabs' => YabsBookmark}
 
   def index
     if params[:search_query]
@@ -81,9 +81,9 @@ class BookmarksController < ApplicationController
     import_start_timestamp = Time.now
 
     if @@csv_metadata_by_format.has_key?(import_format)
-      BookmarksCsv.import(current_user, params[:file], 
-                                      @@csv_metadata_by_format[import_format], 
-                                      @@bookmark_factory_by_format[import_format])
+      BookmarksCsv.import(params[:file], 
+                          @@csv_metadata_by_format[import_format], 
+                          @@bookmark_factory_by_format[import_format].new(current_user))
     else
       @error_message = "Import format not recognized: #{import_format}"
     end

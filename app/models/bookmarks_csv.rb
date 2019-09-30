@@ -1,7 +1,7 @@
 require 'smarter_csv'
 
 class BookmarksCsv
-  def self.import(user, csv_file, csv_metadata, bookmark_factory)
+  def self.import(csv_file, csv_metadata, bookmark_factory)
     bookmarks = []
 
     rows = SmarterCSV.process(csv_file.path)
@@ -10,7 +10,7 @@ class BookmarksCsv
 
     ActiveRecord::Base.transaction do
       rows.each do |row|
-        bookmark = bookmark_factory.create_from_csv_row(row, user)
+        bookmark = bookmark_factory.create_from_csv_row(row)
         bookmarks << bookmark if bookmark.save
       end
     end
