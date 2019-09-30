@@ -1,6 +1,6 @@
 require 'smarter_csv'
 
-class CsvBookmarkImport
+class BookmarksCsv
   def self.import(user, csv_file, csv_metadata, bookmark_factory)
     rows = SmarterCSV.process(csv_file.path)
 

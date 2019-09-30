@@ -81,7 +81,7 @@ class BookmarksController < ApplicationController
     import_start_timestamp = Time.now
 
     if @@csv_metadata_by_format.has_key?(import_format)
-      CsvBookmarkImport.import(current_user, params[:file], 
+      BookmarksCsv.import(current_user, params[:file], 
                                       @@csv_metadata_by_format[import_format], 
                                       @@bookmark_factory_by_format[import_format])
     else
