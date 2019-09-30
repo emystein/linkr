@@ -1,9 +1,8 @@
 class YabsCsvMetadata
-  def id(row)
+  def self.id(row)
     row[:id]
   end
-
-  def url(row)
-    row[:link]
+  def self.row_filter()
+    lambda { |row| id(row).is_a? Numeric }
   end
 end

@@ -9,7 +9,7 @@ describe CSV, type: :model do
   it 'Import YABS Bookmars CSV' do
     bookmark_factory = YabsBookmark.new(@user)
 
-    BookmarksCsv.import(@yabs_bookmarks_csv, YabsCsvMetadata.new, bookmark_factory)
+    BookmarksCsv.import(@yabs_bookmarks_csv, YabsCsvMetadata, bookmark_factory)
 
     expect(Bookmark.all.map(&:title)).to match_array(
       ['Simple Planning for Startups • William Pietri',
@@ -29,12 +29,12 @@ describe CSV, type: :model do
   it 'Skip already imported URLs' do
     bookmark_factory = YabsBookmark.new(@user)
 
-    imported = BookmarksCsv.import(@yabs_bookmarks_csv, YabsCsvMetadata.new, bookmark_factory)
+    imported = BookmarksCsv.import(@yabs_bookmarks_csv, YabsCsvMetadata, bookmark_factory)
     expect(imported.count).to eq(2)
     expect(Bookmark.all.count).to eq(2)
 
     # Re-execute and verify no duplicates are imported
-    imported = BookmarksCsv.import(@yabs_bookmarks_csv, YabsCsvMetadata.new, bookmark_factory)
+    imported = BookmarksCsv.import(@yabs_bookmarks_csv, YabsCsvMetadata, bookmark_factory)
     expect(imported.count).to eq(0)
     expect(Bookmark.all.count).to eq(2)
   end
