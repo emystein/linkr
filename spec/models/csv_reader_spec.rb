@@ -5,7 +5,7 @@ describe CsvReader do
     @yabs_bookmarks_csv = File.open(file_fixture('/yabs_bookmarks.csv'))
   end
 
-  it 'skip filtered rows' do
+  it 'read only valid rows' do
     # yabs_bookmarks.csv contains header, 2 valid rows, and 1 final invalid row which should be filtered out 
 
     rows = CsvReader.read(@yabs_bookmarks_csv, YabsCsvFilter)
