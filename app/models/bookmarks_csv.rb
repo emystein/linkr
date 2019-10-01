@@ -1,14 +1,10 @@
 require 'smarter_csv'
 
 class BookmarksCsv
-  def self.row_filter(csv_metadata)
-    lambda { |row| csv_metadata.id(row).is_a? Numeric }
-  end
-
   def self.import(csv_file, csv_metadata, bookmark_factory)
     bookmarks = []
 
-    rows = CsvReader.read(csv_file, row_filter(csv_metadata))
+    rows = CsvReader.read(csv_file, csv_metadata)
 
     ActiveRecord::Base.transaction do
       rows.each do |row|

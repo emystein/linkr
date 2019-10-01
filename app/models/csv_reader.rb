@@ -1,9 +1,8 @@
 require "smarter_csv"
 
 class CsvReader
-  def self.read(csv_file, row_filter)
+  def self.read(csv_file, csv_metadata)
     rows = SmarterCSV.process(csv_file.path)
-    rows = rows.filter &row_filter
-    rows
+    rows.filter &csv_metadata.row_filter
   end
 end
