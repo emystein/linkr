@@ -7,7 +7,7 @@ describe CSV, type: :model do
   end
 
   it 'Import YABS Bookmars CSV' do
-    bookmark_factory = YabsBookmark.new(@user)
+    bookmark_factory = YabsBookmarkFactory.new(@user)
 
     BookmarksCsv.import(@yabs_bookmarks_csv, YabsCsvFilter, bookmark_factory)
 
@@ -27,7 +27,7 @@ describe CSV, type: :model do
   end
 
   it 'Skip already imported URLs' do
-    bookmark_factory = YabsBookmark.new(@user)
+    bookmark_factory = YabsBookmarkFactory.new(@user)
 
     imported = BookmarksCsv.import(@yabs_bookmarks_csv, YabsCsvFilter, bookmark_factory)
     expect(imported.count).to eq(2)

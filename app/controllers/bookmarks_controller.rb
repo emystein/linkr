@@ -2,7 +2,7 @@ class BookmarksController < ApplicationController
   before_action :authenticate_user!, :except => [:show, :index]
 
   @@csv_metadata_by_format = {'yabs' => YabsCsvFilter}
-  @@bookmark_factory_by_format = {'yabs' => YabsBookmark}
+  @@bookmark_factory_by_format = {'yabs' => YabsBookmarkFactory}
 
   def index
     if params[:search_query]
