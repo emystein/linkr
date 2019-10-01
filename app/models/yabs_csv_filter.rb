@@ -1,4 +1,4 @@
-class YabsCsvMetadata
+class YabsCsvFilter
   def self.row_filter()
     lambda { |row| row[:id].is_a? Numeric }
   end

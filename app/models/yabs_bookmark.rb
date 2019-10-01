@@ -1,3 +1,4 @@
+# TODO rename to YabsBookmarkFactory
 class YabsBookmark
   def initialize(user)
     @user = user
