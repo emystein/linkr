@@ -10,9 +10,6 @@ describe YabsCsvFilter do
     filtered = rows.filter &YabsCsvFilter.row_filter
 
     expect(filtered.count).to be(1)
-
-    filtered.each do |row|
-        expect(row[:id]).to be_a_kind_of(Numeric)
-    end
+    expect(filtered[0][:id]).to be(1)
   end
 end
