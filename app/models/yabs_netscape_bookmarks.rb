@@ -3,6 +3,11 @@ require "nokogiri"
 class YabsNetscapeBookmarks
   include Enumerable
 
+  def self.import(user, path)
+    bookmarks = YabsNetscapeBookmarks.new(user, path)
+    BookmarksImport.import(bookmarks)
+  end
+
   def initialize(user, path)
     @user = user
     @path = path
@@ -22,7 +27,9 @@ class YabsNetscapeBookmarks
     folder_items = node.search('./dl')
 
     anchors.each do |anchor|
-      yield Bookmark.new(user: @user, title: anchor.text, url: anchor["href"])
+      bookmark = Bookmark.new(user: @user, title: anchor.text, url: anchor["href"], private: false)
+      bookmark.tag_list.add(anchor['tags'], parse: true)
+      yield bookmark
     end
 
     folder_items.size.times do |i|
