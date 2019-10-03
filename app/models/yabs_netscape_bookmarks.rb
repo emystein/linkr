@@ -27,7 +27,7 @@ class YabsNetscapeBookmarks
     folder_items = node.search('./dl')
 
     anchors.each do |anchor|
-      bookmark = Bookmark.new(user: @user, title: anchor.text, url: anchor["href"], private: false)
+      bookmark = Bookmark.new(user: @user, title: anchor.text, url: anchor['href'], private: anchor['private'] != '0')
       bookmark.tag_list.add(anchor['tags'], parse: true)
       yield bookmark
     end

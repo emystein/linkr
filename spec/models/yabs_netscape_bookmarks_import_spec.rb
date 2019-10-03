@@ -5,15 +5,6 @@ describe YabsNetscapeBookmarks, type: :model do
     @user = create(:user)
   end
 
-  it "Create Netscape Bookmars" do
-    parser = YabsNetscapeBookmarks.new(@user, file_fixture("/yabs_netscape_bookmarks.html"))
-    bookmarks = []
-    parser.each do |bookmark|
-      bookmarks << Bookmark
-    end
-    expect(bookmarks.count).to be > 0
-  end
-
   it "Import YABS Bookmars CSV" do
     YabsNetscapeBookmarks.import(@user, file_fixture("/yabs_netscape_bookmarks.html"))
 
