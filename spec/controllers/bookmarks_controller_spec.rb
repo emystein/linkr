@@ -154,7 +154,8 @@ describe BookmarksController, :type => :controller do
 
       expect(response).to render_template('import_results')
       expect(assigns(:bookmarks)).not_to be_empty
-      expect(assigns(:error_message)).to be_nil
+      expect(flash[:success]).to be_present
+      expect(flash[:error]).to_not be_present
     end
 
     it "import bookmarks from a YABS Netscape bookmarks file" do
@@ -163,7 +164,8 @@ describe BookmarksController, :type => :controller do
 
       expect(response).to render_template('import_results')
       expect(assigns(:bookmarks)).not_to be_empty
-      expect(assigns(:error_message)).to be_nil
+      expect(flash[:success]).to be_present
+      expect(flash[:error]).to_not be_present
     end
 
     it "rejects unknown file format" do
@@ -172,7 +174,8 @@ describe BookmarksController, :type => :controller do
 
       expect(response).to render_template('import_results')
       expect(assigns(:bookmarks)).to be_empty
-      expect(assigns(:error_message)).not_to be_nil
+      expect(flash[:success]).to_not be_present
+      expect(flash[:error]).to be_present
     end
   end
 end
