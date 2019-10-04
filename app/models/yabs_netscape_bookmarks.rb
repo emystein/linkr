@@ -1,5 +1,6 @@
 require "nokogiri"
 
+# See http://joshorourke.com/2012/06/28/parsing-bookmarks-with-nokogiri
 class YabsNetscapeBookmarks
   include Enumerable
 

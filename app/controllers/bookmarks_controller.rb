@@ -88,7 +88,7 @@ class BookmarksController < ApplicationController
       @error_message = "Import format not defined: #{import_format}"
     end
 
-    @bookmarks = Bookmark.where(:created_at => start_time..Time.now)
+    @bookmarks = Bookmark.where(:user => current_user, :created_at => start_time..Time.now)
 
     render "import_results"
   end
