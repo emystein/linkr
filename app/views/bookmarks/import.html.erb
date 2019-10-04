@@ -5,10 +5,17 @@
 
 <section>
   <%= form_tag '/bookmarks/import', multipart: true do %>
-    <%= radio_button_tag(:import_format, 'yabs_csv', checked = true) %>
-    <%= label_tag(:import_format_yabs_csv, 'YABS Comma Separate Values (CSV)') %>
-    <%= radio_button_tag(:import_format, 'yabs_netscape', checked = false) %>
-    <%= label_tag(:import_format_yabs_netscape, 'YABS Netscape Bookmarks') %>
+    <div>
+      <h4>Import format:</h4>
+    </div>
+    <div>
+      <%= radio_button_tag(:import_format, 'yabs_csv', checked = true) %>
+      <%= label_tag(:import_format_yabs_csv, 'YABS Comma Separate Values (CSV)') %>
+    </div>
+    <div>
+      <%= radio_button_tag(:import_format, 'yabs_netscape', checked = false) %>
+      <%= label_tag(:import_format_yabs_netscape, 'YABS Netscape Bookmarks') %>
+    </div>
     <%= file_field_tag :file %><br />
     <%= submit_tag "Import from file" %>
   <% end %>
