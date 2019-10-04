@@ -1,8 +1,7 @@
 class BookmarksController < ApplicationController
   before_action :authenticate_user!, :except => [:show, :index]
 
-  @@csv_filter_by_format = { "yabs_csv" => YabsCsvFilter }
-  @@bookmark_factory_by_format = { "yabs_csv" => YabsBookmarkFactory }
+  @@bookmark_imports = { 'yabs_csv' => YabsCsvBookmarks, 'yabs_netscape' => YabsNetscapeBookmarks }
 
   def index
     if params[:search_query]
@@ -80,19 +79,11 @@ class BookmarksController < ApplicationController
 
     import_start_timestamp = Time.now
 
-    # if @@csv_filter_by_format.has_key?(import_format)
-    if import_format == "yabs_csv"
-      BookmarksCsv.import(params[:file],
-                          @@csv_filter_by_format[import_format],
-                          @@bookmark_factory_by_format[import_format].new(current_user))
-    elsif import_format == "yabs_netscape"
-      YabsNetscapeBookmarks.import(current_user, params[:file].path)
+    if @@bookmark_imports.has_key?(import_format)
+      @@bookmark_imports[import_format].import(current_user, params[:file].path)
     else
       @error_message = "Import format not recognized: #{import_format}"
     end
-    # else
-    #   @error_message = "Import format not recognized: #{import_format}"
-    # end
 
     @bookmarks = Bookmark.where(:created_at => import_start_timestamp..Time.now)
 

@@ -1,6 +1,6 @@
 class CsvBookmarks
-  def self.from(csv_file, csv_filter, bookmark_factory)
-    rows = CsvReader.read(csv_file, csv_filter)
+  def self.from(csv_file_path, csv_filter, bookmark_factory)
+    rows = CsvReader.read(csv_file_path, csv_filter)
 
     bookmarks = []
 

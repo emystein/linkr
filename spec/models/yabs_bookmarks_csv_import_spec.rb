@@ -3,13 +3,11 @@ require 'rails_helper'
 describe CSV, type: :model do
   before do
     @user = create(:user)
-    @yabs_bookmarks_csv = File.open(file_fixture('/yabs_bookmarks.csv'))
+    @yabs_bookmarks_csv = file_fixture('/yabs_bookmarks.csv')
   end
 
   it 'Import YABS Bookmars CSV' do
-    bookmark_factory = YabsBookmarkFactory.new(@user)
-
-    BookmarksCsv.import(@yabs_bookmarks_csv, YabsCsvFilter, bookmark_factory)
+    YabsCsvBookmarks.import(@user, @yabs_bookmarks_csv)
 
     expect(Bookmark.all.map(&:title)).to match_array(
       ['Simple Planning for Startups • William Pietri',
@@ -27,14 +25,12 @@ describe CSV, type: :model do
   end
 
   it 'Skip already imported URLs' do
-    bookmark_factory = YabsBookmarkFactory.new(@user)
-
-    imported = BookmarksCsv.import(@yabs_bookmarks_csv, YabsCsvFilter, bookmark_factory)
+    imported = YabsCsvBookmarks.import(@user, @yabs_bookmarks_csv)
     expect(imported.count).to eq(2)
     expect(Bookmark.all.count).to eq(2)
 
     # Re-execute and verify no duplicates are imported
-    imported = BookmarksCsv.import(@yabs_bookmarks_csv, YabsCsvFilter, bookmark_factory)
+    imported = YabsCsvBookmarks.import(@user, @yabs_bookmarks_csv)
     expect(imported.count).to eq(0)
     expect(Bookmark.all.count).to eq(2)
   end
