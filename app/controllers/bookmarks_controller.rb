@@ -1,8 +1,8 @@
 class BookmarksController < ApplicationController
   before_action :authenticate_user!, :except => [:show, :index]
 
-  @@csv_filter_by_format = {'yabs' => YabsCsvFilter}
-  @@bookmark_factory_by_format = {'yabs' => YabsBookmarkFactory}
+  @@csv_filter_by_format = { "yabs_csv" => YabsCsvFilter }
+  @@bookmark_factory_by_format = { "yabs_csv" => YabsBookmarkFactory }
 
   def index
     if params[:search_query]
@@ -41,7 +41,7 @@ class BookmarksController < ApplicationController
     @bookmark = current_user.bookmarks.new(params[:bookmark])
 
     if @bookmark.save
-      redirect_to dashboard_url, :flash => {:success => 'Bookmark was successfully created.'}
+      redirect_to dashboard_url, :flash => { :success => "Bookmark was successfully created." }
     else
       render action: "new"
     end
@@ -52,9 +52,9 @@ class BookmarksController < ApplicationController
     @bookmark = current_user.bookmarks.find(params[:id])
 
     updated = @bookmark.update(params[:bookmark])
-    
+
     if updated
-      redirect_to dashboard_url, :flash => {:success => 'Bookmark was successfully updated.'}
+      redirect_to dashboard_url, :flash => { :success => "Bookmark was successfully updated." }
     else
       render action: "edit"
     end
@@ -72,7 +72,7 @@ class BookmarksController < ApplicationController
   end
 
   def show_import_form
-    render 'import'
+    render "import"
   end
 
   def import
@@ -80,16 +80,22 @@ class BookmarksController < ApplicationController
 
     import_start_timestamp = Time.now
 
-    if @@csv_filter_by_format.has_key?(import_format)
-      BookmarksCsv.import(params[:file], 
-                          @@csv_filter_by_format[import_format], 
+    # if @@csv_filter_by_format.has_key?(import_format)
+    if import_format == "yabs_csv"
+      BookmarksCsv.import(params[:file],
+                          @@csv_filter_by_format[import_format],
                           @@bookmark_factory_by_format[import_format].new(current_user))
+    elsif import_format == "yabs_netscape"
+      YabsNetscapeBookmarks.import(current_user, params[:file].path)
     else
       @error_message = "Import format not recognized: #{import_format}"
     end
+    # else
+    #   @error_message = "Import format not recognized: #{import_format}"
+    # end
 
     @bookmarks = Bookmark.where(:created_at => import_start_timestamp..Time.now)
 
-    render 'import_results'
+    render "import_results"
   end
 end

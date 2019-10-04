@@ -148,9 +148,18 @@ describe BookmarksController, :type => :controller do
   end
 
   describe "Import bookmarks" do
-    it "import bookmarks from a file upload" do
+    it "import bookmarks from a YABS CSV file" do
       bookmarks_file = fixture_file_upload('/files/yabs_bookmarks.csv', 'text/csv')
-      post :import, params: {import_format: 'yabs', file: bookmarks_file}
+      post :import, params: {import_format: 'yabs_csv', file: bookmarks_file}
+
+      expect(response).to render_template('import_results')
+      expect(assigns(:bookmarks)).not_to be_empty
+      expect(assigns(:error_message)).to be_nil
+    end
+
+    it "import bookmarks from a YABS Netscape bookmarks file" do
+      bookmarks_file = fixture_file_upload('/files/yabs_netscape_bookmarks.html', 'text/html')
+      post :import, params: {import_format: 'yabs_netscape', file: bookmarks_file}
 
       expect(response).to render_template('import_results')
       expect(assigns(:bookmarks)).not_to be_empty
