@@ -84,7 +84,7 @@ class BookmarksController < ApplicationController
 
     if @@bookmark_imports.has_key?(import_format)
       @@bookmark_imports[import_format].import(current_user, params[:file].path)
-      flash[:success] = 'Bookmarks successfully imported'
+      flash[:success] = 'Bookmarks import finished'
     else
       flash[:error] = "Import format not defined: #{import_format}"
     end
