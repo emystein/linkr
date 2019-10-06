@@ -84,12 +84,12 @@ class BookmarksController < ApplicationController
 
     if @@bookmark_imports.has_key?(import_format)
       @@bookmark_imports[import_format].import(current_user, params[:file].path)
-      flash[:success] = 'Bookmarks import finished'
+      @bookmarks = current_user.bookmarks.where(:created_at => start_time..Time.now)
+      flash[:success] = "Bookmarks import finished. Total imported: #{@bookmarks.count}"
     else
+      @bookmarks = []
       flash[:error] = "Import format not defined: #{import_format}"
     end
-
-    @bookmarks = current_user.bookmarks.where(:created_at => start_time..Time.now)
 
     render "import_results"
   end
