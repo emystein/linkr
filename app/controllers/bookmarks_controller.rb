@@ -88,6 +88,6 @@ class BookmarksController < ApplicationController
       flash[:error] = "Import format not defined: #{import_format}"
     end
 
-    render "import_results"
+    redirect_to "/users/#{current_user.id}"
   end
 end
