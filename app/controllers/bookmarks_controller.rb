@@ -80,10 +80,10 @@ class BookmarksController < ApplicationController
   def import
     import_format = params[:import_format]
 
-    if @@bookmark_imports.has_key?(import_format)
+    begin
       @bookmarks = @@bookmark_imports[import_format].import(current_user, params[:file].path)
-      flash[:success] = "Bookmarks import finished. Total imported: #{@bookmarks.count}"
-    else
+      flash[:success] = "Total bookmarks imported: #{@bookmarks.count}"
+    rescue NoMethodError
       @bookmarks = []
       flash[:error] = "Import format not defined: #{import_format}"
     end

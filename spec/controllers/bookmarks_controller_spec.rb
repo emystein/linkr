@@ -149,15 +149,16 @@ describe BookmarksController, :type => :controller do
 
   describe "Import bookmarks" do
     it "import bookmarks from a YABS CSV file" do
-      test_bookmarks_import_success('yabs_csv', '/files/yabs_bookmarks.csv', 'text/csv')
+      test_bookmarks_import_success(import_format = 'yabs_csv', '/files/yabs_bookmarks.csv', 'text/csv')
     end
 
     it "import bookmarks from a YABS Netscape bookmarks file" do
-      test_bookmarks_import_success('yabs_netscape', '/files/yabs_netscape_bookmarks.html', 'text/html')
+      test_bookmarks_import_success(import_format = 'yabs_netscape', '/files/yabs_netscape_bookmarks.html', 'text/html')
     end
 
     it "rejects unknown file format" do
       bookmarks_file = fixture_file_upload('/files/yabs_bookmarks.csv', 'text/csv')
+      
       post :import, params: {import_format: 'unknown', file: bookmarks_file}
 
       expect(response).to redirect_to("/users/#{subject.current_user.id}")
@@ -169,6 +170,7 @@ describe BookmarksController, :type => :controller do
 
   def test_bookmarks_import_success(import_format, bookmarks_file_path, bookmarks_file_mime_type)
       bookmarks_file = fixture_file_upload(bookmarks_file_path, bookmarks_file_mime_type)
+
       post :import, params: {import_format: import_format, file: bookmarks_file}
 
       expect(response).to redirect_to("/users/#{subject.current_user.id}")
