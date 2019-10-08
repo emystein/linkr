@@ -9,6 +9,17 @@ describe Bookmark, type: :model do
 
   it { should validate_presence_of(:title) }
 
+  context "Description" do
+    it "Set description" do
+      @kitchen_table_bookmark.description = 'Kitchen table description'
+      @kitchen_table_bookmark.save
+
+      @retrieved = Bookmark.find(@kitchen_table_bookmark.id)
+
+      expect(@retrieved.description).to eq('Kitchen table description')
+    end
+  end
+
   context "Tags" do
     it "Assign tags" do
       @kitchen_table_bookmark.tag_list.add("tag1", "tag2")
@@ -17,6 +28,15 @@ describe Bookmark, type: :model do
       @retrieved = Bookmark.find(@kitchen_table_bookmark.id)
 
       expect(@retrieved.tag_list).to eq(["tag1", "tag2"])
+    end
+
+    it "Tag list to string" do
+      @kitchen_table_bookmark.tag_list.add("tag1", "tag2")
+      @kitchen_table_bookmark.save
+
+      @retrieved = Bookmark.find(@kitchen_table_bookmark.id)
+
+      expect(@retrieved.tag_list.to_s).to eq("tag1, tag2")
     end
   end
 

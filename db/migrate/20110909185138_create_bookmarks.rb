@@ -2,7 +2,7 @@ class CreateBookmarks < ActiveRecord::Migration[5.1]
   def change
     create_table :bookmarks do |t|
       t.string :title
-      t.text :notes
+      t.text :description
       t.integer :user_id
       t.integer :location_id
 
