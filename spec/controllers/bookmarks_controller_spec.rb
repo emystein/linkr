@@ -178,4 +178,15 @@ describe BookmarksController, :type => :controller do
       expect(flash[:success]).to be_present
       expect(flash[:error]).to_not be_present
   end
+
+  describe "Export bookmarks" do
+    it "export bookmarks" do
+      bookmarks = YabsCsvBookmarks.import(subject.current_user, file_fixture("/yabs_bookmarks.csv"))
+      document = NetscapeBookmarks.create_document(bookmarks)
+
+      post :export
+
+      expect(response.body).to eq(document)
+    end
+  end
 end
