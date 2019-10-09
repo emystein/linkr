@@ -180,12 +180,12 @@ describe BookmarksController, :type => :controller do
   end
 
   describe "Export bookmarks" do
-    # it "export bookmarks" do
+    it "export bookmarks" do
       expected_document = NetscapeBookmarks.create_document(subject.current_user.bookmarks)
 
       post :export
 
       expect(response.body).to eq(expected_document)
-    # end
+    end
   end
 end
