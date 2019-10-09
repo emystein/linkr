@@ -181,12 +181,11 @@ describe BookmarksController, :type => :controller do
 
   describe "Export bookmarks" do
     it "export bookmarks" do
-      bookmarks = YabsCsvBookmarks.import(subject.current_user, file_fixture("/yabs_bookmarks.csv"))
-      document = NetscapeBookmarks.create_document(bookmarks)
+      expected_document = NetscapeBookmarks.create_document(subject.current_user.bookmarks)
 
       post :export
 
-      expect(response.body).to eq(document)
+      expect(response.body).to eq(expected_document)
     end
   end
 end
