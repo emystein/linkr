@@ -7,6 +7,10 @@
 </div>
 
 <section>
+  <%= render 'users/user_stats' %>
+</section>
+
+<section>
   <% unless @bookmarks.empty? %>
     <%= render :partial => 'bookmarks/bookmark', :collection => @bookmarks %>
     <%= will_paginate @bookmarks %>

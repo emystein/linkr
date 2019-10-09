@@ -7,6 +7,7 @@ class Bookmark < ActiveRecord::Base
 
   default_scope { order(created_at: :desc) }
   scope :public_bookmarks, -> { where(private: false) }
+  scope :private_bookmarks, -> { where(private: true) }
 
   validates_presence_of :title
   validates_uniqueness_of :location, scope: :user
