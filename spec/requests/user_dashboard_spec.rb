@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "Dashboard:" do
+feature "User Dashboard:" do
   background do
     @user = create(:user)
     visit new_user_session_path
@@ -9,7 +9,7 @@ feature "Dashboard:" do
     click_button "Log in"
   end
 
-  scenario "Users should be have a dashboard" do
+  scenario "Users should have a dashboard" do
     visit dashboard_path
     expect(page).to have_content("Your Bookmarks")
   end

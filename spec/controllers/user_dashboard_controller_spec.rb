@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe DashboardController, :type => :controller do
+describe UserDashboardController, :type => :controller do
   sign_me_in
 
   describe "GET 'show'" do
