@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   end
 
   resources :bookmarks_import
+  resources :bookmarks_export
 
   root :to => "users#show"
 end

@@ -1,11 +1,6 @@
 class BookmarksController < ApplicationController
   before_action :authenticate_user!, :except => [:show, :index]
 
-  @@bookmark_imports = { 
-    "yabs_csv" => YabsCsvBookmarks, 
-    "yabs_netscape" => YabsNetscapeBookmarks 
-  }
-
   def index
     if params[:search_query]
       @bookmarks = Bookmark.public_bookmarks.search(params[:search_query]).paginate(:page => params[:page])
