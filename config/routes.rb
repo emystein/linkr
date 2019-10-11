@@ -5,8 +5,8 @@ Rails.application.routes.draw do
     post "/sessions/user", to: "devise/sessions#create" # devise post to this url on login
   end
 
-  get "/help"             => "pages#help"
-  get "/dashboard"        => "user_dashboard#show"
+  get "/help"                => "pages#help"
+  get "/dashboard"           => "user_dashboard#show"
   get "/dashboard/tags/:tag" => "user_dashboard#tag"
 
   resources :users, :only => [:new, :create, :show, :update] do

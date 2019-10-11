@@ -21,4 +21,7 @@
 <section id="tags">
   <h3>Tags</h3>
   <%= @tags.take(28).collect{|t| link_to "#{t} (#{t.count})", "/dashboard/tags/#{t.name}"}.join("<br/>").html_safe %>
+  <br/>
+  <br/>
+  <h3><%= link_to 'All tags', '/tags' %></h3>
 </section>
