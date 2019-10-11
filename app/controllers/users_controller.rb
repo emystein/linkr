@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       @bookmarks = @user.bookmarks.public_bookmarks.paginate(:page => params[:page])
     end
 
-    # @user_stats = UserStats.new(bookmark_count: @user.bookmarks.count)
+    @tags = @user.bookmarks.tag_counts
   end
 
   def tags

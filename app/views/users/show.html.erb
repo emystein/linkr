@@ -6,11 +6,10 @@
   <hr>
 </div>
 
-<section>
-  <%= render 'users/user_stats' %>
-</section>
-
-<section>
+<section id="bookmarks">
+  <section>
+    <%= render 'users/user_stats' %>
+  </section>
   <% unless @bookmarks.empty? %>
     <%= render :partial => 'bookmarks/bookmark', :collection => @bookmarks %>
     <%= will_paginate @bookmarks %>
@@ -19,6 +18,7 @@
   <% end %>
 </section>
 
-<section>
-  <%= link_to 'Tags', "/users/#{@user.id}/tags" %>
+<section id="tags">
+  <h3>Tags</h3>
+  <%= @tags.collect{|t| link_to "#{t} (#{t.count})", tag_path(t.name)}.join("<br/>").html_safe %>
 </section>
