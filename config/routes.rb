@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   get "/help"             => "pages#help"
-  get "/dashboard"        => "user_dashboard#show"
+  get "/dashboard"        => "users#show"
   get "/bookmarks/import" => "bookmarks#show_import_form"
 
   resources :users, :only => [:new, :create, :show, :update] do
@@ -23,5 +23,5 @@ Rails.application.routes.draw do
     post :import, :on => :collection
   end
 
-  root :to => "user_dashboard#show"
+  root :to => "users#show"
 end
