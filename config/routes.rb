@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   get "/help"             => "pages#help"
   get "/dashboard"        => "users#show"
-  get "/bookmarks/import" => "bookmarks#show_import_form"
 
   resources :users, :only => [:new, :create, :show, :update] do
     member do
@@ -22,6 +21,8 @@ Rails.application.routes.draw do
     get :bookmarklet, :export, :on => :collection
     post :import, :on => :collection
   end
+
+  resources :bookmarks_import
 
   root :to => "users#show"
 end

@@ -1,7 +1,7 @@
 <div id="bookmarks-header">
   <h2><%= @user.nickname %>'s Bookmarks</h2>
   <%= link_to 'Export', '/bookmarks/export', class: 'btn btn-info' %>
-  <%= link_to 'Import', '/bookmarks/import', class: 'btn btn-warning' %>
+  <%= link_to 'Import', '/bookmarks_import', class: 'btn btn-warning' %>
   <%= render 'components/search', search_path: "/users/#{@user.id}" %>
   <hr>
 </div>
