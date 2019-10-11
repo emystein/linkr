@@ -1,6 +1,14 @@
 class UserDashboardController < ApplicationController
   before_action :authenticate_user!
 
+  def show
+    @user = current_user
+    @bookmarks = current_user.bookmarks.public_bookmarks.paginate(:page => params[:page])
+    @tags = current_user.bookmarks.tag_counts
+
+    render 'users/show'
+  end
+
   def tag
     @user = current_user
 

@@ -4,12 +4,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if params[:id]
-      @user = User.find(params[:id])
-    else
-      authenticate_user!
-      @user = current_user
-    end
+    @user = User.find(params[:id])
 
     if params[:search_query]
       @bookmarks = @user.bookmarks.public_bookmarks.search(params[:search_query]).paginate(:page => params[:page])
