@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   resources :tags, :only => [:index, :show]
 
   resources :bookmarks do
-    get :save, :on => :member
     get :bookmarklet, :export, :on => :collection
     post :import, :on => :collection
   end

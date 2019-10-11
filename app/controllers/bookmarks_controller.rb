@@ -22,13 +22,6 @@ class BookmarksController < ApplicationController
     @bookmark = current_user.bookmarks.new(:title => params[:title], :url => params[:url])
   end
 
-  def save
-    original_bookmark = Bookmark.find(params[:id])
-    @bookmark = original_bookmark.dup
-    @bookmark.tag_list = original_bookmark.tag_list
-    render :new
-  end
-
   def bookmarklet
     @bookmark = current_user.bookmarks.new(:title => params[:title], :url => params[:url])
     render :layout => "minimal"
