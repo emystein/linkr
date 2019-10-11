@@ -11,6 +11,6 @@ feature "User Dashboard:" do
 
   scenario "Users should have a dashboard" do
     visit dashboard_path
-    expect(page).to have_content("Your Bookmarks")
+    expect(page).to have_content(@user.nickname + "'s Bookmarks")
   end
 end

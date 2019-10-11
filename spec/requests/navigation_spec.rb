@@ -12,7 +12,7 @@ feature "Navigation Auth'd:" do
 
   scenario "dashboard / personal bookmarks" do
     within('nav#site') { click_link('Bookmarks') }
-    expect(find('#main')).to have_content('Your Bookmarks')
+    expect(find('#main')).to have_content("#{@user.nickname}'s Bookmarks")
   end
 
   scenario "everyone's bookmarks" do
@@ -22,7 +22,7 @@ feature "Navigation Auth'd:" do
 
   scenario "public profile" do
     within('nav#profile') { click_link(@user.nickname) }
-    expect(find('#main')).to have_content(@user.nickname + "'s Bookmarks")
+    expect(find('#main')).to have_content("#{@user.nickname}'s Bookmarks")
   end
 
   scenario "help" do
