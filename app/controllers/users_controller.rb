@@ -25,7 +25,4 @@ class UsersController < ApplicationController
     @tags = @user.bookmarks.tag_counts
   end
 
-  def current_user_bookmarks_by_tag
-    @bookmarks = current_user.bookmarks.public_bookmarks.tagged_with(params[:tag], :any => true).paginate(:page => params[:page])
-  end
 end
