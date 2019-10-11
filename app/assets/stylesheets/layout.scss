@@ -1,5 +1,6 @@
 .container {
   margin: 0 auto;
+  overflow: auto;
 }
 
 header {
@@ -34,14 +35,6 @@ header {
   }
 }
 
-.clearfix:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-
 section {
   padding-bottom: 10px;
 }
@@ -51,10 +44,8 @@ body {
 }
 
 #main .container {
-  @include rounded;
   background: #fff; 
   padding: 20px;
   margin-top: 20px;
   margin-bottom: 50px;
-  min-height: 300px;
 }

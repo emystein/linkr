@@ -19,5 +19,4 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     @tags = @user.bookmarks.tag_counts
   end
-
 end

@@ -8,9 +8,6 @@
 @mixin clearfix {
   overflow: auto;
   overflow: -moz-scrollbars-none;
-  // This makes ie6 get layout
-  display: inline-block;
-  // and this puts it back to block
 }
 
 @mixin rounded-bottom-left($radius: 0.5em) {

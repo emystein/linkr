@@ -13,4 +13,3 @@ class TagsController < ApplicationController
     @bookmarks = Bookmark.public_bookmarks.tagged_with(@tag, :any => true).paginate(:page => params[:page])
   end
 end
-
