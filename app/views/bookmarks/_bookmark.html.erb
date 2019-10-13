@@ -2,6 +2,7 @@
   <h4><%= link_to bookmark.title, bookmark.url, :target => "_blank" %> <span></span>
     <span class="actions">
       <% if bookmark.user == current_user -%>
+        <%= check_box_tag "bookmark_ids[]", bookmark.id, false %>
         <%= link_to 'Edit', edit_bookmark_path(bookmark) %> 
         <%= link_to 'Delete', bookmark, confirm: 'Are you sure?', method: :delete %>
       <% else %>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "/help"                => "pages#help"
   get "/dashboard"           => "user_dashboard#show"
   get "/dashboard/tags/:tag" => "user_dashboard#tag"
+  get "/dashboard/make_public"   => "user_dashboard#make_public"
 
   resources :users, :only => [:new, :create, :show, :update] do
     member do
