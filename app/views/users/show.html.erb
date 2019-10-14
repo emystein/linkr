@@ -11,9 +11,10 @@
     <%= render 'users/user_stats' %>
   </section>
   <% unless @bookmarks.empty? %>
-    <%= form_tag "/dashboard/make_public", method: "get" %>
+    <%= form_tag "/dashboard/actions", method: "get" %>
     <%= render :partial => 'bookmarks/bookmark', :collection => @bookmarks %>
-    <%= submit_tag "Make Public" %>
+    <%= submit_tag "make_public" %>
+    <%= submit_tag "make_private" %>
     <%= will_paginate @bookmarks %>
   <% else %>
     <h4>There are no bookmarks to display.</h4>
