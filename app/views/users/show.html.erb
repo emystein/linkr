@@ -13,6 +13,7 @@
   <% unless @bookmarks.empty? %>
     <%= form_tag "/dashboard/actions", method: "get" %>
     <%= render :partial => 'bookmarks/bookmark', :collection => @bookmarks %>
+    <input type="button" id="check_all" value="Check all/Uncheck all"/>
     <%= submit_tag "make_public" %>
     <%= submit_tag "make_private" %>
     <%= submit_tag "delete" %>
@@ -29,3 +30,5 @@
   <br/>
   <h3><%= link_to 'All tags', '/tags' %></h3>
 </section>
+
+

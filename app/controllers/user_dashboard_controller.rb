@@ -54,8 +54,7 @@ class UserDashboardController < ApplicationController
 
   def delete(bookmark_ids)
     bookmark_ids.each do |bookmark_id|
-      @bookmark = current_user.bookmarks.find(bookmark_id)
-      @bookmark.delete
+      current_user.bookmarks.delete(bookmark_id)
     end
     show
   end
