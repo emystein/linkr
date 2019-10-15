@@ -30,6 +30,8 @@ class UserDashboardController < ApplicationController
         make_public(bookmark_ids)
     elsif params[:commit] == 'make_private'
         make_private(bookmark_ids)
+    elsif params[:commit] == 'delete'
+        delete(bookmark_ids)
     end
   end
 
@@ -46,6 +48,14 @@ class UserDashboardController < ApplicationController
       @bookmark = current_user.bookmarks.find(bookmark_id)
       @bookmark.private = toggle
       @bookmark.save
+    end
+    show
+  end
+
+  def delete(bookmark_ids)
+    bookmark_ids.each do |bookmark_id|
+      @bookmark = current_user.bookmarks.find(bookmark_id)
+      @bookmark.delete
     end
     show
   end
