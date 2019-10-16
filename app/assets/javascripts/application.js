@@ -7,12 +7,3 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-
-function toggle_select_all_bookmarks() {
-    $('#check_all').on("click", function () {
-        var cbxs = $('input[type="checkbox"]');
-        cbxs.prop("checked", !cbxs.prop("checked"));
-    });
-}
-
-$(document).ready(toggle_select_all_bookmarks);
