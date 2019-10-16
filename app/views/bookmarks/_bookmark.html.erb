@@ -1,5 +1,5 @@
 <article>
-  <h4><%= link_to bookmark.title, bookmark.url, :target => "_blank" %> <span></span>
+  <h4><%= link_to bookmark.title, bookmark.url, :class => bookmark.private ? "private" : "public", :target => "_blank" %> <span></span>
     <span class="actions">
       <% if bookmark.user == current_user -%>
         <%= check_box_tag "bookmark_ids[]", bookmark.id, false %>
