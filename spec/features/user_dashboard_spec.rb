@@ -1,7 +1,7 @@
-require 'spec_helper'
+require 'rails_helper'
 
-feature "User Dashboard:" do
-  background do
+describe "User Dashboard:", :type => :feature do
+  before :each do
     @user = create(:user)
     visit new_user_session_path
     fill_in "Email", :with => @user.email
@@ -9,7 +9,7 @@ feature "User Dashboard:" do
     click_button "Log in"
   end
 
-  scenario "Users should have a dashboard" do
+  it "Users should have a dashboard" do
     visit dashboard_path
     expect(page).to have_content(@user.nickname + "'s Bookmarks")
   end

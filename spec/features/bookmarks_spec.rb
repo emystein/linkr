@@ -1,7 +1,7 @@
-require 'spec_helper'
+require 'rails_helper'
 
-feature "Bookmarks:" do
-  background do
+describe "Bookmarks:", :type => :feature do
+  before :each do
     @user = create(:user)
 
     visit new_user_session_path
@@ -10,7 +10,7 @@ feature "Bookmarks:" do
     click_button "Log in"
   end
 
-  scenario "A user should be able to create a bookmark" do
+  it "A user should be able to create a bookmark" do
     visit new_bookmark_path
     expect(page).to have_content("Save a new bookmark")
     fill_in "Title", :with => "Proggit"
@@ -20,19 +20,19 @@ feature "Bookmarks:" do
     expect(page).to have_content("Bookmark was successfully created")
   end
 
-  # scenario "A user should be able to see their own bookmarks" do
+  # it "A user should be able to see their own bookmarks" do
   #   pending
   # end
 
-  # scenario "A user should be able to see their own bookmarks" do
+  # it "A user should be able to see their own bookmarks" do
   #   pending
   # end
 
-  # scenario "A user should be able to see everyone's bookmarks" do
+  # it "A user should be able to see everyone's bookmarks" do
   #   pending
   # end
 
-  # scenario "A user should be able to see another user's bookmarks" do
+  # it "A user should be able to see another user's bookmarks" do
   #   pending
   # end
 

@@ -22,7 +22,7 @@ class UserDashboardController < ApplicationController
   end
 
   def actions
-    logger.info("Action: #{params[:commit]}")
+    logger.info("Executing action: #{params[:commit]}")
 
     bookmark_ids = params[:bookmark_ids] ? params[:bookmark_ids] : []
 
@@ -49,6 +49,7 @@ class UserDashboardController < ApplicationController
       @bookmark.private = toggle
       @bookmark.save
     end
+
     show
   end
 
@@ -56,6 +57,7 @@ class UserDashboardController < ApplicationController
     bookmark_ids.each do |bookmark_id|
       current_user.bookmarks.delete(bookmark_id)
     end
+
     show
   end
 end

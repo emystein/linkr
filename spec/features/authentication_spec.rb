@@ -1,12 +1,12 @@
-require 'spec_helper'
+require 'rails_helper'
 
-feature "Signing Up:" do
-  scenario "The homepage should have a signup link" do
+describe "Signing Up:", :type => :feature do
+  it "The homepage should have a signup link" do
     visit root_path
     expect(page).to have_content("signup")
   end
 
-  scenario "Allows the creation of new accounts" do
+  it "Allows the creation of new accounts" do
     visit new_user_registration_path
     fill_in 'Nickname', :with => "jack"
     fill_in 'Email', :with => "jack@example.com"
@@ -16,24 +16,24 @@ feature "Signing Up:" do
     expect(page).to have_content("successfully")
   end
 
-  scenario "Does not allow account creation without required information" do
+  it "Does not allow account creation without required information" do
     visit new_user_registration_path
     click_button "Sign up"
     expect(page).to have_content("errors prohibited this user from being saved")
   end
 end
 
-feature "Logging In:" do
-  background do
+describe "Logging In:", :type => :feature do
+  before :each do
     @user = create(:user)
   end
 
-  scenario "The homepage should have a login link" do
+  it "The homepage should have a login link" do
     visit root_path
     expect(page).to have_content("login")
   end
 
-  scenario "Allows a user to login using their email and password" do
+  it "Allows a user to login using their email and password" do
     visit new_user_session_path
     fill_in "Email", :with => @user.email
     fill_in "Password", :with => "password"
@@ -41,7 +41,7 @@ feature "Logging In:" do
     expect(page).to have_content("successfully")
   end
 
-  scenario "Does not authenticate a user with invalid credentials" do
+  it "Does not authenticate a user with invalid credentials" do
     visit new_user_session_path
     fill_in "Email", :with => @user.nickname
     fill_in "Password", :with => "wrong-password"
@@ -49,14 +49,14 @@ feature "Logging In:" do
     expect(page).to have_content("Invalid Email or password")
   end
 
-  scenario "Has a signup link for people who do not have accounts" do
+  it "Has a signup link for people who do not have accounts" do
     visit new_user_session_path
     expect(page).to have_content("Sign up")
   end
 end
 
-feature "Logging Out:" do
-  background do
+describe "Logging Out:", :type => :feature do
+  before :each do
     @user = create(:user)
     visit new_user_session_path
     fill_in "Email", :with => @user.email
@@ -64,11 +64,11 @@ feature "Logging Out:" do
     click_button "Log in"
   end
 
-  scenario "Authenticated users should see a logout link" do
+  it "Authenticated users should see a logout link" do
     expect(page).to have_content("Logout")
   end
 
-  scenario "Authenticated users should be able to log out" do
+  it "Authenticated users should be able to log out" do
     click_link("Logout")
     expect(page).to have_content("Log in")
   end
