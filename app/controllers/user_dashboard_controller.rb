@@ -24,7 +24,7 @@ class UserDashboardController < ApplicationController
   def actions
     logger.info("Action: #{params[:commit]}")
 
-    bookmark_ids = params[:bookmark_ids]
+    bookmark_ids = params[:bookmark_ids] ? params[:bookmark_ids] : []
 
     if params[:commit] == 'make_public'
         make_public(bookmark_ids)
