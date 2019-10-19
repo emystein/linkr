@@ -13,4 +13,16 @@ describe "User Dashboard:", :type => :feature do
     visit dashboard_path
     expect(page).to have_content(@user.nickname + "'s Bookmarks")
   end
+
+  it "mark bookmark as private" do
+    create(:bookmark)
+
+    visit dashboard_path
+
+    find('input#bookmark_ids_').click
+    find_button(value: 'make_private').click
+
+    expect(page).to have_content(@user.nickname + "'s Bookmarks")
+    # TODO improve assertions
+  end
 end
