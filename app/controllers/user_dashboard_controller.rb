@@ -32,6 +32,8 @@ class UserDashboardController < ApplicationController
         make_private(bookmark_ids)
     elsif params[:commit] == 'delete'
         delete(bookmark_ids)
+    elsif params[:commit] == 'add_tag'
+        add_tag(bookmark_ids, params[:tag])
     end
   end
 
@@ -45,9 +47,9 @@ class UserDashboardController < ApplicationController
 
   def toggle_public_private(bookmark_ids, toggle)
     bookmark_ids.each do |bookmark_id|
-      @bookmark = current_user.bookmarks.find(bookmark_id)
-      @bookmark.private = toggle
-      @bookmark.save
+      bookmark = current_user.bookmarks.find(bookmark_id)
+      bookmark.private = toggle
+      bookmark.save
     end
 
     show
@@ -56,6 +58,16 @@ class UserDashboardController < ApplicationController
   def delete(bookmark_ids)
     bookmark_ids.each do |bookmark_id|
       current_user.bookmarks.delete(bookmark_id)
+    end
+
+    show
+  end
+
+  def add_tag(bookmark_ids, tag)
+    bookmark_ids.each do |bookmark_id|
+      bookmark = current_user.bookmarks.find(bookmark_id)
+      bookmark.tag_list.add(tag)
+      bookmark.save
     end
 
     show

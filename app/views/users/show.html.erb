@@ -17,6 +17,8 @@
     <button name="commit" value="make_public" type="submit" class="btn btn-info">Make Public</button>
     <button name="commit" value="make_private" type="submit" class="btn btn-info">Make Private</button>
     <button name="commit" value="delete" type="submit" class="btn btn-info">Delete</button>
+    <%= text_field_tag 'tag' %>
+    <button name="commit" value="add_tag" type="submit" class="btn btn-info">Add Tag</button>
     <%= will_paginate @bookmarks %>
   <% else %>
     <h4>There are no bookmarks to display.</h4>
