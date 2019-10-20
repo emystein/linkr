@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Signing Up:", :type => :feature do
   it "The homepage should have a signup link" do
     visit root_path
-    expect(page).to have_content("signup")
+    expect(page).to have_content("Sign up")
   end
 
   it "Allows the creation of new accounts" do
@@ -30,7 +30,7 @@ describe "Logging In:", :type => :feature do
 
   it "The homepage should have a login link" do
     visit root_path
-    expect(page).to have_content("login")
+    expect(page).to have_content("Log in")
   end
 
   it "Allows a user to login using their email and password" do

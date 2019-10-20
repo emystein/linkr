@@ -9,8 +9,6 @@ Rails.application.routes.draw do
   get "/dashboard"           => "user_dashboard#show"
   get "/dashboard/tags/:tag" => "user_dashboard#tag"
   get "/dashboard/actions"   => "user_dashboard#actions"
-  get "/dashboard/make_public"   => "user_dashboard#make_public"
-  get "/dashboard/make_private"   => "user_dashboard#make_private"
 
   resources :users, :only => [:new, :create, :show, :update] do
     member do
@@ -24,10 +22,11 @@ Rails.application.routes.draw do
   resources :bookmarks do
     get :bookmarklet, :export, :on => :collection
     post :import, :on => :collection
+    post :save, :on => :member
   end
 
   resources :bookmarks_import
   resources :bookmarks_export
 
-  root :to => "user_dashboard#show"
+  root :to => "bookmarks#index"
 end

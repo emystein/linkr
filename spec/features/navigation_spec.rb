@@ -48,8 +48,8 @@ describe "Navigation UnAuth'd:" do
 
   it "only has login/logout" do
     within('header') {
-      expect(find('nav#profile')).to have_content('login')
-      expect(find('nav#profile')).to have_content('signup')
+      expect(find('nav#profile')).to have_content('Log in')
+      expect(find('nav#profile')).to have_content('Sign up')
     }
   end
 
