@@ -22,7 +22,6 @@ Rails.application.routes.draw do
   resources :bookmarks do
     get :bookmarklet, :export, :on => :collection
     post :import, :on => :collection
-    post :save, :on => :member
   end
 
   resources :bookmarks_import

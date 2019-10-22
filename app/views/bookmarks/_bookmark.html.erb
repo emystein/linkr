@@ -17,10 +17,12 @@
   <p class="tags"><%= bookmark.tag_list.collect{|t| link_to t, tag_path(t)}.join(" ").html_safe %></p>
   <%
 =begin%>
- <p class="meta">
+ <% begin %>
+    <p class="meta">
     by <span class="nickname"><%= link_to bookmark.user.nickname, user_path(bookmark.user) %></span> 
     <span class="date"><%= time_ago_in_words(bookmark.created_at) %> ago</span> 
-  </p> 
+    </p> 
+  <% end %> 
 <%
 =end%>
 </article>

@@ -26,50 +26,79 @@ class UserDashboardController < ApplicationController
 
     bookmark_ids = params[:bookmark_ids] ? params[:bookmark_ids] : []
 
-    if params[:commit] == 'make_public'
-        make_public(bookmark_ids)
-    elsif params[:commit] == 'make_private'
-        make_private(bookmark_ids)
-    elsif params[:commit] == 'delete'
-        delete(bookmark_ids)
-    elsif params[:commit] == 'add_tag'
-        add_tag(bookmark_ids, params[:tag])
-    end
+    commands_by_key = { 
+      'make_private' => TogglePrivateBookmarksCommand,
+      'make_public' => TogglePublicBookmarksCommand,
+      'delete' => DeleteBookmarksCommand,
+      'add_tag' => AddTagToBookmarksCommand,
+    }
+
+    command_class = commands_by_key[params[:commit]]
+
+    command = command_class.new(current_user)
+
+    command.apply(bookmark_ids, params)
+
+    show
+  end
+end
+
+class BookmarkVisibilityToggle
+  def initialize(current_user)
+    @current_user = current_user
   end
 
-  def make_public(bookmark_ids)
-    toggle_public_private(bookmark_ids, false)
-  end
-
-  def make_private(bookmark_ids)
-    toggle_public_private(bookmark_ids, true)
-  end
-
-  def toggle_public_private(bookmark_ids, toggle)
+  def toggle_private(bookmark_ids, toggle)
     bookmark_ids.each do |bookmark_id|
-      bookmark = current_user.bookmarks.find(bookmark_id)
+      bookmark = @current_user.bookmarks.find(bookmark_id)
       bookmark.private = toggle
       bookmark.save
     end
+  end
+end
 
-    show
+class TogglePrivateBookmarksCommand
+  def initialize(current_user)
+    @visibility_toggle = BookmarkVisibilityToggle.new(current_user)
   end
 
-  def delete(bookmark_ids)
+  def apply(bookmark_ids, params)
+    @visibility_toggle.toggle_private(bookmark_ids, true)
+  end
+end
+
+class TogglePublicBookmarksCommand 
+  def initialize(current_user)
+    @visibility_toggle = BookmarkVisibilityToggle.new(current_user)
+  end
+
+  def apply(bookmark_ids, params)
+    @visibility_toggle.toggle_private(bookmark_ids, false)
+  end
+end
+
+class DeleteBookmarksCommand 
+  def initialize(current_user)
+    @current_user = current_user
+  end
+
+  def apply(bookmark_ids, params)
     bookmark_ids.each do |bookmark_id|
-      current_user.bookmarks.delete(bookmark_id)
+      @current_user.bookmarks.delete(bookmark_id)
     end
+  end
+end
 
-    show
+class AddTagToBookmarksCommand
+  def initialize(current_user)
+    @current_user = current_user
   end
 
-  def add_tag(bookmark_ids, tag)
+  def apply(bookmark_ids, params)
     bookmark_ids.each do |bookmark_id|
-      bookmark = current_user.bookmarks.find(bookmark_id)
-      bookmark.tag_list.add(tag)
+      bookmark = @current_user.bookmarks.find(bookmark_id)
+      bookmark.tag_list.add(params[:tag])
       bookmark.save
     end
-
-    show
   end
 end
