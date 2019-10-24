@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'explore/index'
   devise_for :user, path_names: { sign_up: "signup", sign_in: "login", sign_out: "logout" }
 
   devise_scope :user do
@@ -27,5 +28,5 @@ Rails.application.routes.draw do
   resources :bookmarks_import
   resources :bookmarks_export
 
-  root :to => "bookmarks#index"
+  root :to => "explore#index"
 end
