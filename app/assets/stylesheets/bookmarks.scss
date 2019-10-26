@@ -2,14 +2,11 @@ article {
   padding-bottom: 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid #bbb;
-  .meta {
-    color: $uncolor;
-    a {
-      color: $uncolor;
-      &:hover {
-        color: #fff;
-      }
-    }
+  a.private {
+    color: #990033;
+  }
+  span.actions {
+    float: right;
   }
 }
 
@@ -17,14 +14,7 @@ p.url {
   margin-bottom: 0px;
   a {
     color: #666;
-    &:hover {
-      color: #fff;
-    }
   }
-}
-
-p.meta {
-  margin-bottom: 0px;
 }
 
 .pagination {
@@ -38,15 +28,6 @@ p.meta {
     padding-right: 4px;
     padding-top: 2px;
     padding-bottom: 3px;
-  }
-}
-
-article {
-  a.private {
-    color: #990033;
-  }
-  span.actions {
-    float: right;
   }
 }
 

@@ -8,3 +8,9 @@
 @import "layout";
 @import "bookmarks";
 @import "fonts";
+
+a {
+  &:hover {
+    color: #fff;
+  }
+}
