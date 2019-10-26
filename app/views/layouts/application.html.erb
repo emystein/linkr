@@ -25,11 +25,9 @@
       <h1><%= link_to "Linkr", root_path %></h1>
 
       <nav id="site">
-        <% if user_signed_in? -%>
-          <%= link_to "Everyone", bookmarks_path %>
-          <%= link_to "Bookmarks", dashboard_path %>
-          <%= link_to "Tags", tags_path %>
-        <% end -%>
+        <%= link_to "Dashboard", dashboard_path %>
+        <%= link_to "Bookmarks", bookmarks_path %>
+        <%= link_to "Tags", tags_path %>
       </nav>
     </div>
   </header>
