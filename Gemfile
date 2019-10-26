@@ -34,6 +34,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "rails_db", "~> 2.1"
 end
 
 group :development, :test do
@@ -61,13 +62,10 @@ end
 
 
 gem "activeresource", "~> 5.1"
-
 gem "bootstrap", "~> 4.3"
-
 gem "csv", "~> 3.1"
-
 gem "smarter_csv", "~> 1.2"
-
 gem "bookmarks", "~> 0.2.3"
-
 gem "bootstrap_form", "~> 4.3"
+gem "scenic", "~> 1.5"
+gem "scenic_sqlite_adapter", "~> 0.1.0"
