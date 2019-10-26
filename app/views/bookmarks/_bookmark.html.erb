@@ -10,7 +10,7 @@
       <% end %>
     </span>
   </h4>
-  <p class="url"><%= link_to bookmark.url, :target => "_blank" %></p>
+  <%= link_to bookmark.url, bookmark.url, :class => "url", :target => "_blank" %>
   <% unless bookmark.notes.blank? %>
     <p class="notes"><%= bookmark.notes %> </p>
   <% end %>

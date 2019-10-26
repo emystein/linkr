@@ -5,61 +5,23 @@ article {
   a.private {
     color: #990033;
   }
-  span.actions {
+  .actions {
     float: right;
   }
 }
 
-p.url {
-  margin-bottom: 0px;
-  a {
-    color: #666;
+a.url {
+  color: #666;
+  &:hover {
+    color: black;
   }
 }
 
 .pagination {
-  em {
+  padding-top: 10px;
+  .current {
     font-style: normal;
     background: #777;
-    // color: #1a1a1a;
-    padding-left: 4px;
-    padding-right: 4px;
-    padding-top: 2px;
-    padding-bottom: 3px;
-  }
-}
-
-.actions {
-  line-height: 1em;
-  padding-left: 10px;
-}
-
-form {
-  .field {
-    input, textarea {
-      padding: 3px;
-      width: 99%;
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    input[type=checkbox] {
-      width: 1em;
-      height: 1em;
-      padding: 0px;
-    }
-    textarea {
-      width: 99.5%;
-      font-size: 1.0em;
-      height: 100px;
-    }
-    &.private {
-      text-align: right;
-      float: right;
-    }
-  }
-  .actions {
-    text-align: right;
-    padding: 0px;
   }
 }
 
@@ -70,9 +32,6 @@ form {
 section#bookmark {
   width: 800px;
   margin: 0 auto;
-  h2 {
-    border: none;
-  }
   form {
     background: #000;
     padding: 20px;
@@ -82,6 +41,7 @@ section#bookmark {
 #bookmarks-header {
   h2 {
     float: left;
+    margin-bottom: 20px;
   }
   form, a {
     float: right;
