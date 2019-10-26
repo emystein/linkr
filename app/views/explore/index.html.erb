@@ -1,4 +1,13 @@
 <section>
+  <h3>Latest Bookmarks</h3>
+  <% unless @bookmarks.empty? %>
+    <%= render :partial => 'bookmarks/mini_bookmark', :collection => @bookmarks, as: :bookmark %>
+  <% else %>
+    <h4>There are no bookmarks to display.</h4>
+  <% end %>
+</section>
+
+<section>
   <article class="taglist">
     <h3>All Tags</h3>
     <p class="tags"><%= @tags.collect{|t| link_to "#{t} (#{t.count})", tag_path(t.name)}.join(" ").html_safe %></p>

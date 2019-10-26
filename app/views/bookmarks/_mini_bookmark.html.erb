@@ -10,19 +10,4 @@
       <% end %>
     </span>
   </h4>
-  <p class="url"><%= link_to bookmark.url, :target => "_blank" %></p>
-  <% unless bookmark.notes.blank? %>
-    <p class="notes"><%= bookmark.notes %> </p>
-  <% end %>
-  <p class="tags"><%= bookmark.tag_list.collect{|t| link_to t, tag_path(t)}.join(" ").html_safe %></p>
-  <%
-=begin%>
- <% begin %>
-    <p class="meta">
-    by <span class="nickname"><%= link_to bookmark.user.nickname, user_path(bookmark.user) %></span> 
-    <span class="date"><%= time_ago_in_words(bookmark.created_at) %> ago</span> 
-    </p> 
-  <% end %> 
-<%
-=end%>
 </article>
