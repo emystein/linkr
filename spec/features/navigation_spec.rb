@@ -11,12 +11,12 @@ describe "Navigation Auth'd:", :type => :feature do
   end
 
   it "dashboard / personal bookmarks" do
-    within('nav#site') { click_link('Bookmarks') }
+    within('nav#site') { click_link('Dashboard') }
     expect(find('#main')).to have_content("#{@user.nickname}'s Bookmarks")
   end
 
   it "everyone's bookmarks" do
-    within('nav#site') { click_link('Everyone') }
+    within('nav#site') { click_link('Bookmarks') }
     expect(find('#main')).to have_content("Everyone's Bookmarks")
   end
 
@@ -32,7 +32,7 @@ describe "Navigation Auth'd:", :type => :feature do
 
   it "header link" do
     within('header') { click_link('Linkr') }
-    expect(find('#main')).to have_content("Everyone's Bookmarks")
+    expect(find('#main')).to have_content("Bookmarks")
   end
 end
 
@@ -46,17 +46,12 @@ describe "Navigation UnAuth'd:" do
     click_link "Logout" 
   end
 
-  it "only has login/logout" do
+  it "has navigation" do
     within('header') {
+      expect(find('nav#site')).to have_content('Dashboard')
+      expect(find('nav#site')).to have_content('Bookmark')
       expect(find('nav#profile')).to have_content('Log in')
       expect(find('nav#profile')).to have_content('Sign up')
-    }
-  end
-
-  it "does not have standard navigation" do
-    within('header') {
-      expect(find('nav#site')).to_not have_content('Bookmarks')
-      expect(find('nav#site')).to_not have_content('Everyone')
     }
   end
 end
