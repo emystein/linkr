@@ -13,7 +13,7 @@ describe TagCountByDate, type: :model do
     bookmark.save
   end
 
-  it 'tag count by date is not empty' do
+  it 'tags are sorted by date and count' do
     tag_count_by_date = TagCountByDate.all
 
     expect(tag_count_by_date[0].name).to eq 'tag1'
