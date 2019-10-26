@@ -1,29 +1,6 @@
-
-p, ol, ul, td {
-  font-size: 13px;
-  line-height: 18px; }
-
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px; }
-
 a {
-  color: red;
   text-decoration: none !important;
-  &:hover {
-    color: #fff !important;
-    // background-color: $link-hover-color;
-    background-color: #000 !important;
-  }
 }
-
-div {
-  &.field, &.actions {
-    margin-bottom: 10px; } }
-
-#notice {
-  color: green; }
 
 .field_with_errors {
   padding: 2px;
@@ -48,4 +25,5 @@ div {
     color: #fff; }
   ul li {
     font-size: 12px;
-    list-style: square; } }
+    list-style: square; } 
+}
