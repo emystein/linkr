@@ -7,30 +7,43 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller.controller_name %> <%= controller.action_name %>">
-
-  <header>
-    <div class="container">
-      <nav id="profile">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Linkr</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to "Dashboard", dashboard_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Bookmarks", bookmarks_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Tags", tags_path, class: "nav-link" %>
+        </li>
         <% if user_signed_in? %>
-          <%= link_to "new bookmark", new_bookmark_path %> |
-          <%= link_to current_user.nickname, '/dashboard' %> | 
-          <%= link_to('Logout', destroy_user_session_path, method: :delete) %>  | 
-          <%= link_to "help", help_path %>
+          <li class="nav-item">
+            <%= link_to "New Bookmark", new_bookmark_path, class: "nav-link" %> 
+          </li>
+          <li class="nav-item">
+            <%= link_to current_user.nickname, '/dashboard', class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to('Logout', destroy_user_session_path, class: "nav-link", method: :delete) %> 
+          </li>
         <% else %>
-          <%= link_to "Sign up", new_user_registration_path %> | 
-          <%= link_to 'Log in', dashboard_path  %> 
+          <li class="nav-item">
+            <%= link_to 'Log in', dashboard_path, class: "nav-link" %> 
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+          </li>
         <% end %>
-      </nav>
-
-      <h1><%= link_to "Linkr", root_path %></h1>
-
-      <nav id="site">
-        <%= link_to "Dashboard", dashboard_path %>
-        <%= link_to "Bookmarks", bookmarks_path %>
-        <%= link_to "Tags", tags_path %>
-      </nav>
+      </ul>
     </div>
-  </header>
+  </nav>
 
   <% unless flash.empty? %>
     <div id="flash">
