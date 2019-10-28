@@ -63,7 +63,6 @@ end
 
 gem "activeresource", "~> 5.1"
 gem "bootstrap", "~> 4.3"
-gem "csv", "~> 3.1"
 gem "smarter_csv", "~> 1.2"
 gem "bookmarks", "~> 0.2.3"
 gem "bootstrap_form", "~> 4.3"
