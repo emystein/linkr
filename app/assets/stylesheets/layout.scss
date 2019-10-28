@@ -1,5 +1,9 @@
-.container {
+#main .container {
   overflow: auto;
+  background: #fff; 
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 section {
@@ -8,11 +12,4 @@ section {
 
 body { 
   background-color: #ccc9c5;
-}
-
-#main .container {
-  background: #fff; 
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 50px;
 }
