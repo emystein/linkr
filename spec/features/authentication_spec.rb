@@ -15,12 +15,6 @@ describe "Signing Up:", :type => :feature do
     click_button "Sign up"
     expect(page).to have_content("successfully")
   end
-
-  it "Does not allow account creation without required information" do
-    visit new_user_registration_path
-    click_button "Sign up"
-    expect(page).to have_content("errors prohibited this user from being saved")
-  end
 end
 
 describe "Logging In:", :type => :feature do
