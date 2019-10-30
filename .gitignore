@@ -5,3 +5,9 @@ tmp/
 .sass-cache/
 .metals/
 .vscode/
+node_modules
+public/packs
+public/packs-test
+
+
+
