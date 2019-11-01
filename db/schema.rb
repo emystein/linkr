@@ -89,9 +89,9 @@ ActiveRecord::Schema.define(version: 2019_10_31_231318) do
 
   create_view "tag_count_by_dates", sql_definition: <<-SQL
       select tags.name as name, date(taggings.created_at) as created_at, count(1) as count
-            from taggings, tags
-            where taggings.tag_id = tags.id
-            group by date(taggings.created_at), name
-            order by count desc
+              from taggings, tags
+              where taggings.tag_id = tags.id
+              group by date(taggings.created_at), name
+              order by count desc
   SQL
 end
