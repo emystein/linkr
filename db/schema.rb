@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_26_221559) do
+ActiveRecord::Schema.define(version: 2019_10_31_231318) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.string "title"
@@ -23,12 +23,29 @@ ActiveRecord::Schema.define(version: 2019_10_26_221559) do
     t.string "description"
   end
 
+  create_table "bundled_tags", force: :cascade do |t|
+    t.integer "tag_bundle_id"
+    t.integer "tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tag_bundle_id"], name: "index_bundled_tags_on_tag_bundle_id"
+    t.index ["tag_id"], name: "index_bundled_tags_on_tag_id"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "url"
     t.string "title"
     t.integer "bookmark_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tag_bundles", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_tag_bundles_on_user_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -72,9 +89,9 @@ ActiveRecord::Schema.define(version: 2019_10_26_221559) do
 
   create_view "tag_count_by_dates", sql_definition: <<-SQL
       select tags.name as name, date(taggings.created_at) as created_at, count(1) as count
-    from taggings, tags
-    where taggings.tag_id = tags.id
-    group by date(taggings.created_at), name
-    order by count desc
+            from taggings, tags
+            where taggings.tag_id = tags.id
+            group by date(taggings.created_at), name
+            order by count desc
   SQL
 end

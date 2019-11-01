@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, case_sensitive: false
 
   has_many :bookmarks
+  has_many :tag_bundles
 
   def self.by_login(login)
     u = User.arel_table
