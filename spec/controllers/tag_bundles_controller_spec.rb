@@ -26,7 +26,35 @@ RSpec.describe TagBundlesController, type: :controller do
         allow_any_instance_of(TagBundle).to receive(:update).with({ :name => "updated name", :tags => [@tag1, @tag2] })
 
         put :update, :params => { id: tag_bundle.id, name: "updated name", tags: "#{@tag1.name},#{@tag2.name}" }
+
+        # TODO fix
+        # expect(response).to redirect_to(tag_bundles_url)
       end
+      it "add tag if not exist" do
+        tag_bundle = TagBundle.create(user: subject.current_user, name: 'tag_bundle1', tags: [@tag1])
+
+        put :update, :params => { id: tag_bundle.id, name: "updated name", tags: "#{@tag1.name},new_tag" }
+
+        # new_tag = Tag.where(name: 'new_tag')
+        # expect(assigns(:tag_bundle).tags).to eq [@tag1, new_tag]
+
+        expect(assigns(:tag_bundle).tags.collect{|t| t.name}).to eq [@tag1.name, 'new_tag']
+      end
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "destroys the requested tag_bundle" do
+      tag_bundle = TagBundle.create(user: subject.current_user, name: 'tag_bundle1', tags: [@tag1])
+      expect {
+        delete :destroy, :params => { id: tag_bundle.id.to_s }
+      }.to change(TagBundle, :count).by(-1)
+    end
+
+    it "redirects to the tag_bundles list" do
+      tag_bundle = TagBundle.create(user: subject.current_user, name: 'tag_bundle1', tags: [@tag1])
+      delete :destroy, :params => { id: tag_bundle.id.to_s }
+      expect(response).to redirect_to(tag_bundles_url)
     end
   end
 end

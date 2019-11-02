@@ -31,7 +31,7 @@ class TagBundlesController < ApplicationController
     updated = @tag_bundle.update(name: params[:name], tags: tags)
 
     if updated
-      redirect_to dashboard_url, :flash => { :success => "Tag Bundle was successfully updated." }
+      redirect_to tag_bundles_url, :flash => { :success => "Tag Bundle was successfully updated." }
     else
       render action: "edit"
     end
@@ -46,7 +46,7 @@ class TagBundlesController < ApplicationController
 
   def tags_from_names(joined_tag_names)
     tag_names = joined_tag_names.split(',').map{ |n| n.strip}
-    Tag.where(name: tag_names)
+    tag_names.map {|name| Tag.find_or_create_by(name: name) }
   end
 
   def find(id)
