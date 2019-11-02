@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   resources :sessions, :only => [:new, :create, :destroy]
   resources :tags, :only => [:index, :show]
+  resources :tag_bundles
 
   resources :bookmarks do
     get :bookmarklet, :export, :on => :collection

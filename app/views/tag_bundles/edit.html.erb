@@ -1,0 +1,8 @@
+<%= bootstrap_form_tag url: "/tag_bundles/#{@tag_bundle.id}" do |f| %>
+  <%= f.hidden_field :_method, value: "patch" %>
+  <%= f.text_field :name, value: @tag_bundle.name %>
+  <%= f.text_field :tags, value: @tag_bundle.tag_names %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
+
+<%= link_to 'Back', tag_bundles_path %>
