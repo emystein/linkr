@@ -35,9 +35,6 @@ RSpec.describe TagBundlesController, type: :controller do
 
         put :update, :params => { id: tag_bundle.id, name: "updated name", tags: "#{@tag1.name},new_tag" }
 
-        # new_tag = Tag.where(name: 'new_tag')
-        # expect(assigns(:tag_bundle).tags).to eq [@tag1, new_tag]
-
         expect(assigns(:tag_bundle).tags.collect{|t| t.name}).to eq [@tag1.name, 'new_tag']
       end
     end
