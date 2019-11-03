@@ -13,7 +13,6 @@ gem 'acts-as-taggable-on', github:"mkilling/acts-as-taggable-on", branch:"suppor
 gem 'sprockets-rails', :require => 'sprockets/railtie' # assets packaging
 gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7' # generate JSON objects with a Builder-style DSL
 
