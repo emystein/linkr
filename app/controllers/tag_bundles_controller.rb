@@ -11,6 +11,8 @@ class TagBundlesController < ApplicationController
     tags = tags_from_names(params[:tags])
 
     @tag_bundle = TagBundle.create!(user: current_user, name: params[:name], tags: tags)
+
+    redirect_to tag_bundles_path
   end
 
   def show

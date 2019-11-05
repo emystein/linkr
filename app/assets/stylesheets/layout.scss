@@ -14,6 +14,12 @@ body {
   background-color: #ccc9c5;
 }
 
+article {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #bbb;
+}
+
 .taglist {
   border: none;
   .tags {
@@ -23,4 +29,8 @@ body {
       background: #7c2525;
     }
   }
+}
+
+.actions {
+  float: right;
 }

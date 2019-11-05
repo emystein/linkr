@@ -1,4 +1,11 @@
-<%= render :partial => 'tag_bundles/tag_bundle', object: @tag_bundle %>
-
-<%= link_to 'Edit', edit_tag_bundle_path(@tag_bundle) %> |
-<%= link_to 'Back', tag_bundles_path %>
+<article>
+  <section class="taglist">
+    <h3>
+      <%= @tag_bundle.name %>
+      <span class="actions">
+        <%= link_to 'Edit', edit_tag_bundle_path(@tag_bundle) %> 
+      </span>
+    </h3>
+    <p class="tags"><%= @tag_bundle.tags.collect{|t| link_to t.name, tag_path(t.name)}.join(" ").html_safe %></p>
+  </section>
+</article>
