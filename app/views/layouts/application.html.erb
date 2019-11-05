@@ -24,6 +24,9 @@
         <li class="nav-item">
           <%= link_to "Tags", tags_path, class: "nav-link" %>
         </li>
+        <li class="nav-item">
+          <%= link_to "Tag Bundles", tag_bundles_path, class: "nav-link" %>
+        </li>
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to "New Bookmark", new_bookmark_path, class: "nav-link" %> 
