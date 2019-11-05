@@ -13,3 +13,14 @@ section {
 body { 
   background-color: #ccc9c5;
 }
+
+.taglist {
+  border: none;
+  .tags {
+    float: left;
+    a {
+      color: #fff;
+      background: #7c2525;
+    }
+  }
+}
