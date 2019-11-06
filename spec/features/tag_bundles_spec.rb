@@ -50,4 +50,14 @@ describe "Tag Bundles", :type => :feature do
     expect(page).to have_content('tag1')
     expect(page).to have_content('tag2')
   end
+
+  it "delete Tag Bundle" do
+    tag_bundle_1 = TagBundle.create(user: @user, name: 'Tag Bundle 1', tags: [@tag1])
+
+    visit tag_bundles_path
+
+    click_link 'Delete'
+
+    expect(page).to_not have_content('Tag Bundle 1')
+  end
 end

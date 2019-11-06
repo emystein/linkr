@@ -8,7 +8,7 @@ class TagBundlesController < ApplicationController
   def create
     params.permit!
 
-    tags = tags_from_names(params[:tags])
+    tags = Tags.from_names(params[:tags])
 
     @tag_bundle = TagBundle.create!(user: current_user, name: params[:name], tags: tags)
 
@@ -28,7 +28,7 @@ class TagBundlesController < ApplicationController
 
     @tag_bundle = find(params[:id])
 
-    tags = tags_from_names(params[:tags])
+    tags = Tags.from_names(params[:tags])
 
     updated = @tag_bundle.update(name: params[:name], tags: tags)
 
@@ -40,15 +40,9 @@ class TagBundlesController < ApplicationController
   end
 
   def destroy
-    @tag_bundle = find(params[:id])
-    @tag_bundle.destroy
+    find(params[:id]).destroy
 
     redirect_to tag_bundles_url
-  end
-
-  def tags_from_names(joined_tag_names)
-    tag_names = joined_tag_names.split(',').map{ |n| n.strip}
-    tag_names.map {|name| Tag.find_or_create_by(name: name) }
   end
 
   def find(id)
