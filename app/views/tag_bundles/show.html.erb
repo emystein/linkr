@@ -1,11 +1,21 @@
 <article>
   <section class="taglist">
-    <h3>
+    <h2>
       <%= @tag_bundle.name %>
       <span class="actions">
         <%= link_to 'Edit', edit_tag_bundle_path(@tag_bundle) %> 
       </span>
-    </h3>
-    <p class="tags"><%= @tag_bundle.tags.collect{|t| link_to t.name, tag_path(t.name)}.join(" ").html_safe %></p>
+    </h2>
+    <hr>
+    <h3>Tags</h3>
+    <p class="tags">
+      <%= @tag_bundle.tags.collect{|t| link_to t.name, tag_path(t.name)}.join(" ").html_safe %>
+    </p>
+  </section>
+  <section>
+    <hr>
+    <h3>Bookmarks</h3>
+    <%= render :partial => 'bookmarks/bookmark', :collection => @bookmarks %>
+    <%= will_paginate @bookmarks %>
   </section>
 </article>

@@ -17,6 +17,7 @@ class TagBundlesController < ApplicationController
 
   def show
     @tag_bundle = find(params[:id])
+    @bookmarks = @tag_bundle.bookmarks.paginate(:page => params[:page])
   end
 
   def edit

@@ -27,16 +27,8 @@ describe "Navigation Auth'd:", :type => :feature do
 end
 
 describe "Navigation UnAuth'd:" do
-  before :each do
-    @user = create(:user)
-    visit new_user_session_path
-    fill_in "Email", :with => @user.email
-    fill_in "Password", :with => "password"
-    click_button "Log in"
-    click_link "Logout" 
-  end
-
   it "has navigation" do
+    visit root_path
     expect(find('nav.navbar')).to have_content('Dashboard')
     expect(find('nav.navbar')).to have_content('Bookmark')
     expect(find('nav.navbar')).to have_content('Log in')

@@ -7,4 +7,9 @@ class TagBundle < ApplicationRecord
   def tag_names
     self.tags.collect{|t| t.name}.join(',')
   end
+
+  def bookmarks
+    tag_names = self.tags.collect{|t| t.name}
+    self.user.bookmarks.tagged_with(tag_names, :any => true)
+  end
 end
