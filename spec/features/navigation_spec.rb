@@ -20,11 +20,6 @@ describe "Navigation Auth'd:", :type => :feature do
     expect(find('#main')).to have_content("Everyone's Bookmarks")
   end
 
-  it "public profile" do
-    within('nav.navbar') { click_link(@user.nickname) }
-    expect(find('#main')).to have_content("#{@user.nickname}'s Bookmarks")
-  end
-
   it "header link" do
     within('nav.navbar') { click_link('Linkr') }
     expect(find('#main')).to have_content("Bookmarks")

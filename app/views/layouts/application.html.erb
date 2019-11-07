@@ -15,11 +15,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to "New Bookmark", new_bookmark_path, class: "nav-link user" %> 
-          </li>
-        <% end %>
+        <li class="nav-item">
+          <%= link_to "New Bookmark", new_bookmark_path, class: "nav-link user" %> 
+        </li>
         <li class="nav-item">
           <%= link_to "Dashboard", dashboard_path, class: "nav-link" %>
         </li>
@@ -33,9 +31,6 @@
           <%= link_to "Tag Bundles", tag_bundles_path, class: "nav-link" %>
         </li>
         <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to current_user.nickname, '/dashboard', class: "nav-link" %>
-          </li>
           <li class="nav-item">
             <%= link_to('Logout', destroy_user_session_path, class: "nav-link", method: :delete) %> 
           </li>
