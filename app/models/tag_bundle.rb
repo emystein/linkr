@@ -5,11 +5,10 @@ class TagBundle < ApplicationRecord
   has_many :tags, through: :bundled_tags
 
   def tag_names
-    self.tags.collect{|t| t.name}.join(',')
+    self.tags.collect{|t| t.name}
   end
 
   def bookmarks
-    tag_names = self.tags.collect{|t| t.name}
-    self.user.bookmarks.tagged_with(tag_names, :any => true)
+    self.user.bookmarks.tagged_with(self.tag_names, :any => true)
   end
 end

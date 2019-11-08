@@ -18,6 +18,20 @@ RSpec.describe TagBundlesController, type: :controller do
     end
   end
 
+  describe "GET show" do
+    it "shows bookmarks associated to tags" do
+        bookmark = create(:bookmark)
+        bookmark.tag_list.add(@tag1.name)
+        bookmark.save
+
+        tag_bundle = TagBundle.create(user: subject.current_user, name: 'tag_bundle1', tags: [@tag1])
+
+        get :show, :params => {id: tag_bundle.id}
+
+        expect(assigns(:bookmarks)).to contain_exactly(bookmark)
+    end 
+  end
+
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested tag bundle" do
