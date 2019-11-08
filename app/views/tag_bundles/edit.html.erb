@@ -1,5 +1,4 @@
-<%= bootstrap_form_tag url: tag_bundle_path(@tag_bundle.id) do |f| %>
-  <%= f.hidden_field :_method, value: "put" %>
+<%= bootstrap_form_tag url: tag_bundle_path(@tag_bundle.id), method: :patch do |f| %>
   <%= f.text_field :name, value: @tag_bundle.name %>
   <%= f.text_field :tags, value: @tag_bundle.tag_names.join(', ') %>
   <%= f.submit class: 'btn btn-primary' %>
