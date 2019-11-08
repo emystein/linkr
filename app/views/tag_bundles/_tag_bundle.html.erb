@@ -3,6 +3,7 @@
     <h3>
       <%= link_to tag_bundle.name, tag_bundle_path(tag_bundle)  %>
       <span class="actions">
+        <%= link_to 'Edit', edit_tag_bundle_path(tag_bundle) %>
         <%= link_to 'Delete', tag_bundle, confirm: 'Are you sure?', method: :delete %>
       </span>
     </h3>

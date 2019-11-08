@@ -35,6 +35,16 @@ describe "Tag Bundles", :type => :feature do
     expect(page).to have_content(@tag2.name)
   end
 
+  it "edit Tag Bundle from list" do
+    tag_bundle_1 = TagBundle.create(user: @user, name: 'Tag Bundle 1', tags: [@tag1])
+
+    visit tag_bundles_path
+
+    click_link 'Edit'
+
+    expect(page.current_path).to eq edit_tag_bundle_path(tag_bundle_1.id)
+  end
+
   it "update a Tag Bundle" do
     visit new_tag_bundle_path
     fill_in 'Name', with: 'Tag Bundle 1'
