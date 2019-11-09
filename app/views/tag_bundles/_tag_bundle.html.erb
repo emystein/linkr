@@ -1,12 +1,12 @@
 <article>
-  <section class="taglist">
-    <h3>
-      <%= link_to tag_bundle.name, tag_bundle_path(tag_bundle)  %>
-      <span class="actions">
-        <%= link_to 'Edit', edit_tag_bundle_path(tag_bundle) %>
-        <%= link_to 'Delete', tag_bundle, confirm: 'Are you sure?', method: :delete %>
-      </span>
-    </h3>
-    <p class="tags"><%= tag_bundle.tags.collect{|t| link_to t.name, tag_path(t.name)}.join(" ").html_safe %></p>
+  <h3>
+    <%= link_to tag_bundle.name, tag_bundle_path(tag_bundle)  %>
+    <span class="actions">
+      <%= link_to 'Edit', edit_tag_bundle_path(tag_bundle) %>
+      <%= link_to 'Delete', tag_bundle, confirm: 'Are you sure?', method: :delete %>
+    </span>
+  </h3>
+  <section class="tags">
+    <%= tag_bundle.tags.collect{|t| link_to t.name, tag_path(t.name)}.join(" ").html_safe %>
   </section>
 </article>

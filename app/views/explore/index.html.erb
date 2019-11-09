@@ -7,7 +7,7 @@
   <% end %>
 </section>
 
-<section class="taglist">
+<section class="tags">
   <h2>Trending Tags</h2>
-  <p class="tags"><%= @tag_count_by_date.collect{|t| link_to "#{t.name} (#{t.count})", tag_path(t.name)}.join(" ").html_safe %></p>
+  <%= @tag_count_by_date.collect{|t| link_to "#{t.name} (#{t.count})", tag_path(t.name)}.join(" ").html_safe %>
 </section>

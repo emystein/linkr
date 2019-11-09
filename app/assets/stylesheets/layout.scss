@@ -6,28 +6,19 @@
   margin-bottom: 50px;
 }
 
-section {
-  padding-bottom: 10px;
-}
-
 body { 
   background-color: #ccc9c5;
 }
 
 article {
-  padding-bottom: 10px;
+  padding-bottom: 4px;
   margin-bottom: 10px;
   border-bottom: 1px solid #bbb;
 }
 
-.taglist {
-  border: none;
-  .tags {
-    float: left;
-    a {
-      color: #fff;
-      background: #7c2525;
-    }
+.tags {
+  a {
+    color: #616161;
   }
 }
 
@@ -38,6 +29,6 @@ article {
   }
 }
 
-a.user {
+a.new-bookmark {
   color: #ffdc34 !important;
 }

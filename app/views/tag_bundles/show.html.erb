@@ -1,5 +1,5 @@
 <article>
-  <section class="taglist">
+  <section class="tags">
     <h2>
       <%= @tag_bundle.name %>
       <span class="actions">
@@ -8,7 +8,7 @@
     </h2>
     <hr>
     <h3>Tags</h3>
-    <p class="tags">
+    <p>
       <%= @tag_bundle.tags.collect{|t| link_to t.name, tag_path(t.name)}.join(" ").html_safe %>
     </p>
   </section>
