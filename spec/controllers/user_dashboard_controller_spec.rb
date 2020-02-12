@@ -53,5 +53,16 @@ describe UserDashboardController, :type => :controller do
       persisted_bookmark = assigns(:bookmarks).find{|b| b.id == bookmark.id}
       expect(persisted_bookmark.tag_list).to include('new')
     end
+
+    it "don't mark private bookmarks when skip bookmark ids parameter" do
+      bookmark = Bookmark.create! valid_attributes
+
+      get :actions, :params => { commit: 'make_private' }
+
+      get :show
+
+      persisted_bookmark = assigns(:bookmarks).find{|b| b.id == bookmark.id}
+      expect(persisted_bookmark.private).to be false
+    end
   end
 end
