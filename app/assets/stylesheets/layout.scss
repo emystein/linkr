@@ -25,10 +25,15 @@ article {
 .actions {
   float: right;
   a {
-    color: #B22222;
+    // color: #B22222;
   }
 }
 
-a.new-bookmark {
+a.nav-link-important {
   color: #ffdc34 !important;
+}
+
+.btn-info, .btn-info:hover, .btn-info:active, .btn-info:visited {
+  background-color: $info-color !important;
+  border-color: $info-color !important;
 }
