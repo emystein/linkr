@@ -13,6 +13,8 @@ describe UserDashboardController, :type => :controller do
 
       get :actions, :params => { commit: 'make_private', bookmark_ids: [bookmark.id] }
 
+      get :show
+
       persisted_bookmark = assigns(:bookmarks).find{|b| b.id == bookmark.id}
       expect(persisted_bookmark.private).to be true
     end
@@ -24,6 +26,8 @@ describe UserDashboardController, :type => :controller do
 
       get :actions, :params => { commit: 'make_public', bookmark_ids: [bookmark.id] }
 
+      get :show
+
       persisted_bookmark = assigns(:bookmarks).find{|b| b.id == bookmark.id}
       expect(persisted_bookmark.private).to be false
     end
@@ -33,6 +37,8 @@ describe UserDashboardController, :type => :controller do
 
       get :actions, :params => { commit: 'delete', bookmark_ids: [bookmark.id] }
 
+      get :show
+
       persisted_bookmark = assigns(:bookmarks).find{|b| b.id == bookmark.id}
       expect(persisted_bookmark).to be_nil
     end
@@ -41,6 +47,8 @@ describe UserDashboardController, :type => :controller do
       bookmark = Bookmark.create! valid_attributes
 
       get :actions, :params => { commit: 'add_tag', bookmark_ids: [bookmark.id], tag: 'new' }
+
+      get :show
 
       persisted_bookmark = assigns(:bookmarks).find{|b| b.id == bookmark.id}
       expect(persisted_bookmark.tag_list).to include('new')
