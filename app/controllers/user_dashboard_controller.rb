@@ -39,7 +39,7 @@ class UserDashboardController < ApplicationController
 
     command.apply(bookmark_ids, params)
 
-    show
+    redirect_to action: :show
   end
 end
 
