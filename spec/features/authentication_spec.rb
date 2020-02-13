@@ -32,7 +32,7 @@ describe "Logging In:", :type => :feature do
     fill_in "Email", :with => @user.email
     fill_in "Password", :with => "password"
     click_button "Log in"
-    expect(page).to have_content("successfully")
+    expect(page).to have_content("Logout")
   end
 
   it "Does not authenticate a user with invalid credentials" do
