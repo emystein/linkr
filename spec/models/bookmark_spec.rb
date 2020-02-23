@@ -9,14 +9,14 @@ describe Bookmark, type: :model do
 
   it { should validate_presence_of(:title) }
 
-  context "Description" do
-    it "Set description" do
-      @kitchen_table_bookmark.description = 'Kitchen table description'
+  context "Notes" do
+    it "Set notes" do
+      @kitchen_table_bookmark.notes = 'Kitchen table notes'
       @kitchen_table_bookmark.save
 
       @retrieved = Bookmark.find(@kitchen_table_bookmark.id)
 
-      expect(@retrieved.description).to eq('Kitchen table description')
+      expect(@retrieved.notes).to eq('Kitchen table notes')
     end
   end
 

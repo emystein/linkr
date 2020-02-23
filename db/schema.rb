@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 2019_10_31_231318) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "private", default: false
-    t.string "description"
   end
 
   create_table "bundled_tags", force: :cascade do |t|
@@ -89,9 +88,9 @@ ActiveRecord::Schema.define(version: 2019_10_31_231318) do
 
   create_view "tag_count_by_dates", sql_definition: <<-SQL
       select tags.name as name, date(taggings.created_at) as created_at, count(1) as count
-              from taggings, tags
-              where taggings.tag_id = tags.id
-              group by date(taggings.created_at), name
-              order by count desc
+  from taggings, tags
+  where taggings.tag_id = tags.id
+  group by date(taggings.created_at), name
+  order by count desc
   SQL
 end
