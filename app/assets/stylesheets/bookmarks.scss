@@ -1,10 +1,15 @@
+$bookmark-url-color: #2991d6de;
+
+.bookmark:hover {
+  background-color: lighten($bookmark-url-color, 40%);
+}
 
 a.private {
   color: #94284c;
 }
 
 a.url {
-  color: #2991d6de;
+  color: $bookmark-url-color;
 }
 
 .pagination {
