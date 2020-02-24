@@ -1,15 +1,18 @@
 <article class="bookmark">
-  <h4><%= link_to bookmark.title, bookmark.url, :class => bookmark.private ? "private" : "public", :target => "_blank" %> <span></span>
+  <h4>
+    <%= link_to bookmark.title, bookmark.url, :class => bookmark.private ? "private" : "public", :target => "_blank" %> <span></span>
     <span class="actions">
-      <% if bookmark.user == current_user -%>
-        <%= check_box_tag "bookmark_ids[]", bookmark.id, false %>
+      <% if bookmark.user == current_user %>
         <%= link_to 'Edit', edit_bookmark_path(bookmark) %> 
         <%= link_to 'Delete', bookmark, confirm: 'Are you sure?', method: :delete %>
       <% else %>
-        <%= link_to 'Save', bookmark_path(bookmark) unless bookmark.user == current_user %>
+        <%= link_to 'Save', bookmark_path(bookmark) %>
       <% end %>
     </span>
   </h4>
+  <% if bookmark.user == current_user %>
+    <%= check_box_tag "bookmark_ids[]", bookmark.id, false %>
+  <% end %>
   <%= link_to bookmark.url, bookmark.url, :class => "url", :target => "_blank" %>
   <% unless bookmark.notes.blank? %>
     <p class="notes"><%= bookmark.notes %> </p>

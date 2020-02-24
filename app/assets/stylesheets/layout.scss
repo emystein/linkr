@@ -16,16 +16,18 @@ article {
   border-bottom: 1px solid #bbb;
 }
 
-.tags {
-  a {
-    color: #616161;
-  }
+article:hover .actions {
+  display: block;
 }
 
 .actions {
+  display: none;
   float: right;
+}
+
+.tags {
   a {
-    // color: #B22222;
+    color: #616161;
   }
 }
 
