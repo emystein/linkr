@@ -1,6 +1,6 @@
 <article class="bookmark">
   <h4>
-    <%= link_to bookmark.title, bookmark.url, :class => bookmark.private ? "private" : "public", :target => "_blank" %> <span></span>
+    <%= link_to bookmark.private ? "[Private] " + bookmark.title : bookmark.title, bookmark.url, :class => bookmark.private ? "private" : "public", :target => "_blank" %> <span></span>
     <span class="actions">
       <% if bookmark.user == current_user %>
         <%= link_to 'Edit', edit_bookmark_path(bookmark) %> 

@@ -20,6 +20,18 @@ describe "Bookmarks:", :type => :feature do
     expect(page).to have_content("Bookmark was successfully created")
   end
 
+  it "A user should be able to create a private bookmark" do
+    visit new_bookmark_path
+
+    fill_in "Title", :with => "Proggit"
+    fill_in "Url", :with => "http://reddit.com/r/programming"
+    page.check('Private')
+
+    click_button "Create Bookmark"
+
+    expect(page).to have_content("[Private] Proggit")
+  end
+
   # it "A user should be able to see their own bookmarks" do
   #   pending
   # end
