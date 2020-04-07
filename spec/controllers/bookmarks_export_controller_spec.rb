@@ -7,7 +7,7 @@ describe BookmarksExportController, :type => :controller do
     it "export bookmarks" do
       expected_document = NetscapeBookmarks.create_document(subject.current_user.bookmarks)
 
-      post :create
+      get :index
 
       expect(response.body).to eq(expected_document)
     end
