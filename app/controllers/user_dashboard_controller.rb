@@ -8,17 +8,16 @@ class UserDashboardController < ApplicationController
 
   def show
     @bookmarks = current_user.bookmarks.paginate(:page => params[:page])
-    render 'users/show'
   end
 
   def tag
     @bookmarks = current_user.bookmarks.public_bookmarks
         .tagged_with(params[:tag], :any => true)
         .paginate(:page => params[:page])
-    render 'users/show'
+    render 'user_dashboard/show'
   end
 
-  def actions
+  def execute_actions
     logger.info("Executing action: #{params[:commit]}")
 
     commands_by_key = { 

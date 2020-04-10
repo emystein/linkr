@@ -1,0 +1,29 @@
+<div id="main-header">
+  <h2><%= @user.nickname %>'s Bookmarks</h2>
+  <%= render 'components/search', search_path: "/users/#{@user.id}" %>
+  <hr>
+</div>
+
+<section id="bookmarks">
+  <section>
+    <%= render 'users/user_stats' %>
+  </section>
+  <% unless @bookmarks.empty? %>
+    <%= form_tag "/dashboard/execute-actions", method: "get" %>
+    <%= render :partial => 'bookmarks/bookmark', :collection => @bookmarks %>
+    <%= render 'users/bookmark_actions' %>
+    <%= will_paginate @bookmarks %>
+  <% else %>
+    <h4>There are no bookmarks to display.</h4>
+  <% end %>
+</section>
+
+<section class="tags">
+  <h3 class="section-title">Tags</h3>
+  <%= @tags.take(28).collect{|t| link_to "#{t} (#{t.count})", "/dashboard/tags/#{t.name}"}.join("<br/>").html_safe %>
+  <br/>
+  <br/>
+  <h3 class="section-title"><%= link_to 'All tags', '/tags' %></h3>
+</section>
+
+
