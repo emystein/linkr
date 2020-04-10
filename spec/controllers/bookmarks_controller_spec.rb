@@ -82,6 +82,14 @@ describe BookmarksController, :type => :controller do
         expect(response).to redirect_to(dashboard_url)
       end
     end
+    describe "with invalid update" do
+      it "returns to edit" do
+        bookmark = Bookmark.create! valid_attributes
+        allow_any_instance_of(Bookmark).to receive(:update).and_return(false)
+        put :update, :params => { id: bookmark.id, bookmark: valid_attributes }
+        expect(response).to render_template('edit')
+      end
+    end
   end
 
   describe "DELETE destroy" do

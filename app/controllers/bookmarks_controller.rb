@@ -41,9 +41,7 @@ class BookmarksController < ApplicationController
     params.permit!
     @bookmark = current_user.bookmarks.find(params[:id])
 
-    updated = @bookmark.update(params[:bookmark])
-
-    if updated
+    if @bookmark.update(params[:bookmark])
       redirect_to dashboard_url, :flash => { :success => "Bookmark was successfully updated." }
     else
       render action: "edit"
