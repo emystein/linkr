@@ -1,4 +1,4 @@
-class UserDashboardController < ApplicationController
+class DashboardController < ApplicationController
   before_action :authenticate_user!, :assign_common_fields
 
   def assign_common_fields

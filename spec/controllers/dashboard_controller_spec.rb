@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe UserDashboardController, :type => :controller do
+describe DashboardController, :type => :controller do
   sign_me_in
 
   def valid_attributes
