@@ -9,7 +9,7 @@
     <%= render 'users/user_stats' %>
   </section>
   <% unless @bookmarks.empty? %>
-    <%= form_tag "/dashboard/execute-actions", method: "get" %>
+    <%= form_tag "/dashboard/execute-actions", method: "post" %>
     <%= render :partial => 'bookmarks/bookmark', :collection => @bookmarks %>
     <%= render 'users/bookmark_actions' %>
     <%= will_paginate @bookmarks %>

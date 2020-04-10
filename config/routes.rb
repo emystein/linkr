@@ -6,10 +6,10 @@ Rails.application.routes.draw do
     post "/sessions/user", to: "devise/sessions#create" # devise post to this url on login
   end
 
-  get "/help"                        => "pages#help"
-  get "/dashboard"                   => "dashboard#show"
-  get "/dashboard/tags/:tag"         => "dashboard#tag"
-  get "/dashboard/execute-actions"   => "dashboard#execute_actions"
+  get "/help"                         => "pages#help"
+  get "/dashboard"                    => "dashboard#show"
+  get "/dashboard/tags/:tag"          => "dashboard#tag"
+  post "/dashboard/execute-actions"   => "dashboard#execute_actions"
 
   resources :users, :only => [:new, :create, :show, :update] do
     member do

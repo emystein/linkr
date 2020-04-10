@@ -11,7 +11,7 @@ describe DashboardController, :type => :controller do
     it "mark bookmark as private" do
       bookmark = Bookmark.create! valid_attributes
 
-      get :execute_actions, :params => { commit: 'make_private', bookmark_ids: [bookmark.id] }
+      post :execute_actions, :params => { commit: 'make_private', bookmark_ids: [bookmark.id] }
 
       get :show
 
@@ -24,7 +24,7 @@ describe DashboardController, :type => :controller do
       bookmark.private = true
       bookmark.save
 
-      get :execute_actions, :params => { commit: 'make_public', bookmark_ids: [bookmark.id] }
+      post :execute_actions, :params => { commit: 'make_public', bookmark_ids: [bookmark.id] }
 
       get :show
 
@@ -35,7 +35,7 @@ describe DashboardController, :type => :controller do
     it "delete bookmark" do
       bookmark = Bookmark.create! valid_attributes
 
-      get :execute_actions, :params => { commit: 'delete', bookmark_ids: [bookmark.id] }
+      post :execute_actions, :params => { commit: 'delete', bookmark_ids: [bookmark.id] }
 
       get :show
 
@@ -46,7 +46,7 @@ describe DashboardController, :type => :controller do
     it "add tag to bookmark" do
       bookmark = Bookmark.create! valid_attributes
 
-      get :execute_actions, :params => { commit: 'add_tag', bookmark_ids: [bookmark.id], tag: 'new' }
+      post :execute_actions, :params => { commit: 'add_tag', bookmark_ids: [bookmark.id], tag: 'new' }
 
       get :show
 
@@ -57,7 +57,7 @@ describe DashboardController, :type => :controller do
     it "don't mark private bookmarks when skip bookmark ids parameter" do
       bookmark = Bookmark.create! valid_attributes
 
-      get :execute_actions, :params => { commit: 'make_private' }
+      post :execute_actions, :params => { commit: 'make_private' }
 
       get :show
 
