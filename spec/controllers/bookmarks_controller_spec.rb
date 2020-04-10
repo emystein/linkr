@@ -161,7 +161,7 @@ describe BookmarksController, :type => :controller do
       
       post :import, params: {import_format: 'unknown', file: bookmarks_file}
 
-      expect(response).to redirect_to("/users/#{subject.current_user.id}")
+      expect(response).to redirect_to("/dashboard")
       expect(assigns(:bookmarks)).to be_empty
       expect(flash[:success]).to_not be_present
       expect(flash[:error]).to be_present
@@ -173,7 +173,7 @@ describe BookmarksController, :type => :controller do
 
       post :import, params: {import_format: import_format, file: bookmarks_file}
 
-      expect(response).to redirect_to("/users/#{subject.current_user.id}")
+      expect(response).to redirect_to("/dashboard")
       expect(assigns(:bookmarks)).not_to be_empty
       expect(flash[:success]).to be_present
       expect(flash[:error]).to_not be_present

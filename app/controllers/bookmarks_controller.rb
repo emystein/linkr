@@ -61,10 +61,6 @@ class BookmarksController < ApplicationController
     params.permit(:search_query)
   end
 
-  def import_form
-    render "import_form"
-  end
-
   def import
     bookmark_imports = { 
       "yabs_csv" => YabsCsvBookmarks, 
@@ -81,7 +77,7 @@ class BookmarksController < ApplicationController
       flash[:error] = "Import format not defined: #{import_format}"
     end
     
-    redirect_to user_path(current_user)
+    redirect_to dashboard_url
   end
   
   def export_form
