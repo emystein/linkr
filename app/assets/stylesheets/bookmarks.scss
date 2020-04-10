@@ -23,17 +23,3 @@ a.url {
 .bookmark_count {
   text-align: center;
 }
-
-#bookmarks-header {
-  h2 {
-    float: left;
-    margin-bottom: 20px;
-  }
-  form, a {
-    float: right;
-  }
-  hr {
-    clear: both;
-    border-top: 4px solid;
-  }
-}
