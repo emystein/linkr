@@ -22,11 +22,9 @@ Rails.application.routes.draw do
   resources :tag_bundles
 
   resources :bookmarks do
-    get :bookmarklet, :export_form, :export, :on => :collection
+    get :bookmarklet, :import_form, :export_form, :export, :on => :collection
     post :import, :on => :collection
   end
-
-  resources :bookmarks_import
 
   root :to => "explore#index"
 end

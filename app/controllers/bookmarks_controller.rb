@@ -61,10 +61,33 @@ class BookmarksController < ApplicationController
     params.permit(:search_query)
   end
 
+  def import_form
+    render "import_form"
+  end
+
+  def import
+    bookmark_imports = { 
+      "yabs_csv" => YabsCsvBookmarks, 
+      "yabs_netscape" => YabsNetscapeBookmarks 
+    }
+    
+    import_format = params[:import_format]
+    
+    begin
+      @bookmarks = bookmark_imports[import_format].import(current_user, params[:file].path)
+      flash[:success] = "Total bookmarks imported: #{@bookmarks.count}"
+    rescue NoMethodError
+      @bookmarks = []
+      flash[:error] = "Import format not defined: #{import_format}"
+    end
+    
+    redirect_to user_path(current_user)
+  end
+  
   def export_form
     render "export_form"
   end
-
+  
   def export
     document = NetscapeBookmarks.create_document(current_user.bookmarks)
     send_data(document, :filename => 'bookmarks.html')
