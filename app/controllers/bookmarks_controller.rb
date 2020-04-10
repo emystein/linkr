@@ -80,10 +80,6 @@ class BookmarksController < ApplicationController
     redirect_to dashboard_url
   end
   
-  def export_form
-    render "export_form"
-  end
-  
   def export
     document = NetscapeBookmarks.create_document(current_user.bookmarks)
     send_data(document, :filename => 'bookmarks.html')
