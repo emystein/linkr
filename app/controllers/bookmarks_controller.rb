@@ -30,22 +30,18 @@ class BookmarksController < ApplicationController
     params.permit!
     @bookmark = current_user.bookmarks.new(params[:bookmark])
 
-    if @bookmark.save
-      redirect_to dashboard_url, :flash => { :success => "Bookmark was successfully created." }
-    else
-      render action: "new"
-    end
+    action = -> { @bookmark.save }
+
+    execute(action, "new")
   end
 
   def update
     params.permit!
     @bookmark = current_user.bookmarks.find(params[:id])
 
-    if @bookmark.update(params[:bookmark])
-      redirect_to dashboard_url, :flash => { :success => "Bookmark was successfully updated." }
-    else
-      render action: "edit"
-    end
+    action = -> { @bookmark.update(params[:bookmark]) }
+
+    execute(action, "edit")
   end
 
   def destroy
@@ -82,4 +78,15 @@ class BookmarksController < ApplicationController
     document = NetscapeBookmarks.create_document(current_user.bookmarks)
     send_data(document, :filename => 'bookmarks.html')
   end
+
+  private
+
+  def execute(action, failure_action)
+    if action.call
+      redirect_to dashboard_url, :flash => { :success => "Success." }
+    else
+      render action: failure_action
+    end
+  end
+
 end
