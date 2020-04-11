@@ -9,23 +9,10 @@ class BookmarksController < ApplicationController
     end
   end
 
-  def show
-    @bookmark = Bookmark.find(params[:id])
-  end
-
   def new
     @bookmark = current_user.bookmarks.new(:title => params[:title], :url => params[:url])
   end
-
-  def bookmarklet
-    @bookmark = current_user.bookmarks.new(:title => params[:title], :url => params[:url])
-    render :layout => "minimal"
-  end
-
-  def edit
-    @bookmark = current_user.bookmarks.find(params[:id])
-  end
-
+  
   def create
     params.permit!
     @bookmark = current_user.bookmarks.new(params[:bookmark])
@@ -35,6 +22,19 @@ class BookmarksController < ApplicationController
     execute(action, "new")
   end
 
+  def bookmarklet
+    @bookmark = current_user.bookmarks.new(:title => params[:title], :url => params[:url])
+    render :layout => "minimal"
+  end
+
+  def show
+    @bookmark = Bookmark.find(params[:id])
+  end
+  
+  def edit
+    @bookmark = current_user.bookmarks.find(params[:id])
+  end
+  
   def update
     params.permit!
     @bookmark = current_user.bookmarks.find(params[:id])
@@ -88,5 +88,4 @@ class BookmarksController < ApplicationController
       render action: failure_action
     end
   end
-
 end
