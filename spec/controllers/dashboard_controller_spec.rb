@@ -7,50 +7,48 @@ describe DashboardController, :type => :controller do
     { "user_id" => subject.current_user.id, "title" => "El título", "url" => "La URL" }
   end
 
-  describe "Bookmark Actions" do
-    it "mark bookmark as private" do
-      bookmark = Bookmark.create! valid_attributes
+  def persist_bookmark(action)
+    persist_bookmark_with_params(action, Hash.new)
+  end
 
-      post :execute_actions, :params => { commit: 'make_private', bookmark_ids: [bookmark.id] }
+  def persist_bookmark_with_params(action, extra_parameters, is_private = false)
+      bookmark = Bookmark.create! valid_attributes
+      bookmark.private = is_private 
+      bookmark.save
+
+      basic_parameters = { commit: action, bookmark_ids: [bookmark.id] }
+      
+      request_parameters = basic_parameters.merge(extra_parameters)
+
+      post :execute_actions, :params => request_parameters
 
       get :show
 
-      persisted_bookmark = assigns(:bookmarks).find{|b| b.id == bookmark.id}
+      assigns(:bookmarks).find{|b| b.id == bookmark.id}
+  end
+
+  describe "Bookmark Actions" do
+    it "mark bookmark as private" do
+      persisted_bookmark = persist_bookmark_with_params('make_private', Hash.new, is_private = false)
+
       expect(persisted_bookmark.private).to be true
     end
 
     it "mark bookmark as public" do
-      bookmark = Bookmark.create! valid_attributes
-      bookmark.private = true
-      bookmark.save
+      persisted_bookmark = persist_bookmark_with_params('make_public', Hash.new, is_private = true)
 
-      post :execute_actions, :params => { commit: 'make_public', bookmark_ids: [bookmark.id] }
-
-      get :show
-
-      persisted_bookmark = assigns(:bookmarks).find{|b| b.id == bookmark.id}
       expect(persisted_bookmark.private).to be false
     end
 
     it "delete bookmark" do
-      bookmark = Bookmark.create! valid_attributes
+      persisted_bookmark = persist_bookmark('delete')
 
-      post :execute_actions, :params => { commit: 'delete', bookmark_ids: [bookmark.id] }
-
-      get :show
-
-      persisted_bookmark = assigns(:bookmarks).find{|b| b.id == bookmark.id}
       expect(persisted_bookmark).to be_nil
     end
 
     it "add tag to bookmark" do
-      bookmark = Bookmark.create! valid_attributes
+      persisted_bookmark = persist_bookmark_with_params('add_tag', { tag: 'new' })
 
-      post :execute_actions, :params => { commit: 'add_tag', bookmark_ids: [bookmark.id], tag: 'new' }
-
-      get :show
-
-      persisted_bookmark = assigns(:bookmarks).find{|b| b.id == bookmark.id}
       expect(persisted_bookmark.tag_list).to include('new')
     end
 
@@ -62,6 +60,7 @@ describe DashboardController, :type => :controller do
       get :show
 
       persisted_bookmark = assigns(:bookmarks).find{|b| b.id == bookmark.id}
+
       expect(persisted_bookmark.private).to be false
     end
   end
