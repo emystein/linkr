@@ -24,7 +24,7 @@ RSpec.describe TagBundlesController, type: :controller do
         bookmark.tag_list.add(@tag1.name)
         bookmark.save
 
-        tag_bundle = TagBundle.create(user: subject.current_user, name: 'tag_bundle1', tags: [@tag1])
+        tag_bundle = create_tag_bundle([@tag1])
 
         get :show, :params => {id: tag_bundle.id}
 
@@ -35,7 +35,7 @@ RSpec.describe TagBundlesController, type: :controller do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested tag bundle" do
-        tag_bundle = TagBundle.create(user: subject.current_user, name: 'tag_bundle1', tags: [@tag1])
+        tag_bundle = create_tag_bundle([@tag1])
 
         allow_any_instance_of(TagBundle).to receive(:update).with({ :name => "updated name", :tags => [@tag1, @tag2] })
 
@@ -45,7 +45,7 @@ RSpec.describe TagBundlesController, type: :controller do
         # expect(response).to redirect_to(tag_bundles_url)
       end
       it "add tag if not exist" do
-        tag_bundle = TagBundle.create(user: subject.current_user, name: 'tag_bundle1', tags: [@tag1])
+        tag_bundle = create_tag_bundle([@tag1])
 
         put :update, :params => { id: tag_bundle.id, name: "updated name", tags: "#{@tag1.name},new_tag" }
 
@@ -56,16 +56,20 @@ RSpec.describe TagBundlesController, type: :controller do
 
   describe "DELETE destroy" do
     it "destroys the requested tag_bundle" do
-      tag_bundle = TagBundle.create(user: subject.current_user, name: 'tag_bundle1', tags: [@tag1])
+      tag_bundle = create_tag_bundle([@tag1])
       expect {
         delete :destroy, :params => { id: tag_bundle.id.to_s }
       }.to change(TagBundle, :count).by(-1)
     end
 
     it "redirects to the tag_bundles list" do
-      tag_bundle = TagBundle.create(user: subject.current_user, name: 'tag_bundle1', tags: [@tag1])
+      tag_bundle = create_tag_bundle([@tag1])
       delete :destroy, :params => { id: tag_bundle.id.to_s }
       expect(response).to redirect_to(tag_bundles_url)
     end
+  end
+
+  def create_tag_bundle(tags)
+    TagBundle.create(user: subject.current_user, name: 'tag_bundle1', tags: tags)
   end
 end

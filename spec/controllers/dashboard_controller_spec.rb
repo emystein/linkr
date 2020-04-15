@@ -12,52 +12,52 @@ describe DashboardController, :type => :controller do
   end
 
   def persist_bookmark_with_params(action, extra_parameters, is_private = false)
-      bookmark = Bookmark.create! valid_attributes.merge({private: is_private})
+    bookmark = Bookmark.create! valid_attributes.merge({ private: is_private })
 
-      basic_parameters = { commit: action, bookmark_ids: [bookmark.id] }
-      
-      request_parameters = basic_parameters.merge(extra_parameters)
+    basic_parameters = { commit: action, bookmark_ids: [bookmark.id] }
 
-      post :execute_actions, :params => request_parameters
+    request_parameters = basic_parameters.merge(extra_parameters)
 
-      get :show
+    post :execute_actions, :params => request_parameters
 
-      assigns(:bookmarks).find{|b| b.id == bookmark.id}
+    get :show
+
+    assigns(:bookmarks).find { |b| b.id == bookmark.id }
   end
 
   describe "Bookmark Actions" do
     it "mark bookmark as private" do
-      bookmark = persist_bookmark('make_private', is_private = false)
+      bookmark = persist_bookmark("make_private", is_private = false)
 
       expect(bookmark.private).to be true
     end
 
     it "mark bookmark as public" do
-      bookmark = persist_bookmark('make_public', is_private = true)
+      bookmark = persist_bookmark("make_public", is_private = true)
 
       expect(bookmark.private).to be false
     end
 
     it "delete bookmark" do
-      bookmark = persist_bookmark('delete')
+      bookmark = persist_bookmark("delete")
 
       expect(bookmark).to be_nil
     end
 
     it "add tag to bookmark" do
-      bookmark = persist_bookmark_with_params('add_tag', { tag: 'new' })
+      bookmark = persist_bookmark_with_params("add_tag", { tag: "new" })
 
-      expect(bookmark.tag_list).to include('new')
+      expect(bookmark.tag_list).to include("new")
     end
 
     it "don't mark private bookmarks when skip bookmark ids parameter" do
       bookmark = Bookmark.create! valid_attributes
 
-      post :execute_actions, :params => { commit: 'make_private' }
+      post :execute_actions, :params => { commit: "make_private" }
 
       get :show
 
-      bookmark = assigns(:bookmarks).find{|b| b.id == bookmark.id}
+      bookmark = assigns(:bookmarks).find { |b| b.id == bookmark.id }
 
       expect(bookmark.private).to be false
     end
