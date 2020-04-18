@@ -14,9 +14,10 @@ ActiveRecord::Schema.define(version: 2019_10_31_231318) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.string "title"
-    t.text "notes"
+    t.text "description"
     t.integer "user_id"
     t.integer "location_id"
+    t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "private", default: false
