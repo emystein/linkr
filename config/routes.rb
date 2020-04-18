@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'notifications_test/index'
   devise_for :user
   
   devise_scope :user do

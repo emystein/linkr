@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_31_231318) do
+ActiveRecord::Schema.define(version: 2020_04_18_021644) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.string "title"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2019_10_31_231318) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "private", default: false
+    t.string "description"
   end
 
   create_table "bundled_tags", force: :cascade do |t|
@@ -37,6 +38,35 @@ ActiveRecord::Schema.define(version: 2019_10_31_231318) do
     t.integer "bookmark_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notification_settings_subscriptions", force: :cascade do |t|
+    t.string "subscriber_type"
+    t.integer "subscriber_id"
+    t.string "subscribable_type"
+    t.integer "subscribable_id"
+    t.text "settings"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["subscribable_type", "subscribable_id"], name: "idx_subscriptions_subscribable_type_subscribable_id"
+    t.index ["subscriber_type", "subscriber_id"], name: "idx_subscriptions_subscriber_type_subscriber_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "target_type"
+    t.integer "target_id"
+    t.string "object_type"
+    t.integer "object_id"
+    t.boolean "read", default: false, null: false
+    t.text "metadata"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "type"
+    t.bigint "subscription_id"
+    t.string "category"
+    t.index ["object_type", "object_id"], name: "index_notifications_on_object_type_and_object_id"
+    t.index ["read"], name: "index_notifications_on_read"
+    t.index ["target_type", "target_id"], name: "index_notifications_on_target_type_and_target_id"
   end
 
   create_table "tag_bundles", force: :cascade do |t|
@@ -81,6 +111,8 @@ ActiveRecord::Schema.define(version: 2019_10_31_231318) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.text "settings"
+    t.string "status"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -88,9 +120,9 @@ ActiveRecord::Schema.define(version: 2019_10_31_231318) do
 
   create_view "tag_count_by_dates", sql_definition: <<-SQL
       select tags.name as name, date(taggings.created_at) as created_at, count(1) as count
-  from taggings, tags
-  where taggings.tag_id = tags.id
-  group by date(taggings.created_at), name
-  order by count desc
+      from taggings, tags
+      where taggings.tag_id = tags.id
+      group by date(taggings.created_at), name
+      order by count desc
   SQL
 end

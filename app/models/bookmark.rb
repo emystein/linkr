@@ -24,4 +24,6 @@ class Bookmark < ActiveRecord::Base
   def self.search(query)
     where('lower(title) like lower(?)', "%#{query}%")
   end
+
+  notification_object
 end

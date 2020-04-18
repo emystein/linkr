@@ -69,3 +69,6 @@ gem "scenic", "~> 1.5"
 gem "scenic_sqlite_adapter", "~> 0.1.0"
 
 gem "webpacker", "~> 4.0"
+
+gem "notifications-rails"
+

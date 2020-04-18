@@ -17,4 +17,6 @@ class User < ActiveRecord::Base
     u = User.arel_table
     where(u[:nickname].eq(login).or(u[:email].eq(login)))
   end
+
+  notification_target
 end
