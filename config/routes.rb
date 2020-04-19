@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   get "/explore"                      => "explore#index"
   get "/help"                         => "pages#help"
   get "/dashboard"                    => "dashboard#show"
-  get "/dashboard/inbox"              => "dashboard#inbox"
   get "/dashboard/tags/:tag"          => "dashboard#tag"
   post "/dashboard/execute-actions"   => "dashboard#execute_actions"
+  get "/inbox"                        => "inbox#index"
 
   resources :users, :only => [:new, :create, :show, :update] do
     member do
