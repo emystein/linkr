@@ -56,6 +56,8 @@ class BookmarksController < ApplicationController
   end
 
   def import
+    logger.info("Importing bookmarks: #{params[:file]}")
+
     bookmark_imports = { 
       "yabs_csv" => YabsCsvBookmarks, 
       "yabs_netscape" => YabsNetscapeBookmarks 
