@@ -1,0 +1,20 @@
+<h1>Notification Control Center</h1>
+
+<%= form_with(url: '/notification_control_center/notify', method: 'post') do %>
+  <%= label_tag  'username', 'Username:' %>
+  <%= text_field_tag 'username'  %>
+
+  <br>
+
+  <%= label_tag  'notification_text', 'Notification text:' %>
+  <%= text_field_tag 'notification_text' %>
+
+  <br>
+
+  <%= label_tag  'bookmark_id', 'Bookmark ID:' %>
+  <%= text_field_tag 'bookmark_id' %>
+
+  <br>
+
+  <button type='submit' class='btn btn-info'>Send Notification</button>
+<% end %>

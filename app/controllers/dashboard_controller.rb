@@ -14,7 +14,7 @@ class DashboardController < ApplicationController
     @bookmarks = current_user.bookmarks.public_bookmarks
         .tagged_with(params[:tag], :any => true)
         .paginate(:page => params[:page])
-    render 'user_dashboard/show'
+    render 'dashboard/show'
   end
 
   def execute_actions

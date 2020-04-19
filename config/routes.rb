@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'notifications_test/index'
+  root :to => "explore#index"
+
   devise_for :user
   
   devise_scope :user do
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   get "/explore"                      => "explore#index"
   get "/help"                         => "pages#help"
   get "/dashboard"                    => "dashboard#show"
+  get "/dashboard/inbox"              => "dashboard#inbox"
   get "/dashboard/tags/:tag"          => "dashboard#tag"
   post "/dashboard/execute-actions"   => "dashboard#execute_actions"
 
@@ -29,5 +31,6 @@ Rails.application.routes.draw do
     post :import, :on => :collection
   end
 
-  root :to => "explore#index"
+  get 'notification_control_center'                    => 'notification_control_center#index'
+  post 'notification_control_center/notify'            => 'notification_control_center#notify'
 end
