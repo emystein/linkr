@@ -46,6 +46,7 @@ group :development, :test do
   gem "guard-rspec"
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "rails-controller-testing"
+  gem 'simplecov'
 end
 
 group :test do
