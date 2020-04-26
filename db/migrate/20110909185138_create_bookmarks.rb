@@ -6,8 +6,8 @@ class CreateBookmarks < ActiveRecord::Migration[5.1]
       t.integer :user_id
       t.integer :location_id
       t.text :notes
-
       t.timestamps
+      t.boolean :private, default: false
     end
   end
 end
