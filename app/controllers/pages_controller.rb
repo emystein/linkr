@@ -1,11 +1,7 @@
-class PagesController < ApplicationController
-  before_action :authenticate_user!, :except => [:help]
+# frozen_string_literal: true
 
+class PagesController < ApplicationController
   def index
     redirect_to :dashboard if current_user
   end
-
-  def help
-  end
-
 end
