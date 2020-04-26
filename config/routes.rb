@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :user
-  
+
   devise_scope :user do
     post "/sessions/user", to: "devise/sessions#create" # devise post to this url on login
   end
-  
+
   get "/explore"                      => "explore#index"
   get "/help"                         => "pages#help"
   get "/dashboard"                    => "dashboard#show"
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   # resources :sessions, :only => [:new, :create, :destroy]
 
   resources :tags, :only => [:index, :show]
-  
+
   resources :tag_bundles
 
   resources :bookmarks do
