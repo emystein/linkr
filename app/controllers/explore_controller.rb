@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExploreController < ApplicationController
   def index
     @bookmarks = Bookmark.public_bookmarks.take(10)
