@@ -3,6 +3,11 @@ require "rails_helper"
 describe DashboardController, :type => :controller do
   sign_me_in
 
+  before do
+    @tag1 = create(:tag)
+    @tag2 = create(:tag)
+  end
+
   def valid_attributes
     { "user_id" => subject.current_user.id, "title" => "El título", "url" => "La URL" }
   end
@@ -23,6 +28,18 @@ describe DashboardController, :type => :controller do
     get :show
 
     assigns(:bookmarks).find { |b| b.id == bookmark.id }
+  end
+
+  describe 'Tagged Bookmarks' do
+    it 'shows Bookmarks with given tag' do
+      bookmark1 = create(:bookmark)
+      bookmark1.tag_list.add(@tag1.name)
+      bookmark1.save
+
+      get :tag, params: {tag: @tag1.name}
+
+      expect(assigns(:bookmarks)).to eq [bookmark1]
+    end
   end
 
   describe "Bookmark Actions" do

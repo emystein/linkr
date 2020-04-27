@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DashboardController < ApplicationController
   before_action :authenticate_user!, :assign_common_fields
 
@@ -7,24 +9,24 @@ class DashboardController < ApplicationController
   end
 
   def show
-    @bookmarks = current_user.bookmarks.paginate(:page => params[:page])
+    @bookmarks = current_user.bookmarks.paginate(page: params[:page])
   end
 
   def tag
     @bookmarks = current_user.bookmarks.public_bookmarks
-        .tagged_with(params[:tag], :any => true)
-        .paginate(:page => params[:page])
-    render 'user_dashboard/show'
+                             .tagged_with(params[:tag], any: true)
+                             .paginate(page: params[:page])
+    render 'dashboard/show'
   end
 
   def execute_actions
     logger.info("Executing action: #{params[:commit]}")
 
-    commands_by_key = { 
+    commands_by_key = {
       'make_private' => TogglePrivateBookmarksCommand,
       'make_public' => TogglePublicBookmarksCommand,
       'delete' => DeleteBookmarksCommand,
-      'add_tag' => AddTagToBookmarksCommand,
+      'add_tag' => AddTagToBookmarksCommand
     }
 
     command = commands_by_key[params[:commit]].new(current_user)
@@ -56,19 +58,19 @@ class BookmarkVisibilityToggleCommand
 end
 
 class TogglePrivateBookmarksCommand < BookmarkVisibilityToggleCommand
-  def apply(bookmark_ids, params)
+  def apply(bookmark_ids, _params)
     toggle_private(bookmark_ids, true)
   end
 end
 
 class TogglePublicBookmarksCommand < BookmarkVisibilityToggleCommand
-  def apply(bookmark_ids, params)
+  def apply(bookmark_ids, _params)
     toggle_private(bookmark_ids, false)
   end
 end
 
 class DeleteBookmarksCommand < UserBookmarksCommand
-  def apply(bookmark_ids, params)
+  def apply(bookmark_ids, _params)
     bookmark_ids.each do |bookmark_id|
       @current_user.bookmarks.delete(bookmark_id)
     end
