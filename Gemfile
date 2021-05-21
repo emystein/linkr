@@ -1,17 +1,17 @@
 source 'http://rubygems.org'
 
 gem "rails"
-gem 'puma', '~> 3.11'
+gem 'puma'
 gem 'jquery-rails'
 gem 'sqlite3', '~> 1.4' # see: https://github.com/rails/rails/issues/35153
 # gem 'pg'
 # Use Redis adapter to run Action Cable in production
 gem 'redis'
-gem 'redis-objects'
 gem 'will_paginate'
 # gem 'acts-as-taggable-on', github:"mbleigh/acts-as-taggable-on", branch:"master"
 gem 'acts-as-taggable-on'
 gem 'sass-rails'
+gem "webpacker", "~> 5.0"
 gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7' # generate JSON objects with a Builder-style DSL
@@ -27,17 +27,20 @@ gem 'devise' # authentication
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development do
+  gem 'listen', '~> 3.3'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem "rails_db", "~> 2.1"
+  # Display performance information such as SQL time and flame graphs for each request in your browser.
+  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
+  gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem "rails_db", "~> 2.1"
+  gem 'web-console', '>= 4.1.0'
 end
 
 group :development, :test do
-  gem "rspec-rails", '~> 4.0.0.beta2'
+  gem "rspec-rails"
   gem "shoulda-matchers", require: false
   gem "factory_bot_rails"
   gem 'database_cleaner'
@@ -52,9 +55,9 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.29.0'
+  gem 'rexml'
   gem 'selenium-webdriver'
   gem 'webdrivers'
-  gem 'rexml'
 end
 
 # To use debugger
@@ -68,5 +71,3 @@ gem "smarter_csv", "~> 1.2"
 gem "bookmarks", "~> 0.2.3" # used for export bookmarks in Netscape format
 gem "scenic", "~> 1.5"
 gem "scenic_sqlite_adapter", "~> 0.1.0"
-
-gem "webpacker", "~> 4.0"
