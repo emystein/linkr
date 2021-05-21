@@ -106,15 +106,15 @@ describe BookmarksController, type: :controller do
 
   describe 'Import bookmarks' do
     it 'import bookmarks from a YABS CSV file' do
-      test_bookmarks_import_success(import_format = 'yabs_csv', '/files/yabs_bookmarks.csv', 'text/csv')
+      test_bookmarks_import_success(import_format = 'yabs_csv', '/yabs_bookmarks.csv', 'text/csv')
     end
 
     it 'import bookmarks from a YABS Netscape bookmarks file' do
-      test_bookmarks_import_success(import_format = 'yabs_netscape', '/files/yabs_netscape_bookmarks.html', 'text/html')
+      test_bookmarks_import_success(import_format = 'yabs_netscape', '/yabs_netscape_bookmarks.html', 'text/html')
     end
 
     it 'rejects unknown file format' do
-      bookmarks_file = fixture_file_upload('/files/yabs_bookmarks.csv', 'text/csv')
+      bookmarks_file = fixture_file_upload('yabs_bookmarks.csv', 'text/csv')
 
       post :import, params: { import_format: 'unknown', file: bookmarks_file }
 

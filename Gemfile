@@ -54,6 +54,7 @@ group :test do
   gem 'capybara', '>= 3.29.0'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'rexml'
 end
 
 # To use debugger

@@ -13,3 +13,5 @@ tmp/
 yarn-debug.log*
 .yarn-integrity
 coverage
+.idea
+

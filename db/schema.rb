@@ -2,8 +2,8 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
@@ -89,9 +89,9 @@ ActiveRecord::Schema.define(version: 2019_10_31_231318) do
 
   create_view "tag_count_by_dates", sql_definition: <<-SQL
       select tags.name as name, date(taggings.created_at) as created_at, count(1) as count
-  from taggings, tags
-  where taggings.tag_id = tags.id
-  group by date(taggings.created_at), name
-  order by count desc
+      from taggings, tags
+      where taggings.tag_id = tags.id
+      group by date(taggings.created_at), name
+      order by count desc
   SQL
 end
