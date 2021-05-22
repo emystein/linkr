@@ -21,6 +21,11 @@ body {
   }
 }
 
+section {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 article {
   padding-bottom: 4px;
   margin-bottom: 10px;
@@ -47,4 +52,9 @@ a.nav-link-important {
 .btn-info, .btn-info:hover, .btn-info:active, .btn-info:visited {
   background-color: $info-color !important;
   border-color: $info-color !important;
+}
+
+#login-container {
+  width: 350px;
+  margin-bottom: 10px;
 }
