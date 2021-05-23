@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :user
+  devise_for :user, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   devise_scope :user do
     post "/sessions/user", to: "devise/sessions#create" # devise post to this url on login

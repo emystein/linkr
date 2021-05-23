@@ -71,3 +71,9 @@ gem "smarter_csv", "~> 1.2"
 gem "bookmarks", "~> 0.2.3" # used for export bookmarks in Netscape format
 gem "scenic", "~> 1.5"
 gem "scenic_sqlite_adapter", "~> 0.1.0"
+
+gem "omniauth-google-oauth2", "~> 1.0"
+
+gem "omniauth", "~> 2.0"
+
+gem "omniauth-rails_csrf_protection", "~> 1.0"
